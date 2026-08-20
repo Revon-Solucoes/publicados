@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dados do cliente</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Dados do cliente</h1><p class="meta">v1 · 2026-08-08</p></header>
+<p>AVISO DE USO</p>
+<p><strong>As referências <code>[PRODUTO cap. X]</code> apontam para <code>produto/produto-revon-hof.md</code>, que está em <code>produto/fontes/superado/</code>.</strong> O que vale hoje sobre o produto é <a href="../produto/definicao-produto-assessoria.html"><code>produto/definicao-produto-assessoria.md</code></a>, com as seis frentes. Antes de usar uma dessas referências como base, confira o conteúdo lá.</p>
+<p>O inventário em si continua válido: o que se pergunta ao cliente é o que está aqui, e a coluna <strong>Bloqueia</strong> já aponta os portões e o marco do Copiloto no ar.</p>
+<p>v1 · 2026-08-08</p>
+<p>Tudo que a Revon precisa saber para montar o planejamento e configurar o Copiloto. É o inventário que sustenta a sessão diagnóstica do dia 1.</p>
+<p><strong>Colunas.</strong> <code>PLAN</code> significa que o dado alimenta o planejamento de marketing ou o comercial. <code>COPI</code> significa que ele configura o Copiloto. <strong>Bloqueia</strong> é o que para de funcionar sem ele.</p>
+<p><strong>Origem de cada afirmação:</strong> <code>[PRODUTO cap. X]</code> vem de <code>produto/produto-revon-hof.md</code>. <code>[ESTRATÉGIA]</code> vem de <a href="estrategia-campanhas-hof.html"><code>operacao/estrategia-campanhas-hof.md</code></a>. <code>[SUG]</code> é proposta desta v1.</p>
+<h2 id="antes-de-perguntar">Antes de perguntar</h2>
+<p>A Revon chega na sessão diagnóstica com três coisas já levantadas, e não pergunta nada disso:</p>
+<table><thead><tr><th>Fonte</th><th>O que ela já sabe</th></tr></thead><tbody><tr><td>Mercado e nicho</td><td>Como funciona HOF, jornada da paciente, objeções típicas, faixas de mercado</td></tr><tr><td>Plano de sucesso, do passo V.1</td><td>O que foi comprado, os recursos da clínica, as lacunas e os riscos, tudo levantado durante a venda e validado com ela no dia 0</td></tr><tr><td>Time de vendas, na passagem de bastão interna do passo 0.3</td><td>O que foi apurado na negociação, dor declarada, expectativa, porte, e o que não está escrito em lugar nenhum</td></tr><tr><td>O que é público</td><td>Site, Instagram, comunicação atual, concorrentes locais visíveis</td></tr></tbody></table>
+<p><strong>Recursos da clínica não se levantam aqui.</strong> Quem grava, quem atende a fila, se existe agenda com horário livre: isso entra no plano de sucesso durante a venda, e recurso que falta se resolve com a dona <strong>antes de fechar</strong>. Descobrir na diagnóstica que não há quem grave transforma o dia 1 em negociação do que já deveria estar acordado.</p>
+<p>O que sobra é o que está nas tabelas abaixo. <code>[SUG]</code> Cada linha que a Revon já conseguiu responder sozinha vira <strong>confirmação</strong>, não pergunta.</p>
+<h2 id="0-o-que-ela-chama-de-sucesso">0 · O que ela chama de sucesso</h2>
+<p>Levantado no fim da conversa, pelo passo 1.12, e não no começo.</p>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>O que precisa ter acontecido em 30 dias para ela dizer que valeu, nas palavras dela</td><td>●</td><td></td><td>A leitura semanal do funil e a pauta da reunião mensal</td></tr><tr><td>O que ela vai olhar para saber</td><td>●</td><td></td><td>Como esse resultado se apura</td></tr><tr><td>O prazo que ela esperava</td><td>●</td><td></td><td>A conversa que se faz agora quando a expectativa dela não bate com a da Revon</td></tr></tbody></table>
+<h2 id="1-stakeholder-e-decisao">1 · Stakeholder e decisão</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Quem decide na clínica, nome e papel</td><td>●</td><td></td><td>A quem apresentar o planejamento no dia 3</td></tr><tr><td>Quem é o contato do dia a dia</td><td>●</td><td>●</td><td>O grupo de trabalho e o canal direto</td></tr><tr><td>Quem responde por preço</td><td>●</td><td></td><td>A política de preço</td></tr><tr><td>Quem grava os vídeos</td><td>●</td><td></td><td>A cadência de gravação</td></tr></tbody></table>
+<h2 id="2-a-clinica">2 · A clínica</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Razão social e CNPJ</td><td></td><td>●</td><td>Conta de anúncio e integrações</td></tr><tr><td>Endereço de atendimento</td><td>●</td><td>●</td><td>Segmentação geográfica e a regra de raio</td></tr><tr><td><strong>Raio de atendimento aceitável</strong></td><td>●</td><td>●</td><td>O critério &quot;mora fora do raio&quot;, que desqualifica <code>[PRODUTO cap. 7.3]</code></td></tr><tr><td>Horário de funcionamento</td><td></td><td>●</td><td>Para as réguas não dispararem fora de hora <code>[SUG]</code></td></tr><tr><td>Quantidade de salas e cadeiras</td><td>●</td><td></td><td>O teto de capacidade</td></tr></tbody></table>
+<h2 id="3-equipe">3 · Equipe</h2>
+<p><code>[PRODUTO cap. 7.3]</code> Em clínica com mais de uma secretária, cada uma vê apenas o funil e a fila dela, e o perfil de gestão vê a soma. Sem isto o escopo por responsável não existe.</p>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Quantas secretárias, nome de cada uma</td><td></td><td>●</td><td>Escopo por responsável e distribuição da fila</td></tr><tr><td>Quem é a especialista, ou as especialistas</td><td>●</td><td>●</td><td>Régua 5, quando aparece objeção clínica</td></tr><tr><td>Quem mais fala com paciente</td><td></td><td>●</td><td>Quem entra no Copiloto</td></tr><tr><td>Disponibilidade da equipe para treinamento</td><td>●</td><td></td><td>As datas do dia 4</td></tr><tr><td>Nível atual da equipe em vendas</td><td>●</td><td></td><td>O peso do treinamento</td></tr></tbody></table>
+<h2 id="4-comercial-e-preco">4 · Comercial e preço</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td><strong>Política de preço</strong> <code>[PRODUTO cap. 10.2]</code></td><td>●</td><td></td><td>A construção da oferta</td></tr><tr><td><strong>Lista de procedimentos que vende, com o nome que a clínica usa</strong></td><td>●</td><td>●</td><td>O registro de venda e o ranking de procedimentos <code>[PRODUTO cap. 7.3]</code></td></tr><tr><td>Ticket médio atual</td><td>●</td><td></td><td>A meta de elevação</td></tr><tr><td>Ticket dos protocolos completos</td><td>●</td><td></td><td>A escada de valor <code>[ESTRATÉGIA]</code></td></tr><tr><td><strong>Cobra avaliação hoje? Quanto?</strong></td><td>●</td><td></td><td>A porta de entrada da escada <code>[ESTRATÉGIA]</code></td></tr><tr><td>Forma de pagamento e parcelamento</td><td>●</td><td></td><td>O que a oferta pode prometer</td></tr><tr><td>Taxa de fechamento atual, se souber</td><td>●</td><td></td><td>A linha de base</td></tr></tbody></table>
+<h2 id="5-a-paciente">5 · A paciente</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td><strong>Quem a clínica quer atender</strong> <code>[PRODUTO cap. 5.1]</code></td><td>●</td><td>●</td><td>Posicionamento e triagem</td></tr><tr><td><strong>Quem ela prefere não atender</strong></td><td>●</td><td>●</td><td>O filtro anti-curioso</td></tr><tr><td><strong>Critérios de qualificação: o que define ter perfil</strong> <code>[PRODUTO cap. 10.3]</code></td><td></td><td>●</td><td>A IA de triagem inteira</td></tr><tr><td>Queixas mais comuns que chegam</td><td>●</td><td></td><td>Gancho de criativo e estudo de caso <code>[ESTRATÉGIA]</code></td></tr><tr><td>Objeções que mais aparecem</td><td>●</td><td></td><td>A matriz de objeções</td></tr><tr><td>De onde vêm as pacientes hoje</td><td>●</td><td></td><td>O diagnóstico de canal</td></tr></tbody></table>
+<h3 id="as-cinco-perguntas-da-triagem">As cinco perguntas da triagem</h3>
+<p><code>[PRODUTO cap. 7.3]</code> A ficha da paciente é preenchida automaticamente com cinco campos: nome, o que quer fazer, já fez antes, de onde é, e para quando. <strong>O que precisa vir da clínica é o critério de leitura de cada um</strong>, ou seja, qual resposta qualifica e qual não.</p>
+<table><thead><tr><th>Campo</th><th>O que a clínica precisa definir</th></tr></thead><tbody><tr><td>O que quer fazer</td><td>Quais procedimentos ela atende e quais recusa</td></tr><tr><td>Já fez antes</td><td>Isso muda a prioridade?</td></tr><tr><td>De onde é</td><td>O raio, e o que fazer com quem está fora</td></tr><tr><td>Para quando</td><td>A partir de qual prazo a paciente é fria</td></tr></tbody></table>
+<h2 id="6-oferta-e-posicionamento">6 · Oferta e posicionamento</h2>
+<p><code>[PRODUTO cap. 5.1]</code> A Revon constrói, a clínica valida. O que a Revon precisa para construir:</p>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>O que a clínica entrega bem, na visão dela</td><td>●</td><td></td><td>A promessa central</td></tr><tr><td>O que ela não quer prometer</td><td>●</td><td></td><td>A viabilidade clínica <code>[PRODUTO cap. 10.1]</code></td></tr><tr><td>Diferencial declarado da clínica</td><td>●</td><td></td><td>O &quot;por que aqui&quot; da oferta</td></tr><tr><td>Concorrentes locais que ela cita</td><td>●</td><td></td><td>O posicionamento</td></tr><tr><td>Casos de que ela se orgulha</td><td>●</td><td></td><td>Os estudos de caso <code>[ESTRATÉGIA]</code></td></tr><tr><td>Restrições de comunicação que ela impõe</td><td>●</td><td></td><td>O que o criativo pode dizer</td></tr></tbody></table>
+<h2 id="7-marca-e-material">7 · Marca e material</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Logo em arquivo aberto</td><td>●</td><td></td><td>Criativo e página</td></tr><tr><td>Cores e tipografia, se houver</td><td>●</td><td></td><td>Criativo</td></tr><tr><td>Fotos da clínica e da equipe</td><td>●</td><td></td><td>Criativo e página</td></tr><tr><td>Acervo de antes e depois, com autorização de uso</td><td>●</td><td></td><td>Prova</td></tr><tr><td><strong>Autorizações de imagem das pacientes</strong></td><td>●</td><td></td><td>Qualquer peça com paciente <code>[SUG]</code></td></tr><tr><td>Material institucional existente</td><td>●</td><td></td><td>Reaproveitamento</td></tr></tbody></table>
+<h2 id="8-digital-e-acessos">8 · Digital e acessos</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td><strong>Número de WhatsApp da clínica</strong> <code>[PRODUTO cap. 10.3]</code></td><td></td><td>●</td><td>A integração inteira</td></tr><tr><td>Esse número já está em uso em outro aplicativo?</td><td></td><td>●</td><td>A migração, que pode levar dias <code>[SUG]</code></td></tr><tr><td>@ do Instagram e acesso</td><td>●</td><td>●</td><td>Orgânico e anúncio</td></tr><tr><td>Conta de anúncio existente, ou criação nova</td><td>●</td><td></td><td>O impulsionamento</td></tr><tr><td>Gerenciador de negócios, se houver</td><td>●</td><td></td><td>Permissões</td></tr><tr><td>Site ou página, se houver</td><td>●</td><td></td><td>Destino e rastreamento</td></tr><tr><td>Histórico de campanhas anteriores</td><td>●</td><td></td><td>O que já foi testado</td></tr><tr><td>Agenda ou sistema que a clínica usa hoje</td><td></td><td>●</td><td>Onde a avaliação é marcada</td></tr></tbody></table>
+<h2 id="9-midia">9 · Mídia</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td><strong>Valor mensal de investimento</strong> <code>[PRODUTO cap. 10.1]</code></td><td>●</td><td></td><td>A verba de impulsionamento</td></tr><tr><td>Como a verba será aportada, e por quem</td><td>●</td><td></td><td>O impulsionamento, que depende do Portão 2</td></tr><tr><td>Já investiu antes? Quanto e com que resultado</td><td>●</td><td></td><td>A expectativa</td></tr></tbody></table>
+<h2 id="10-agenda-e-capacidade">10 · Agenda e capacidade</h2>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td><strong>Disponibilidade de horário para avaliação</strong> <code>[PRODUTO cap. 10.2]</code></td><td>●</td><td>●</td><td>Régua 3, e o Portão 1</td></tr><tr><td>Quantas avaliações cabem por semana</td><td>●</td><td></td><td>O teto de demanda que a clínica sustenta</td></tr><tr><td>Antecedência típica entre marcar e atender</td><td></td><td>●</td><td>A cadência da régua de confirmação <code>[PRODUTO cap. 6.5]</code></td></tr><tr><td>Dias e horários de maior movimento</td><td></td><td>●</td><td>Quando as tarefas caem na fila <code>[SUG]</code></td></tr><tr><td>Período de férias ou fechamento previsto</td><td>●</td><td>●</td><td>O calendário da implantação</td></tr></tbody></table>
+<h2 id="11-rotina-para-adaptar-as-reguas">11 · Rotina, para adaptar as réguas</h2>
+<p><code>[PRODUTO cap. 6.7]</code> Os prazos das cinco réguas são definidos pela Revon e já vêm configurados. <strong>O que se adapta é a cadência e a mensagem</strong>, e isso depende de saber como o dia da clínica funciona.</p>
+<table><thead><tr><th>Dado</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Como a secretária organiza o dia hoje</td><td>●</td><td>A hora em que a fila é trabalhada</td></tr><tr><td>Quanto tempo ela leva para responder hoje</td><td>●</td><td>A linha de base do tempo de resposta</td></tr><tr><td>Como a clínica confirma presença hoje</td><td>●</td><td>A régua 3</td></tr><tr><td>O que ela faz hoje quando alguém falta</td><td>●</td><td>A régua 4</td></tr><tr><td>O que ela faz hoje com quem avaliou e não fechou</td><td>●</td><td>A régua 5</td></tr><tr><td>Tom de voz da clínica no WhatsApp</td><td>●</td><td>As mensagens prontas</td></tr></tbody></table>
+<h2 id="12-base-existente">12 · Base existente</h2>
+<p><code>[ESTRATÉGIA]</code> A revitalização da base é canal de custo zero e depende disto.</p>
+<table><thead><tr><th>Dado</th><th>PLAN</th><th>COPI</th><th>Bloqueia</th></tr></thead><tbody><tr><td>Quantas pacientes atendidas nos últimos seis meses</td><td>●</td><td>●</td><td>O tamanho da base</td></tr><tr><td>Esses contatos estão organizados em algum lugar?</td><td>●</td><td>●</td><td>Se dá para trabalhar a base</td></tr><tr><td>Existe registro de qual procedimento cada uma fez</td><td>●</td><td>●</td><td>A separação por procedimento</td></tr></tbody></table>
+<h2 id="o-minimo-que-trava-os-portoes">O mínimo que trava os portões</h2>
+<p><code>[SUG]</code> De tudo acima, sete linhas travam um portão se faltarem. As demais atrasam, mas não bloqueiam. O marco que cada uma trava está na coluna Bloqueia.</p>
+<ol><li>Número de WhatsApp e acesso</li><li>Critérios de qualificação</li><li>Raio de atendimento</li><li>Política de preço</li><li>Disponibilidade de agenda para avaliação</li><li>Verba disponível na plataforma</li><li>Vídeos gravados</li></ol>
+<h2 id="o-que-so-se-descobre-testando">O que só se descobre testando</h2>
+<p><code>[SUG]</code> Estas perguntas não têm resposta na sessão diagnóstica, e tentar adivinhar atrasa a entrega. Elas viram hipótese e se resolvem nos dias 8 a 30:</p>
+<ul><li>Qual gancho de criativo funciona com o público daquela cidade</li><li>Qual faixa de ticket a região sustenta</li><li>Qual etapa do funil vai ser o gargalo real da clínica</li><li>Se a paciente daquela clínica responde melhor a vídeo ou a carrossel</li></ul>
+</main>
+</body>
+</html>

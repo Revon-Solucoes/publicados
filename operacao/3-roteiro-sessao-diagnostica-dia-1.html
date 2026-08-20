@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roteiro da sessão diagnóstica</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Roteiro da sessão diagnóstica</h1><p class="meta">v3 · 2026-08-18</p></header>
+<p>A conversa do dia 1. Em que ordem perguntar, como perguntar, e como fechar. O inventário completo dos dados está em <a href="2-dados-do-cliente.html"><code>operacao/2-dados-do-cliente.md</code></a>. Aqui é a condução.</p>
+<p><strong>Quem conduz:</strong> coordenação e CS.</p>
+<p><strong>Duração:</strong> 90 minutos.</p>
+<p><strong>Esta conversa é diagnóstico operacional, e nada mais.</strong> O posicionamento é conversa própria, de cerca de 75 minutos, no dia seguinte, com roteiro em <a href="10-roteiro-posicionamento.html"><code>operacao/10-roteiro-posicionamento.md</code></a> e passo 2.0 do playbook. Perguntado aqui, sem número na mesa, o que volta é a resposta performada, e é justamente isso que a extração ancorada em ticket, mix e gargalo existe para furar.</p>
+<p><strong>As duas conversas somam 165 minutos</strong>, e a divisão não é para economizar tempo: duas horas e meia numa sentada só, com dona de clínica que tem paciente esperando, não se sustentam.</p>
+<p><strong>Este é o kickoff.</strong> A passagem de bastão aconteceu no dia 0, com quem vendeu presente, e por isso esta conversa não gasta tempo com apresentação nem com alinhamento de objetivo: os dois já foram feitos, e o plano de sucesso chega aqui validado pela cliente.</p>
+<h2 id="antes-de-entrar">Antes de entrar</h2>
+<p>Quem conduz chega com o documento do dia 0 aberto, em duas colunas: <strong>o que falta</strong> e <strong>o que precisa de confirmação</strong>. A gravação e a transcrição da call de vendas já foram ouvidas.</p>
+<p>A regra que organiza a conversa inteira: <strong>o que já se sabe não vira pergunta, vira confirmação.</strong> &quot;Vi que vocês atendem principalmente protocolo completo, é isso mesmo?&quot; no lugar de &quot;o que vocês atendem?&quot;.</p>
+<h2 id="bloco-1-abertura-5-min">Bloco 1 · Abertura · 5 min</h2>
+<p>Três coisas, nesta ordem:</p>
+<ol><li><strong>O que é esta conversa.</strong> Levantar como a clínica opera hoje, e confirmar o que a Revon já apurou. É diagnóstico operacional</li><li><strong>O que sai daqui.</strong> Duas datas: a conversa de posicionamento, amanhã, e a apresentação do planejamento, no dia 3. Mais a lista do que a Revon ainda precisa receber</li><li><strong>Como funciona.</strong> A Revon fala pouco e pergunta muito. As decisões vêm depois, na apresentação</li><li><strong>O que esta conversa não é.</strong> Não se decide posicionamento hoje. Amanhã a Revon volta com o retrato em número e é ali que a posição da clínica na cidade é trabalhada</li></ol>
+<h2 id="bloco-2-a-clinica-hoje-15-min">Bloco 2 · A clínica hoje · 15 min</h2>
+<p>Começa larga, porque é onde a cliente fala solto e entrega contexto que não cabe em pergunta fechada.</p>
+<ul><li>&quot;Me conta como está a clínica hoje.&quot;</li><li>&quot;O que te fez procurar a Revon agora?&quot;</li><li>&quot;Se em três meses estivesse tudo certo, o que teria mudado?&quot;</li></ul>
+<p>Enquanto ela fala, marcar no documento o que já foi respondido nos blocos seguintes, para não repetir.</p>
+<p>Confirmar: endereço, <strong>raio de atendimento</strong>, horário de funcionamento, quantas salas.</p>
+<h2 id="bloco-3-a-paciente-20-min">Bloco 3 · A paciente · 20 min</h2>
+<p>O bloco mais importante. Sai daqui o que configura a triagem.</p>
+<ul><li>&quot;Descreve a paciente que você mais gosta de atender.&quot;</li><li>&quot;E a que você prefere não atender? Por quê?&quot;</li><li>&quot;Quais queixas mais chegam?&quot;</li><li>&quot;O que elas mais falam quando desistem?&quot;</li></ul>
+<p>Depois de ela descrever, fechar o critério em voz alta: <strong>&quot;Então, para a triagem, paciente com perfil é quem [x, y, z]. Quem não tem perfil é quem [a, b]. Fechado assim?&quot;</strong></p>
+<p>Percorrer os quatro campos da triagem, um a um:</p>
+<table><thead><tr><th>Campo</th><th>O que precisa ficar decidido</th></tr></thead><tbody><tr><td>O que quer fazer</td><td>Quais procedimentos atende e quais recusa</td></tr><tr><td>Já fez antes</td><td>Isso muda a prioridade dela?</td></tr><tr><td>De onde é</td><td>O raio, e o que fazer com quem está fora</td></tr><tr><td>Para quando</td><td>A partir de qual prazo a paciente é fria</td></tr></tbody></table>
+<h2 id="bloco-4-comercial-numero-e-gargalo-30-min">Bloco 4 · Comercial, número e gargalo · 30 min</h2>
+<p>Absorveu os 15 minutos do antigo bloco de oferta e posicionamento, e é o bloco que mais paga agora: <strong>é daqui que sai a devolutiva numérica</strong> que abre a conversa de posicionamento do dia seguinte. Sem os três números, aquela conversa abre sem âncora e vira conversa de opinião.</p>
+<ul><li>&quot;Como funciona hoje da primeira mensagem até a paciente na cadeira?&quot;</li><li>&quot;Quem responde o WhatsApp? Em quanto tempo, na média?&quot;</li><li>&quot;Qual o ticket médio hoje? E dos protocolos completos?&quot; <strong>Os dois números, separados.</strong> Se não existirem, registrar que não existem, que também é diagnóstico.</li><li>&quot;Dos procedimentos que vocês fazem, quais três sustentam o faturamento hoje?&quot; E depois: <strong>&quot;e quais três você gostaria que sustentassem?&quot;</strong> A distância entre as duas listas é a matéria da conversa de amanhã.</li><li>&quot;Entre a primeira mensagem e a cadeira, em que ponto some mais paciente?&quot; Fechar em <strong>uma</strong> etapa, não em três.</li><li>&quot;De cem pessoas que chamam no WhatsApp, quantas marcam? E quantas aparecem?&quot; O número aproximado serve; a ordem de grandeza é o que importa.</li></ul>
+<p>Pedir a <strong>lista de procedimentos com o nome que a clínica usa</strong>, porque é o que alimenta o registro de venda e o ranking. <strong>Para cada um, perguntar de quanto em quanto tempo a paciente precisa voltar</strong>, e se é o que ela recomenda ou o que acontece na prática, os dois números interessam, e quando divergem o segundo é o que vale. Perguntar também se tem procedimento sem retorno nenhum. Fechar em voz alta, procedimento a procedimento. <strong>Se ela não souber, não inventar prazo</strong>, vira pendência com dono e data.</p>
+<p><strong>Fechar a linha de base de consultas, com todas as letras:</strong> &quot;quantas avaliações a clínica realiza hoje por semana, em média?&quot; Contam todas, de qualquer origem, no mesmo critério do contrato. <strong>Se ela não souber de cabeça, extrair da agenda dos últimos 90 dias, junto com ela, ali mesmo.</strong> Não aceitar estimativa solta. <strong>Este é o único número desta sessão que não dá para recuperar depois</strong>: a partir do dia 7 a operação já está mexendo no funil, e não existe mais &quot;antes&quot;. Registrar também sobre qual período o número foi apurado.</p>
+<p>Sobre preço, aqui é <strong>confirmação, não descoberta</strong>: a política de preço é linha do Portão 1 e já chegou por escrito antes desta conversa. Ler de volta e confirmar como é apresentada. <strong>Preço é decisão dela</strong>, e a Revon estrutura como o investimento é apresentado.</p>
+<p><strong>Não entrar em posicionamento aqui.</strong> Se ela puxar o assunto, anotar a frase com as palavras dela e dizer que é exatamente o tema da conversa de amanhã. Antecipar queima a extração.</p>
+<h2 id="bloco-5-equipe-e-rotina-10-min">Bloco 5 · Equipe e rotina · 10 min</h2>
+<p>Este bloco existe para adaptar a cadência das réguas.</p>
+<ul><li>&quot;Quem é a secretária, ou quantas são?&quot;</li><li>&quot;Como é o dia dela? Em que momento ela consegue parar e trabalhar uma fila de tarefas?&quot;</li><li>&quot;Como vocês confirmam presença hoje?&quot;</li><li>&quot;O que vocês fazem quando alguém falta?&quot;</li><li>&quot;E quando a paciente avalia e não fecha?&quot;</li><li>&quot;Quantas avaliações cabem por semana?&quot;</li></ul>
+<p>Confirmar a <strong>disponibilidade de agenda</strong> e o tom de voz da clínica no WhatsApp.</p>
+<h2 id="bloco-6-o-que-so-a-diagnostica-revela-5-min">Bloco 6 · O que só a diagnóstica revela · 5 min</h2>
+<p>Aqui muda o tom: deixa de ser descoberta e passa a ser combinado. Cada item vem com o motivo.</p>
+<p><strong>O Portão 1 é pedido aqui</strong>, no passo 1.6 do playbook: Instagram, Página, portfólio, conta de anúncios, número e a pergunta sobre outro provedor, com o dono de cada linha. Nada disso se pede antes de sentar com a cliente. A data não é dita nesta conversa: ela nasce quando a última linha chegar e for testada, no passo 1.11.</p>
+<p>Junto do portão, levanta-se o que a conversa revela e ninguém teria como pedir antes:</p>
+<ul><li>Quem tem a senha do Instagram hoje, onde está o segundo fator, e se alguém que saiu da clínica ainda tem acesso</li><li><strong>Qual perfil será trabalhado</strong>, o da clínica ou o do especialista. Decisão sem volta, e sai fechada daqui</li><li>Conta de anúncios antiga no perfil pessoal dela, ou criada pelo aplicativo sem ela saber, que vira conta a reivindicar</li><li>Automação de mensagem já rodando, para não pôr dois robôs na mesma caixa</li><li>Quem executa a parte manual do social selling, <strong>com nome</strong></li><li>Fotos, logo e material de marca</li><li><strong>Autorização de imagem</strong> das pacientes do acervo</li><li>Valor do investimento mensal e como será aportado</li></ul>
+<p><strong>Nada daqui reabre o Portão 1 nem move a data já comunicada.</strong> Cada item vira pendência com dono, data, e o marco que ele trava, dito na hora.</p>
+<h2 id="bloco-7-fechamento-5-min">Bloco 7 · Fechamento · 5 min</h2>
+<h3 id="antes-das-datas-o-que-ela-chama-de-sucesso">Antes das datas: o que ela chama de sucesso</h3>
+<p><strong>Três perguntas, e são as últimas da conversa.</strong> Passo 1.12 do playbook. Vêm no fim porque ela já viu os próprios números e a resposta deixa de ser genérica.</p>
+<ul><li><em>&quot;Daqui a trinta dias, o que precisa ter acontecido para você olhar e dizer que valeu?&quot;</em></li><li><em>&quot;Como você vai saber? O que você vai olhar para saber?&quot;</em></li><li><em>&quot;Quanto tempo você esperava até isso acontecer?&quot;</em></li></ul>
+<p><strong>Escrever a resposta com as palavras dela</strong>, sem traduzir para o vocabulário da Revon.</p>
+<p><strong>Duas coisas que não se faz aqui.</strong> Não negociar a resposta para baixo até virar o que a Revon já ia entregar: se for inatingível em trinta dias, dizer ali o que é possível no prazo e o que fica para o dia 90, e registrar os dois. E se ela responder com um marco da Revon, do tipo &quot;ter o sistema funcionando&quot;, perguntar de novo: entrar no sistema não é vitória, e essa é a resposta que se dá quando a pergunta soou como cortesia.</p>
+<h3 id="depois-as-cinco-coisas-e-a-reuniao-nao-termina-sem-elas">Depois, as cinco coisas, e a reunião não termina sem elas:</h3>
+<ol><li><strong>Marcar a conversa de posicionamento</strong>, para a manhã seguinte, cerca de 75 minutos, com a especialista presente. Dizer o que ela é: a Revon volta com o retrato em número e a partir dele fecha a posição da clínica na cidade. <strong>Não é continuação desta conversa</strong>, e dizer isso evita que ela mande outra pessoa no lugar</li><li><strong>Marcar a apresentação do dia 3</strong>, com data e hora, e dizer o que ela vai conter</li><li><strong>Marcar a data das gravações</strong> de vídeo</li><li><strong>Marcar as datas dos dois treinamentos</strong>, secretária e especialista, lembrando que a especialista também vê a parte dela do Copiloto</li><li><strong>Ler em voz alta as pendências</strong>, cada uma com o dado, o dono, a data máxima e <strong>qual marco ela empurra</strong></li></ol>
+<p>Fechar com a regra dos portões, dita agora e não quando o atraso acontecer. <strong>O Copiloto no ar continua com data prometida, sete dias.</strong> O que não tem mais prazo fixo é o impulsionamento, e não se promete mais campanha no ar em sete dias.</p>
+<p>Duas datas, com nomes diferentes, e nunca misturadas:</p>
+<ul><li><strong>A data do Copiloto no ar.</strong> Ela já foi dita quando o Portão 1 abriu, e é repetida aqui sem mudança. Diga a data, não o número de dias. Significa que toda paciente que escrever a partir dali entra no sistema, e que a secretária trabalha a fila do dia</li><li><strong>O impulsionamento não tem data.</strong> Ele depende do Portão 2, que é a primeira leva gravada mais a base da Meta fechada. <strong>O caminho crítico é a gravação dela</strong>, e é por isso que a Revon não promete a data: ela não controla. Dito olhando para a especialista, e não para a gestora</li></ul>
+<p>A regra por extenso: <strong>nada do que foi levantado hoje reabre o Portão 1 nem move a data que ela já ouviu.</strong> O que apareceu aqui vira pendência com dono, data e marco. Quando algo pausa o prazo, a Revon avisa em até 1 dia útil qual foi a situação e o que muda, pela rotina do passo T.1 do playbook.</p>
+<h2 id="depois-da-conversa">Depois da conversa</h2>
+<p>No mesmo dia, mandar no grupo de WhatsApp:</p>
+<ul><li>A lista de entregas com os prazos combinados</li><li>As datas marcadas</li><li>As pendências com dono e data</li></ul>
+<p>E, no registro interno: o primeiro valor nas palavras dela, no plano de sucesso e na seção 6 do documento interno.</p>
+<h2 id="como-conduzir">Como conduzir</h2>
+<p><code>[SUG]</code> Cinco hábitos que sustentam o roteiro:</p>
+<ul><li><strong>Pergunta aberta primeiro, fechamento depois.</strong> Deixa ela descrever, e só então proponha o critério em voz alta para ela confirmar</li><li><strong>Uma pergunta por vez.</strong> Duas juntas fazem ela responder só a segunda</li><li><strong>Silêncio depois da pergunta.</strong> A informação boa costuma vir na segunda frase, depois da pausa</li><li><strong>Repetir o que entendeu, com as palavras dela.</strong> É o que evita montar o planejamento em cima de uma interpretação errada</li><li><strong>Registrar durante, não depois.</strong> Pendência que não foi escrita na hora vira pendência esquecida</li></ul>
+<h2 id="o-que-fica-para-depois-da-subida">O que fica para depois da subida</h2>
+<p>Estas quatro perguntas não têm resposta nesta conversa, e tentar adivinhar atrasa a entrega. Viram hipótese:</p>
+<ul><li>Qual gancho de criativo funciona com o público daquela cidade</li><li>Qual faixa de ticket a região sustenta</li><li>Qual etapa do funil vai ser o gargalo real daquela clínica, <strong>medido</strong>. O Bloco 4 levanta o gargalo que ela <strong>percebe</strong>, que é o que serve para a devolutiva de amanhã. Os dois não são a mesma coisa, e quando divergirem o medido é o que vale para operar</li><li>Se a paciente daquela clínica responde melhor a vídeo ou a carrossel</li></ul>
+</main>
+</body>
+</html>

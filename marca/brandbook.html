@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manual de Identidade Visual · REVON</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Manual de Identidade Visual · REVON</h1></header>
+<p>STATUS: VIGENTE Origem: <code>marca/fontes/brandbook-revon.html</code></p>
+<p><strong>A fonte de cor é <code>marca/kit/tokens.css</code></strong>, gerado da MIV e regenerado dela a cada atualização. Ele traz as rampas inteiras, a régua de uso de cada degrau e o contraste calculado, e é o que o template dos documentos carrega.</p>
+<p>Na MIV, <strong>Cacau <code>#4A3428</code> é o escuro da marca</strong>, com <strong>Noz <code>#6B4A32</code></strong> no degrau claro da mesma família. O <strong>Grafite <code>#222222</code> é secundário</strong>, com dois trabalhos: ser a tinta sobre o azul e o escuro neutro para quando a peça não quiser o marrom. A tinta de texto é <code>#2B2B2B</code>, com as opacidades do kit.</p>
+<p><strong>Este documento é a referência do resto</strong>, e é o que ele tem de melhor: arquétipo, personalidade, tom de voz, o que fica de fora, tipografia e a regra de aparência da equipe.</p>
+<p>Aceleradora de crescimento para clínicas de harmonização facial. Uso interno e de parceiros.</p>
+<p><strong>O que este manual protege.</strong> Não é manual comercial, nem documentação de produto, nem treinamento de equipe. É o documento que define quem a Revon é, como ela fala e como ela aparece.</p>
+<p>O original em HTML tem as peças visuais que este texto não carrega: os arquivos de logo, o pattern, as amostras de cor e os exemplos de composição. Para ver, abrir <code>marca/fontes/brandbook-revon.html</code>.</p>
+<hr>
+<h1 id="a-marca">A marca</h1>
+<h2 id="quem-e-a-revon">Quem é a Revon</h2>
+<p><strong>Tagline.</strong> Aceleradora de crescimento para clínicas de harmonização facial.</p>
+<p><strong>O que isso quer dizer.</strong> Cuidamos do caminho inteiro entre o anúncio e a receita da clínica: posicionamento, captação, atendimento, avaliação e retorno. O trabalho não termina quando o contato entra.</p>
+<p><strong>O que a Revon não é.</strong> Não somos uma agência de tráfego. Mídia paga é uma das ferramentas, não é o produto. E não somos generalistas: um único mercado, um único caminho.</p>
+<h2 id="big-idea">Big idea</h2>
+<blockquote><p>Fazemos harmonizadoras pararem de competir por preço e virarem donas da própria agenda.</p></blockquote>
+<h2 id="dona-da-propria-agenda">Dona da própria agenda</h2>
+<p>Segunda-feira chega, a clínica abre a agenda e não sabe o que fez a semana anterior ser boa. Isso não é previsibilidade, é sorte com nome bonito.</p>
+<table><thead><tr><th>Não é</th><th>É</th></tr></thead><tbody><tr><td>Ter mais gente perguntando preço</td><td>Saber quantas novas avaliações entram por semana</td></tr><tr><td>Depender de indicação para a semana ser boa</td><td>Escolher qual paciente a clínica quer atender</td></tr><tr><td>Descobrir no fim do mês se o mês fechou</td><td>Ter um caminho que funciona sem depender de sorte</td></tr><tr><td>Encher a agenda de procedimento avulso</td><td>Sustentar o próprio preço porque a paciente entende o valor</td></tr></tbody></table>
+<h2 id="tese-de-crescimento">Tese de crescimento</h2>
+<p><strong>Mais contatos não consertam o caminho. Só aumentam o que se perde nele.</strong></p>
+<p>A paciente pode chegar e não responder. Responder e não agendar. Agendar e faltar. Comparecer e sair dizendo que vai pensar. Cada perda pequena vira uma perda grande no fim do caminho.</p>
+<p><strong>A jornada da paciente.</strong> Paciente certa, conversa, avaliação agendada, comparecimento, avaliação, protocolo fechado, retorno.</p>
+<p><strong>Duas alavancas.</strong> Mais pacientes com perfil entrando, e menos pacientes se perdendo no caminho. Tudo o que a Revon faz existe para mover uma dessas duas. Nada do que fazemos existe fora disso.</p>
+<h2 id="no-que-acreditamos">No que acreditamos</h2>
+<p>Quatro crenças. Toda peça da Revon deve conseguir se apoiar em pelo menos uma delas.</p>
+<ol><li><strong>A paciente compra transformação, não procedimento.</strong> Ela não quer uma seringa. Quer gostar mais do que vê no espelho.</li><li><strong>Mais contatos não corrigem uma operação que perde pacientes no caminho.</strong> Dobrar o investimento em anúncio sem consertar o caminho dobra o desperdício.</li><li><strong>Protocolos tiram a clínica da lógica de procedimento avulso e da comparação por preço.</strong> Procedimento tem preço fácil de comparar. Transformação, não.</li><li><strong>Captação, atendimento, avaliação e retorno precisam trabalhar na mesma direção.</strong> Uma etapa tem que preparar a próxima.</li></ol>
+<h2 id="visao-sobre-preco">Visão sobre preço</h2>
+<p><strong>Tese central.</strong> A paciente não nasceu comparando preço. <strong>A clínica ensinou ela a comparar preço.</strong> Quando a comunicação da clínica fala de botox, de ml, de antes e depois e de promoção, é isso que a paciente aprende a comprar.</p>
+<p><strong>Regra de comunicação.</strong> A paciente nunca é a vilã da história. O antagonista é quase sempre um comportamento da própria clínica, não a pessoa do outro lado da conversa. Nunca escrever &quot;caçadora de preço&quot;, &quot;curiosa&quot; ou qualquer construção que transforme a paciente em adversária.</p>
+<h2 id="metodo-face">Método FACE</h2>
+<p>Quatro pilares que cobrem a jornada inteira. Este manual apresenta o método; a documentação completa vive fora dele.</p>
+<table><thead><tr><th></th><th>Pilar</th><th>O que faz</th></tr></thead><tbody><tr><td><strong>F</strong></td><td>Filtro da Paciente Certa</td><td>Atrair quem tem perfil para tratamentos completos</td></tr><tr><td><strong>A</strong></td><td>Agenda Previsível</td><td>Transformar interesse em avaliação marcada, e trabalhar confirmação e comparecimento</td></tr><tr><td><strong>C</strong></td><td>Consulta que Converte</td><td>Estruturar a avaliação para a paciente entender a transformação e o protocolo</td></tr><tr><td><strong>E</strong></td><td>Estratégia de Recorrência</td><td>Saber quem precisa retornar, quando e como retomar</td></tr></tbody></table>
+<hr>
+<h1 id="para-quem">Para quem</h1>
+<h2 id="para-quem-existimos">Para quem existimos</h2>
+<blockquote><p>Você não deixaria um generalista aplicar no seu rosto. Por que deixaria um cuidar do crescimento da sua clínica?</p></blockquote>
+<p>Somos especializados exclusivamente em clínicas de harmonização facial e injetáveis.</p>
+<p><strong>Com quem falamos:</strong> a dona da clínica, a secretária e quem atende a paciente, e a coordenadora ou gestora da operação.</p>
+<p><strong>A Revon fala com a harmonizadora. A Revon não é uma clínica e nunca se comunica como uma.</strong></p>
+<h2 id="perfil-da-clinica">Perfil da clínica</h2>
+<p>Clínica tecnicamente boa, com agenda que oscila. Quase sempre chega com mais de um destes sintomas ao mesmo tempo, e é por isso que resolver um só não muda o mês.</p>
+<ul><li>O WhatsApp recebe muito &quot;quanto custa?&quot; e pouca avaliação é marcada</li><li>A agenda depende mais de indicação do que a dona gostaria</li><li>Investe em mídia, mas sente que chega muita gente fora do perfil</li><li>A secretária responde todo mundo, mas muita conversa morre</li><li>Agenda avaliações e perde pacientes em faltas e cancelamentos</li><li>Poderia vender protocolos maiores, e fecha procedimento avulso demais</li></ul>
+<h2 id="quem-a-harmonizadora-e-por-dentro">Quem a harmonizadora é por dentro</h2>
+<p>Ela olha para a qualidade do próprio trabalho e sente que a agenda e o faturamento ainda não acompanham a profissional que ela se tornou.</p>
+<p><strong>Falamos com ela como quem entende de operação, não como quem entende de estética.</strong></p>
+<p>O que é verdade sobre ela:</p>
+<ul><li>Estudou muito. Investiu em curso, em técnica e em equipamento</li><li>Não se vê como vendedora, e não quer se ver</li><li>Tem orgulho do resultado que entrega e desconforto com a conversa de preço</li><li>Não quer virar influenciadora</li><li>Quer ser escolhida pelo trabalho, não pela tabela</li></ul>
+<p><strong>Consequência para a comunicação.</strong> A Revon nunca trata a resistência dela a se vender como falha a corrigir. O caminho que a Revon constrói é justamente o que dispensa que ela se venda.</p>
+<p>Isso não é leitura de personalidade. Na pesquisa do Center for Talent Innovation publicada em <em>Executive Presence</em> (Sylvia Ann Hewlett, 2014, capítulo 6), 29% dos respondentes disseram que se creditar pelo próprio resultado derruba a presença executiva de uma mulher, e 24% disseram que se diminuir também derruba. Os dois lados são punidos, e é essa faixa estreita que ela está descrevendo quando diz que não quer se ver como vendedora.</p>
+<hr>
+<h1 id="personalidade-e-voz">Personalidade e voz</h1>
+<h2 id="arquetipos">Arquétipos</h2>
+<p><strong>Sábio 55%.</strong> É a base da credibilidade. Sem ele, qualquer direção soa a palpite. Ensina a enxergar, diagnostica, explica causa e consequência, simplifica, tira a clínica do achismo.</p>
+<p><strong>Herói 45%.</strong> É o que tira a paciente da inércia. Sem ele, o diagnóstico morre na análise. Conduz para a mudança, dá direção, cria movimento, acompanha, ajuda a executar.</p>
+<p><strong>O Sábio abre, o Herói fecha.</strong> Toda peça mostra o que está acontecendo antes de dizer o que fazer.</p>
+<p>Governante está fora: a Revon não define o padrão de um pedestal, ela entra junto para fazer acontecer.</p>
+<p><strong>Sábio na prática:</strong> descrever o caminho da paciente antes de propor solução; nomear o problema com precisão, sem suavizar e sem dramatizar; explicar por que acontece, não só que acontece; uma ideia por peça.</p>
+<p><strong>Herói na prática:</strong> toda peça termina com o que fazer agora; direção clara, um caminho e não um cardápio; acompanhar a execução; firmeza sem agressividade, porque a convicção está no que se diz, não no volume.</p>
+<h2 id="personalidade">Personalidade</h2>
+<p><strong>Didática. Firme. Próxima. Ambiciosa.</strong></p>
+<p>Onde está o equilíbrio: firme não agressiva; confiante não arrogante; didática não professoral; próxima não informal demais; ambiciosa não fantasiosa; sofisticada não luxuosa.</p>
+<p><strong>Para que lado errar quando o equilíbrio falhar.</strong> A lista acima diz onde está o ponto, não diz o que fazer na dúvida, e na dúvida quem escreve suaviza. Duas regras de desempate:</p>
+<ul><li><strong>Tirar o &quot;eu&quot; do argumento.</strong> A firmeza se ancora no que é melhor para a clínica, nunca no que incomoda a Revon.</li><li><strong>Atirar de mira, não de rajada.</strong> Não falar sem ter ponto. Dito o ponto, sustentar com dois ou três motivos e parar.</li></ul>
+<h2 id="tom-de-voz">Tom de voz</h2>
+<p><strong>De gestor para dona de clínica.</strong> Tom simples, direto e específico do universo da clínica. Sem aquecimento, sem retórica e sem palavra difícil para parecer inteligente.</p>
+<p>Três regras:</p>
+<ol><li><strong>Falar a língua real da clínica.</strong> Paciente, avaliação, protocolo, comparecimento, retorno.</li><li><strong>Mostrar antes de propor.</strong> Nenhuma solução aparece antes de o problema estar nomeado.</li><li><strong>Ser específico.</strong> &quot;Novas avaliações por semana&quot; diz alguma coisa. &quot;Resultados incríveis&quot; não diz nada.</li></ol>
+<h2 id="ver-entender-agir">Ver, entender, agir</h2>
+<p>Estrutura principal da fala, a mesma ideia em três camadas.</p>
+<table><thead><tr><th>Camada</th><th>O que faz</th><th>Exemplo</th></tr></thead><tbody><tr><td>Ver</td><td>Mostrar o que está acontecendo</td><td>&quot;Sua secretária responde todo mundo, mas muita conversa morre.&quot;</td></tr><tr><td>Entender</td><td>Explicar por que acontece</td><td>&quot;A conversa chega no preço antes de a paciente entender o valor.&quot;</td></tr><tr><td>Agir</td><td>Indicar o que precisa mudar</td><td>&quot;A avaliação precisa vir antes do número.&quot;</td></tr></tbody></table>
+<h2 id="lexico-da-clinica">Léxico da clínica</h2>
+<p>O vocabulário é o da clínica, não o do marketing. Precisão aqui não é preferência, é obrigação.</p>
+<p><strong>Preferir:</strong> paciente, paciente com perfil, harmonizadora, dentista harmonizadora, secretária, especialista, avaliação, agenda de avaliações, protocolo, plano de tratamento, consulta, comparecimento, retorno, anúncios ou mídia.</p>
+<p><strong>Evitar na comunicação externa:</strong> cliente, lead, vendedor, reunião, funil, MQL, SQL, CRM como jargão, growth, sales, máquina de vendas, escalar sua clínica, hack, segredo, &quot;próximo nível&quot;.</p>
+<p><strong>A regra da precisão.</strong> Não inventar tradução estranha para o universo clínico. Trocar uma palavra de marketing por outra que ninguém diz na clínica é pior do que não trocar. Errado: &quot;avaliação cheia&quot;. Certo: &quot;agenda de avaliações cheia&quot;.</p>
+<h2 id="como-fala-como-nao-fala">Como fala, como não fala</h2>
+<table><thead><tr><th>Não fala assim</th><th>Fala assim</th></tr></thead><tbody><tr><td>&quot;Vamos escalar sua clínica para o próximo nível.&quot;</td><td>&quot;Vamos colocar novas avaliações na sua agenda toda semana.&quot;</td></tr><tr><td>&quot;Nosso funil de conversão entrega leads qualificados.&quot;</td><td>&quot;Mais pacientes com perfil chegando e mais avaliações marcadas.&quot;</td></tr><tr><td>&quot;Sua máquina de vendas rodando no automático.&quot;</td><td>&quot;Um processo que a sua equipe consegue executar todo dia.&quot;</td></tr><tr><td>&quot;O segredo que as clínicas de sucesso usam.&quot;</td><td>&quot;O que costuma travar a agenda de uma clínica, e o que muda isso.&quot;</td></tr><tr><td>&quot;Nosso time de sales agenda uma call com você.&quot;</td><td>&quot;Nossa equipe entra em contato para conversar sobre a sua clínica.&quot;</td></tr></tbody></table>
+<p>A frase da direita é sempre mais longa e mais específica. É o preço da clareza, e a Revon paga esse preço.</p>
+<h2 id="registros-a-evitar">Registros a evitar</h2>
+<p>Não são palavras isoladas, são vozes inteiras que a Revon não usa.</p>
+<table><thead><tr><th>Registro</th><th>O que traz junto</th></tr></thead><tbody><tr><td>Guru</td><td>segredo, hack, próximo nível, mindset, &quot;poucos sabem disso&quot;</td></tr><tr><td>Agência genérica</td><td>criativos do mês, gestão de tráfego, &quot;bora?&quot;, emoji decorativo</td></tr><tr><td>SaaS</td><td>plataforma, dashboard, onboarding, feature, growth, &quot;sistema operacional&quot;</td></tr><tr><td>Luxo</td><td>exclusividade, elite, dourado, sofisticação de vitrine</td></tr><tr><td>Clínica de estética</td><td>nude e rosé, procedimento como protagonista, antes e depois como argumento</td></tr><tr><td>Promessa vazia</td><td>&quot;garantido&quot; como superlativo, revolucionário, transformação mágica, número sem origem</td></tr></tbody></table>
+<p><strong>Exceção: garantia real não é promessa vazia.</strong></p>
+<p>Evitar &quot;garantido&quot; quando é superlativo, quando não existe mecanismo por trás, ou quando não há condição, prazo ou respaldo contratual. Comunicar a garantia quando ela existe em contrato com condições claras, o texto explica exatamente o que é garantido, e a promessa é verdadeira e verificável.</p>
+<hr>
+<h1 id="sistema-visual">Sistema visual</h1>
+<h2 id="logo">Logo</h2>
+<p>Uma assinatura, quatro fundos. A versão se escolhe pelo fundo em que ela vai pousar, nunca pelo gosto da peça. Todas saem dos vetoriais originais.</p>
+<p>Versões: horizontal (marfim sobre grafite é a principal; grafite sobre marfim é a de documento; azul sobre branco; branco sobre azul), vertical para espaços estreitos, símbolo para app e avatar, símbolo como marca d&#x27;água, e ícone para favicon.</p>
+<p><strong>Regra.</strong> Sobre fundo escuro, a assinatura é marfim ou branco. Sobre claro, é azul ou grafite. Sobre azul, só branco. Nunca recolorir fora disso.</p>
+<h2 id="construcao-e-protecao">Construção e proteção</h2>
+<p><strong>O símbolo tem três formas e uma leitura:</strong> a seta, que é crescimento, direção e clareza; a letra R, inicial da Revon; e o triângulo, que é base sólida e confiabilidade.</p>
+<p><strong>Área de proteção.</strong> A unidade X é o quadrado do vazio interno do símbolo. Nenhum elemento pode invadir a distância de um X em volta da assinatura.</p>
+<p><strong>Tamanho mínimo.</strong> Em tela, horizontal 96 px de largura e símbolo 20 px. Impresso, horizontal 25 mm e símbolo 6 mm.</p>
+<h2 id="usos-incorretos">Usos incorretos</h2>
+<p>A assinatura só existe nos arquivos entregues. Qualquer versão reconstruída, redesenhada ou ajustada está errada por definição.</p>
+<p>Não distorcer, esticar ou comprimir. Não rotacionar. Não recolorir nem aplicar sobre cor fora da paleta. Não aplicar sobre fundo poluído ou sem contraste. Sem sombra, brilho ou glow. Não remontar com outra tipografia. Não invadir a área de proteção. Nenhuma versão dourada.</p>
+<h2 id="paleta">Paleta</h2>
+<p>Quatro cores carregam a identidade. Não há uma quinta na comunicação de marca.</p>
+<table><thead><tr><th>Cor</th><th>Papel</th><th>HEX</th></tr></thead><tbody><tr><td>Azul Revon</td><td>Primária</td><td><code>#4787FF</code></td></tr><tr><td>Grafite Revon</td><td>Profundidade</td><td><code>#222222</code></td></tr><tr><td>Marfim</td><td>Papel editorial</td><td><code>#F3F0E9</code></td></tr><tr><td>Branco</td><td>Respiro</td><td><code>#FFFFFF</code></td></tr></tbody></table>
+<p><strong>Equilíbrio de referência, não fórmula.</strong> Fundo escuro: 60% grafite, 30% branco, 10% azul. Fundo claro: 60% marfim, 30% grafite, 10% azul.</p>
+<p><strong>A regra por trás dos números.</strong> Marfim e grafite constroem o território. O azul ativa e assina. Uma peça pode ser 80/15/5 ou 70/20/10 e continuar Revon, desde que esses papéis fiquem de pé. O que quebra a identidade não é a proporção, é o azul virar campo genérico de fundo ou o território perder o marfim.</p>
+<p>Azul cheio é fundo de abertura, não de conteúdo: sobre ele a tinta chega no máximo a 4,68:1, então página com corpo de texto usa marfim, branco ou grafite.</p>
+<p><strong>Nenhum dourado, em nenhum tom.</strong> Também fora: gradiente tecnológico, brilho, e qualquer cor nude, rosé ou champanhe.</p>
+<h2 id="escala-tonal">Escala tonal</h2>
+<p>Cada cor é uma cartela de tinta. Quanto maior o número, mais escuro. O degrau marcado é a cor oficial.</p>
+<p><strong>Azul Atlântico</strong>, âncora no 500: 50 <code>#E2EDFF</code>, 100 <code>#C8DAFF</code>, 200 <code>#AAC8FF</code>, 300 <code>#8AB4FF</code>, 400 <code>#6A9FFF</code>, <strong>500 <code>#4787FF</code></strong>, 600 <code>#2F6DE6</code>, 700 <code>#1F57CC</code>, 800 <code>#1642A6</code>, 900 <code>#0E2F7A</code>, 950 <code>#071F52</code>. Gelo e Horizonte não são cores próprias: são os degraus 50 e 200.</p>
+<p><strong>Grafite</strong>, âncora no 950, neutro puro: 50 <code>#ECECEC</code> até <strong>950 <code>#222222</code></strong>.</p>
+<p><strong>Marfim</strong>, âncora no 50, família quente: <strong>50 <code>#F3F0E9</code></strong> até 950 <code>#27231B</code>.</p>
+<p><strong>Onde cada degrau do azul entra.</strong> De 50 a 500, letra sobre grafite, e é onde mora o azul da marca. O 600 é terra de ninguém: não carrega letra em fundo nenhum, só bloco. De 700 a 950, letra sobre marfim e branco, e é o azul-texto.</p>
+<h2 id="cores-funcionais-de-produto">Cores funcionais de produto</h2>
+<p>Duas camadas de cor, que não se misturam. A paleta da marca comunica quem a Revon é. A camada funcional comunica o que o sistema está fazendo.</p>
+<table><thead><tr><th>Estado</th><th>Uso</th><th>HEX</th></tr></thead><tbody><tr><td>Sucesso</td><td>Confirmado, pago, comparecido, concluído</td><td><code>#1E8E5A</code></td></tr><tr><td>Atenção</td><td>Pendente, vencendo, sem resposta há dias</td><td><code>#B4770E</code></td></tr><tr><td>Erro e crítico</td><td>Falha, cancelamento, perda, campo inválido</td><td><code>#C0392B</code></td></tr><tr><td>Informação</td><td>Estado neutro do sistema, é o próprio azul-texto</td><td><code>#1F57CC</code></td></tr></tbody></table>
+<p><strong>O que isto autoriza:</strong> badge, alerta, validação de formulário, estado de linha no CRM, e cor para separar estado em gráfico e tabela.</p>
+<p><strong>O que isto não autoriza:</strong> verde, âmbar ou vermelho como cor decorativa de marca; estado colorido em LP, anúncio, social ou apresentação; uma quinta cor institucional entrando pela porta dos fundos.</p>
+<h2 id="tipografia">Tipografia</h2>
+<p><strong>TT Norms Pro</strong>, primária e estrutural. Clareza, força, execução, precisão, estrutura, ação. Light 300, Regular 400, Medium 500, Bold 700, Black 900. TypeType.</p>
+<p><strong>Awesome Serif</strong>, editorial e de contraste. Tese, pensamento, provocação, sofisticação, manifesto. Regular 400, Medium 500, SemiBold 600, Bold 700. Nicky Laatz.</p>
+<p>Regras:</p>
+<ul><li>A tipografia é o principal elemento gráfico da marca, antes de cor, símbolo ou imagem.</li><li>A percepção geral é sans-serif. O contraste da TT Norms vem da variação de peso, de 300 a 900, não de trocar de fonte.</li><li>A Awesome Serif cria um momento, não vira padrão. Não usar serif automaticamente porque um texto é H1, H2 ou H3: a escolha é semântica, não hierárquica.</li><li>Contraste alto de tamanho entre título e corpo.</li><li>Corpo entre 60 e 75 caracteres por linha. Caixa alta só em rótulo curto, com tracking aberto.</li></ul>
+<p><strong>Escala.</strong> Display, Norms 900 de 79 a 114 px. Título, Norms 900 de 44 a 56 px. Subtítulo, Norms 700 em 30 px. Números, Norms 900. Tese editorial, Serif 700 de 30 a 114 px. Linha de apoio, Norms 400 em 19 px. Corpo, Norms 400 em 15,5 px. Rótulo, CTA e UI, Norms 700 em 10,5 px.</p>
+<p><strong>Ícones.</strong> Phosphor Icons 2.0, só outline e fill. Não redesenhar nem engrossar o traço. Nunca dentro de círculo colorido.</p>
+<h2 id="serif-questiona-sans-resolve">Serif questiona, sans resolve</h2>
+<p><strong>Awesome Serif quando a Revon quer</strong> fazer pensar, provocar, reposicionar, apresentar uma tese. Mais perto do Sábio.</p>
+<p><strong>TT Norms Pro quando a Revon quer</strong> afirmar, estruturar, diagnosticar, explicar, mostrar método, mostrar número, levar à ação. Mais perto do Herói.</p>
+<p>Não é regra rígida, e não existe uma fonte por arquétipo. É lógica de direção de arte, para decidir rápido com a peça em cima da mesa.</p>
+<p><strong>A pergunta que decide:</strong> esta frase existe para fazer a leitora pensar, ou para fazer a leitora entender e agir? A resposta é a fonte.</p>
+<h2 id="ritmo-tipografico">Ritmo tipográfico</h2>
+<p><strong>Proporção de referência:</strong> 70% TT Norms Pro, 30% Awesome Serif. Não é conta, é referência para impedir que a serif domine. Sintoma de serif demais: headline, números, subtítulos e frases de destaque todos em serif na mesma peça. Se a peça inteira fala com a mesma voz, não há contraste, há uniforme.</p>
+<p><strong>Números são estrutura.</strong> Etapa, método, sequência, performance, métrica, garantia e diagnóstico em TT Norms Pro Bold ou Black. Número em serifada continua possível, mas por intenção editorial declarada, nunca porque o número é grande.</p>
+<p><strong>Uma headline, uma voz.</strong> Alternar fonte palavra a palavra vira ruído, não ênfase. A ênfase vem de peso e cor; o contraste de fonte acontece entre seções.</p>
+<h2 id="simbolo-e-pattern">Símbolo e pattern</h2>
+<p><strong>O uso preferencial do símbolo não é como logotipo, é como elemento gráfico em escala.</strong> Grande, cortado, sangrando a borda. Capa e aberturas são a exceção: ali ele aparece inteiro, alinhado à margem, porque assina em vez de compor. O que ele nunca faz é ficar solto.</p>
+<p><strong>Pode:</strong> escala grande, cortado pela borda, inteiro na capa alinhado à margem, marca d&#x27;água em baixa opacidade, monocromático.</p>
+<p><strong>Não pode:</strong> dentro de círculo, com sombra ou glow, em gradiente, solto no meio sem sangrar nem encostar na margem.</p>
+<p><strong>Pattern.</strong> A seta do R repetida em malha contínua. Uma aparição por peça, porque duas viram papel de parede. Textura de fundo em baixa opacidade, nunca atrás de texto corrido, e sempre monocromático.</p>
+<hr>
+<h1 id="aplicacao">Aplicação</h1>
+<h2 id="fotografia-pessoas">Fotografia · pessoas</h2>
+<p><strong>Gente real, lugar real.</strong> A fotografia da Revon documenta um trabalho que existe. Ela não ilustra um conceito de trabalho.</p>
+<p>Imagem entra porque ajuda a narrativa, nunca para preencher espaço. Uma composição tipográfica bem resolvida é melhor do que uma foto que não diz nada, e o sistema foi feito para funcionar sem foto nenhuma.</p>
+<p><strong>Pessoas, preferir:</strong> pessoas reais, fundadores, equipe, clientes autorizados; contexto profissional real com a pessoa fazendo algo que ela faz mesmo; expressão natural, inclusive concentrada ou séria.</p>
+<p><strong>Pessoas, evitar:</strong> modelo de banco de imagem; mulher de jaleco sorrindo de braços cruzados; pose corporativa artificial e aperto de mão; rosto retocado até virar anúncio.</p>
+<p><strong>Ambiente, preferir:</strong> clínica real, escritório, sala de avaliação, recepção em uso; contexto com sinais de uso, não vitrine; cenário com relação direta com o que o texto diz.</p>
+<p><strong>Ambiente, evitar:</strong> coworking genérico ou escritório de stock; cenário montado só para a foto; espaço vazio e impecável que não parece atender ninguém.</p>
+<h2 id="fotografia-luz-profundidade-e-verdade">Fotografia · luz, profundidade e verdade</h2>
+<p><strong>Luz.</strong> Preferir natural ou neutra, contraste natural com sombra de verdade, e tratamento discreto com cor corrigida e não inventada. Evitar luz dourada excessiva, neon azul e glow, filtro bege e pele plástica.</p>
+<p><strong>Profundidade.</strong> Fundo desfocado vale quando parece consequência natural da fotografia. Não vale o desfoque artificial exagerado, aplicado depois para esconder cenário ruim: se o fundo atrapalha tanto, o problema é o enquadramento.</p>
+<p><strong>IA e verdade.</strong> Evitar imagem com aparência evidente de IA: mãos e dentes errados, pele sem poro, simetria perfeita, objetos de clínica que não existem, texto ilegível no fundo. A marca inteira se apoia em dizer a verdade sobre o que acontece numa clínica, e uma imagem que se denuncia como falsa derruba o argumento antes do texto ser lido.</p>
+<p><strong>Teste antes de aprovar.</strong> Isto poderia ter acontecido? A imagem diz algo que o texto não diz? Ela funciona em preto e branco?</p>
+<h2 id="como-a-revon-aparece-equipe">Como a Revon aparece · equipe</h2>
+<p>Vale para quem fala com o cliente ao vivo, por voz ou por vídeo: CS, coordenação e quem mais entrar numa conversa em nome da Revon.</p>
+<p>Ela existe aqui, e não no playbook de implantação, porque a resposta não se decide por gosto. Sai do posicionamento, e o posicionamento mora neste manual. O passo T.6 de <a href="../operacao/1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a> aponta para cá.</p>
+<p><strong>O princípio.</strong> A pessoa da Revon aparece como gestor, e não como clínica, agência, consultoria ou vitrine. Tudo abaixo é consequência do que este manual já afirma.</p>
+<table><thead><tr><th>O que este manual já diz</th><th>O que isso obriga</th></tr></thead><tbody><tr><td>A Revon fala com a harmonizadora e nunca se comunica como uma clínica</td><td>Sem jaleco e sem branco clínico. A pessoa da Revon nunca é lida como parte da equipe da clínica</td></tr><tr><td>Governante está fora, a Revon não fala de um pedestal</td><td>Sem terno completo com gravata, que é o figurino do arquétipo descartado</td></tr><tr><td>Não somos uma agência de tráfego, e Agência genérica é registro a evitar</td><td>Sem camiseta de marca, boné, streetwear ou look de criativo</td></tr><tr><td>Sofisticada não luxuosa, e Luxo é registro a evitar</td><td>Sem logo aparente, sem dourado, sem peça que sinalize preço</td></tr><tr><td>Nude, rosé, dourado e champanhe estão na coluna Não é Revon</td><td>A paleta do corpo é a da marca: grafite, marfim e azul pontual</td></tr><tr><td>Poucos elementos por composição</td><td>No máximo uma peça de destaque, o resto neutro</td></tr><tr><td>De gestor para dona de clínica</td><td>Registro de trabalho, não de evento nem de rede social</td></tr></tbody></table>
+<p><strong>Padrão fixo, não figurino de ocasião.</strong> O padrão vale todo dia, e não só na reunião marcada, porque nunca se sabe quando a chamada vira vídeo. Ter o padrão definido não é rigidez: como a faixa do que é aceito é mais estreita para mulher e é punida nos dois sentidos, um padrão fixo tira da pessoa uma decisão diária em que ela perde de qualquer jeito.</p>
+<p><strong>A regra é sobre o que a pessoa faz, não sobre o que ela é.</strong> Cuidado e adequação são exigíveis: roupa que serve, cabelo cuidado, sapato limpo. Cabelo, traço, sotaque, corpo e idade não entram na regra. <strong>A Revon não pede que ninguém pareça mais velha, nem mais parecida com outra pessoa.</strong></p>
+<p><strong>Contra a leitura de &quot;jovem demais&quot;, a resposta é apresentação, e não roupa.</strong> A pessoa é apresentada com função e especialização, e abre a conversa pelo dado específico daquela clínica.</p>
+<p><strong>Fonte.</strong> A coluna da esquerda da tabela sai deste manual. A parte de presença sai de Sylvia Ann Hewlett, <em>Executive Presence</em> (HarperBusiness, 2014), capítulos 4, 6 e 7, pesquisa do Center for Talent Innovation.</p>
+<h2 id="familias-de-composicao">Famílias de composição</h2>
+<p>A Revon é reconhecida pela sua <strong>gramática visual</strong>, não pela repetição da mesma peça. O sistema gera famílias de composição, não templates rígidos. Duas peças podem não se parecer em nada de layout e ainda assim serem inconfundivelmente da Revon.</p>
+<p><strong>A gramática:</strong> tipografia forte, grids, assimetria, linhas, números, diagramas, espaço, azul pontual, símbolo em escala, contraste editorial.</p>
+<p><strong>O que o manual entrega:</strong> uma lógica de decisão, elementos que se recombinam, e liberdade de composição dentro de limites claros.</p>
+<p><strong>O que ele não é:</strong> coleção de layouts para copiar, template que só muda texto e foto, ou gabarito que dispensa direção de arte.</p>
+<h2 id="brand-design-product-ui">Brand design × Product UI</h2>
+<p>A Revon pode ter um produto digital sem adotar estética de software na comunicação.</p>
+<table><thead><tr><th></th><th>Brand design</th><th>Product UI</th></tr></thead><tbody><tr><td>Objetivo</td><td>Convencer</td><td>Funcionar</td></tr><tr><td>Onde</td><td>LP, social, apresentações, anúncios, material comercial</td><td>CRM, dashboards, áreas internas, ferramentas</td></tr><tr><td>Direção</td><td>Editorial e tipográfica, assimetria, contraste, linhas, espaço, poucos elementos</td><td>Usabilidade, leitura, densidade, hierarquia, estados, acessibilidade</td></tr></tbody></table>
+<p><strong>O limite dos dois lados.</strong> O Product UI preserva os fundamentos visuais e não tenta transformar ferramenta de trabalho em layout editorial. E a comunicação não empresta a estética do produto: card com sombra, gradiente de SaaS e captura de dashboard não viram argumento de marca.</p>
+<h2 id="a-categoria">A categoria</h2>
+<p><strong>Não é agência. Não é CRM. Não é consultoria.</strong></p>
+<p>Isso é frase de categoria, não inventário do que a Revon possui. Diz por qual prateleira a marca quer ser reconhecida.</p>
+<p><strong>A categoria é:</strong> aceleradora de crescimento para clínicas de harmonização facial.</p>
+<p><strong>&quot;Não é CRM&quot; significa</strong> que CRM não é a categoria comercial pela qual a Revon deve ser percebida. Vender &quot;um CRM&quot; coloca a marca numa comparação de funcionalidade e preço de software, exatamente a lógica da qual ela tira as clínicas.</p>
+<p><strong>&quot;Não é CRM&quot; não significa</strong> que a Revon não tem tecnologia, que não tem um CRM, que a solução não usa software, ou que funcionalidades devam ser escondidas. A tecnologia aparece como mecanismo do resultado, nunca como a oferta em si. O mesmo vale para mídia paga: ferramenta, não produto.</p>
+<h2 id="revon-nao-revon">Revon, não Revon</h2>
+<table><thead><tr><th>É Revon</th><th>Não é Revon</th></tr></thead><tbody><tr><td>Azul Revon, marfim e grafite em contraste forte</td><td>Nude, rosé, dourado ou champanhe</td></tr><tr><td>Headline grande, corpo pequeno</td><td>Vidro, brilho, desfoque e sombra colorida</td></tr><tr><td>Tipografia funcionando como elemento gráfico</td><td>Cards arredondados com sombra suave</td></tr><tr><td>Layout assimétrico e bastante respiro</td><td>Gradiente tecnológico e estética de software</td></tr><tr><td>Símbolo em escala, cortado pela borda</td><td>Ícone dentro de círculo colorido</td></tr><tr><td>Fio de 1 px no lugar de moldura</td><td>Três cards centralizados com botão embaixo</td></tr><tr><td>Diagrama e número antes de imagem</td><td>Foto de banco de imagem preenchendo espaço</td></tr><tr><td>Poucos elementos por composição</td><td>Qualquer coisa que pareça uma clínica de estética</td></tr></tbody></table>
+<p>Esta página fala de comunicação de marca. Interface de produto tem regras próprias.</p>
+<hr>
+<blockquote><p>Não é agência. Não é CRM. Não é consultoria. É uma aceleradora de crescimento para clínicas de harmonização facial.</p></blockquote>
+</main>
+</body>
+</html>

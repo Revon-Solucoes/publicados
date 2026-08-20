@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A avaliação que gera confiança , valor e decisão .</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>A avaliação que gera confiança , valor e decisão .</h1></header>
+<p>REVON · A avaliação que gera confiança, valor e decisão (ao vivo)</p>
+<p>Treinamento de especialistas</p>
+<p>Clínicas de estética avançada e Harmonização Facial</p>
+<p>O fechamento não é uma técnica do final da consulta. É a consequência de tudo o que acontece nos primeiros quarenta minutos.</p>
+<p>Uso interno REVON · frente Consulta de Protocolos</p>
+<p>seta avançar N notas F tela cheia O índice</p>
+<p><strong>Formato.</strong> 25 slides, de 60 a 90 minutos com exercícios. Seis blocos: contexto, preparação e abertura, diagnóstico, devolutiva e prescrição, valor e decisão, aplicação. Quase metade do treinamento está no diagnóstico, porque <em>é lá que a venda é ganha ou perdida</em>.</p>
+<p><strong>Abertura sugerida.</strong> Pergunte: &quot;quantas avaliações você fez no mês passado, quantas fecharam, e você sabe dizer por que as outras não fecharam?&quot; Quase ninguém responde a terceira parte. Esse é o ponto de partida.</p>
+<p><strong>Onde isso encaixa.</strong> Este é o treinamento da frente <strong>Consulta de Protocolos</strong>. O conteúdo e o impulsionamento trazem a paciente com perfil, a triagem e a Agenda Confirmada fazem ela comparecer, e esta frente é o que acontece dentro da sala. As frentes estão em <a href="definicao-produto-assessoria.html"><code>produto/definicao-produto-assessoria.md</code></a>.</p>
+<p><strong>Regra da casa, diga em voz alta:</strong> nada aqui é script para decorar. Tudo é estrutura para adaptar. Se a especialista soar decorada, o método está sendo aplicado errado.</p>
+<p><strong>De onde vem o que sustenta este treinamento.</strong> Três coisas aqui não são opinião da Revon, e quem conduz precisa saber qual é qual.</p>
+<ul><li><strong>Escolher três opções por nível, nunca ler a lista inteira</strong>, é sacrifício aplicado à consulta. Al Ries e Jack Trout, <em>Posicionamento</em>, capítulo 24, página 232, para quem a essência do posicionamento é o sacrifício. Lista completa não é generosidade, é transferir para a paciente uma decisão que ela não tem como tomar.</li><li><strong>Critério vale mais que currículo, e credencial de terceiro vale mais que autoafirmação.</strong> Capítulo 21, páginas 197 e 198: a credibilidade sobe quando vem de uma autoridade reconhecida, porque é seguro para quem decide não precisar confiar no próprio julgamento. Por isso o bloco de autoridade é sobre o critério que ela aplica, e o título ou a formação entram como pano de fundo e não como argumento.</li><li><strong>O silêncio depois do preço, a calma quando a objeção vem, e a verdade desconfortável dita com dois ou três motivos</strong> são postura em momento de tensão, na seção T.5 do playbook, com fonte em pesquisa de negócios. Pausa depois de frase importante não é vazio, é ênfase.</li></ul>
+<p><strong>O que este treinamento não tira de fonte externa:</strong> a estrutura dos sete movimentos, a matriz de objeções e o caso da Cláudia são construção da Revon a partir do que a operação encontra. <strong>Quem valida é a auditoria semanal do passo A.4</strong>, com conversa real de clínica real, e é ela que vai dizer o que muda na v2.</p>
+<p><strong>Combinado com a turma:</strong> peça que cada uma tenha em mente, durante todo o treinamento, uma avaliação real recente que <em>não</em> fechou. No bloco de objeções elas vão reanalisar esse caso.</p>
+<p><strong>Se o tempo apertar:</strong> corte profundidade nos slides 4 a 6. Nunca nos slides 7 a 13 (diagnóstico e devolutiva) e nem no 20 (objeções).</p>
+<p>Contexto</p>
+<p>A tese deste treinamento</p>
+<h3 id="uma-boa-avaliacao-nao-comeca-no-fechamento">Uma boa avaliação não começa no fechamento.</h3>
+<p>01</p>
+<p>Ela se sentiu <strong>ouvida</strong></p>
+<p>02</p>
+<p>Ela <strong>reconheceu</strong> o próprio problema</p>
+<p>03</p>
+<p>Ela <strong>entendeu</strong> o diagnóstico</p>
+<p>04</p>
+<p>Ela viu <strong>lógica</strong> na recomendação</p>
+<p>05</p>
+<p>Ela <strong>confiou</strong> na especialista</p>
+<p>06</p>
+<p>Ela <strong>compreendeu</strong> o valor do plano</p>
+<p>=</p>
+<p>Decisão consciente</p>
+<p>O fechamento é consequência, não é técnica</p>
+<p>O que isso significa na prática</p>
+<p>Quando uma avaliação não fecha, o problema quase nunca está no preço. Está em uma dessas seis coisas que não aconteceu, e a paciente chegou na hora do número sem ter nada com que comparar além do procedimento avulso que viu no Instagram.</p>
+<p><strong>Este é o slide âncora.</strong> Ele volta no encerramento. Gaste tempo aqui.</p>
+<p><strong>As seis causas mais comuns de uma avaliação que não fecha.</strong> Use como provocação e peça que levantem a mão em cada uma:</p>
+<ul><li>A conversa começa pelo procedimento que ela pediu, e a avaliação inteira acontece dentro do pedido.</li><li>A especialista fala mais do que ouve: explica anatomia, marca e mecanismo de ação.</li><li>Ninguém anota nada, e as dez informações dos dois primeiros minutos se perdem.</li><li>A paciente nunca ouve o próprio caso organizado em voz alta.</li><li>O preço chega antes do valor.</li><li>O &quot;vou pensar&quot; é aceito sem uma única pergunta.</li></ul>
+<p><strong>Reforce:</strong> <em>&quot;nenhuma dessas seis é falta de técnica. Vocês têm a técnica. O que ninguém ensinou foi a estrutura da conversa.&quot;</em> Isso derruba a defensiva da turma logo no começo.</p>
+<p><strong>Limites éticos. Diga aqui e retome no bloco de objeções.</strong> Nada deste treinamento vale se cruzar estas sete linhas: não criar defeito que a paciente não trouxe nem percebe; não aumentar insegurança para vender; não prometer resultado; não pressionar pela vulnerabilidade; não indicar o desnecessário; não inventar urgência ou escassez; não usar medo como ferramenta de fechamento.</p>
+<p>Regra do espelho: você contaria para a paciente, olhando nos olhos dela, exatamente por que disse aquilo? Se a resposta é não, você cruzou a linha.</p>
+<p><strong>Caso limite que sempre aparece:</strong> <em>&quot;e quando existe um evento real daqui a três meses e o protocolo precisa de tempo?&quot;</em> Aí a urgência é técnica e verdadeira, e deve ser dita. Urgência real se explica; urgência inventada se impõe.</p>
+<p>Contexto</p>
+<p>A avaliação dentro da jornada, e a avaliação por dentro</p>
+<h3 id="a-etapa-central-da-jornada-tem-sete-movimentos-sempre-nesta-ordem">A etapa central da jornada tem sete movimentos, sempre nesta ordem.</h3>
+<p>CAPTAÇÃO WHATSAPP QUALIFICAÇÃO AGENDAMENTO COMPARECIMENTO AVALIAÇÃO DECISÃO PROCEDIMENTO ACOMPANHAMENTO RECORRÊNCIA</p>
+<p>MOV 01 Preparar</p>
+<p>Chegar com contexto, ambiente e ficha prontos.</p>
+<ul><li>01 Preparação</li><li>02 Recepção</li></ul>
+<p>MOV 02 Abrir</p>
+<p>Baixar a tensão e dar previsibilidade à conversa.</p>
+<ul><li>03 Apresentação</li><li>04 Rapport</li></ul>
+<p>MOV 03 Entender</p>
+<p>Investigar situação, queixa, impacto, medo e desejo.</p>
+<ul><li>05 Situação atual</li><li>06 Queixa principal</li><li>07 Aprofundamento</li><li>08 Dor, medo, desejo</li></ul>
+<p>MOV 04 Devolver</p>
+<p>Organizar o que ouviu e devolver até ela confirmar.</p>
+<ul><li>09 Devolutiva</li><li>10 Diagnóstico</li></ul>
+<p>MOV 05 Prescrever</p>
+<p>Explicar a transformação antes do procedimento.</p>
+<ul><li>11 Prescrição</li><li>12 Transformação</li><li>13 Prova e segurança</li></ul>
+<p>MOV 06 Decidir</p>
+<p>Apresentar o investimento e trabalhar o que trava.</p>
+<ul><li>14 Investimento</li><li>15 Decisão</li><li>16 Objeções</li></ul>
+<p>MOV 07 Continuar</p>
+<p>Definir o próximo passo e registrar tudo.</p>
+<ul><li>17 Próximo passo</li><li>18 Retomada</li></ul>
+<p>A regra da ordem</p>
+<p>Nenhum movimento pode ser antecipado, e os dois destacados costumam ocupar <strong>metade da consulta</strong>. Prescrever antes de devolver produz um plano que a paciente não reconhece. Apresentar investimento antes de prescrever produz um número sem raciocínio por trás.</p>
+<p><strong>Peça que fotografem este slide.</strong> É o mapa do treinamento inteiro e volta no encerramento.</p>
+<p><strong>Mnemônico:</strong> preparar, abrir, entender, devolver, prescrever, decidir, continuar. Faça a turma repetir uma vez em voz alta.</p>
+<p><strong>Sobre a faixa de cima.</strong> A avaliação é o ponto da jornada em que a intenção da paciente está mais alta: ela já viu a comunicação, conversou, escolheu um horário, muitas vezes pagou e se deslocou. <em>É o momento mais caro que a clínica tem, e o mais desperdiçado.</em> Ligue com o FACE: captação e qualificação são o F, agendamento e comparecimento são o A, avaliação e decisão são o C, acompanhamento e recorrência são o E.</p>
+<p><strong>O que acontece depois da consulta também é parte da jornada:</strong> ela conversa em casa, revê o valor, compara. Se a avaliação foi registrada, existe retomada. Se não foi, a clínica só descobre o desfecho quando a paciente some. Isso volta no slide 21.</p>
+<p><strong>Onde as avaliações quebram na prática:</strong> no salto do movimento 2 direto para o 5. A especialista recebe bem, conversa um pouco e já parte para o plano. Faltaram o 3 e o 4.</p>
+<p><strong>Sinal objetivo de conclusão de cada etapa</strong>, se perguntarem (não coloque na tela):</p>
+<ul><li><strong>01</strong> Você sabe nome, queixa declarada e o que ela já perguntou · <strong>02</strong> Ela entra sem pressa e sem esperar em pé</li><li><strong>03</strong> Ela sabe que o preço vem no fim e por quê · <strong>04</strong> Ela conta algo que não estava na ficha</li><li><strong>05</strong> Você sabe o que ela já fez e como foi · <strong>06</strong> Ela aponta no espelho · <strong>07</strong> Ela diz em que situação isso mais pesa · <strong>08</strong> Dor, medo e desejo preenchidos</li><li><strong>09</strong> Ela responde &quot;é exatamente isso&quot; · <strong>10</strong> Ela reconhece a prioridade que você definiu</li><li><strong>11</strong> Ela entende por que nesta ordem · <strong>12</strong> Ela descreve o resultado com as próprias palavras · <strong>13</strong> Ela pergunta sobre processo, não sobre risco</li><li><strong>14</strong> Você falou o número e ficou em silêncio · <strong>15</strong> Ela responde algo além de &quot;vou pensar&quot; · <strong>16</strong> Você sabe nomear o que trava</li><li><strong>17</strong> Existe data e responsável combinados · <strong>18</strong> O registro permite retomar sem repetir a avaliação</li></ul>
+<p><strong>Se alguém disser que não dá tempo:</strong> a avaliação bem conduzida leva de 40 a 60 minutos. É por isso que a clínica cobra por ela e atende menos pacientes por dia com ticket maior.</p>
+<p>Preparação e abertura</p>
+<p>Movimento 1</p>
+<h3 id="quase-tudo-o-que-voce-precisa-saber-ja-passou-pelo-whatsapp">Quase tudo o que você precisa saber já passou pelo WhatsApp.</h3>
+<p>Antes de cada avaliação, a especialista deve receber um resumo curto do que já se sabe. Três ou quatro dessas informações já mudam completamente a abertura da conversa.</p>
+<p>O que costuma chegar antes da consulta dez informações</p>
+<ul><li>Nome, e como ela prefere ser chamada</li><li>Origem: anúncio, indicação ou retorno</li><li>Queixa declarada, nas palavras dela</li><li>Procedimento pelo qual perguntou</li><li>Experiências anteriores, e onde fez</li><li>Medo declarado durante o atendimento</li><li>Evento ou momento importante</li><li>Referências e fotos que ela enviou</li><li>Objeção que já apareceu na conversa</li><li>Faixa de investimento, quando citada</li></ul>
+<p>Preparar-se é chegar com contexto</p>
+<p>&quot;Vi que você conversou com a Marina e comentou que o que mais te incomoda é o aspecto cansado. Quero entender isso melhor com você.&quot;</p>
+<p>Pré-julgar é chegar com conclusão</p>
+<p>&quot;Vi que você perguntou preço de botox. Então já separei aqui um orçamento de toxina para você.&quot;</p>
+<p><strong>A distinção que precisa ficar clara.</strong> Contexto é matéria-prima para perguntar melhor. Conclusão é atalho que fecha a investigação antes de ela começar. O mesmo dado, &quot;perguntou preço de botox&quot;, vira contexto (<em>&quot;o que te fez pensar em botox?&quot;</em>) ou pré-julgamento (<em>&quot;ela quer só botox e não tem dinheiro&quot;</em>).</p>
+<p><strong>Erro clássico de pré-julgamento:</strong> estimar o poder aquisitivo pela roupa, pelo carro ou pelo bairro. Custa caro em HOF, porque a paciente que investe alto muitas vezes é discreta por escolha.</p>
+<p><strong>Checklist de ambiente, cinco minutos antes</strong> (não está na tela, use se houver tempo):</p>
+<ul><li>Papel, tablet ou ficha na mesa: a paciente precisa <em>ver</em> que o que ela diz está sendo registrado.</li><li>Espelho de mão disponível: ela precisa apontar, não só descrever.</li><li>Celular no silencioso e fora da mesa; combinado com a equipe de não interromper.</li><li>Dois casos semelhantes já selecionados, sem procurar na galeria na frente dela.</li><li><strong>Agenda com folga real.</strong> É o item mais subestimado: avaliação encaixada entre dois procedimentos vira exame rápido com preço no fim, que é exatamente o que este treinamento existe para eliminar.</li></ul>
+<p><strong>Combinado operacional:</strong> alguém precisa entregar esse resumo de cinco linhas antes de cada avaliação. Se a clínica é atendida pela REVON, ele pode sair do próprio registro da conversa.</p>
+<p>Preparação e abertura</p>
+<p>Movimento 2 · etapas 03 e 04</p>
+<h3 id="os-primeiros-cinco-minutos-definem-se-ela-vai-contar-a-verdade-nos-proximos-quarenta">Os primeiros cinco minutos definem se ela vai contar a verdade nos próximos quarenta.</h3>
+<p>Abertura · tirar a paciente do modo orçamento</p>
+<p>A lógica · não decore, adapte &quot;Antes de pensarmos em qualquer procedimento, quero entender o que está incomodando você, o resultado que está buscando e o que faz sentido para o seu rosto. Depois eu te explico o que eu indicaria e por quê. <strong>No final a gente fala de investimento, com calma.</strong> Posso te fazer algumas perguntas?&quot;</p>
+<p>Adia o preço sem esconder o preço</p>
+<p>Anuncia que vai haver investigação</p>
+<p>Promete explicação com justificativa</p>
+<p>Pede permissão para perguntar</p>
+<p>Rapport · não é conversa fiada</p>
+<p>Superficial</p>
+<p>&quot;Que dia bonito hoje, né? Você mora aqui perto?&quot;</p>
+<p>Útil</p>
+<p>&quot;Quero entender o que trouxe você até aqui e como isso tem incomodado no seu dia a dia.&quot;</p>
+<ul><li>Escuta sem interromper, <strong>mesmo sabendo a resposta</strong></li><li>Retomar as palavras exatas que ela usou</li><li>Uma pausa de dois segundos antes de responder</li></ul>
+<p><strong>Por que a lógica da abertura funciona.</strong> Ela faz quatro coisas em vinte segundos, e a quarta é a mais subestimada: <em>permissão</em>. Quem autoriza a pergunta responde melhor.</p>
+<p><strong>Nunca transforme isso em frase obrigatória.</strong> Se dez especialistas da mesma clínica falarem igual, soa a script. O que é obrigatório são os quatro elementos, não as palavras.</p>
+<p><strong>Erro comum:</strong> abrir com &quot;então, o que você quer fazer?&quot; . Entrega a condução da consulta para a paciente no primeiro segundo, e depois é muito difícil retomar.</p>
+<p><strong>Três temperaturas da mesma abertura</strong>, conforme a leitura da paciente nos primeiros trinta segundos:</p>
+<ul><li><strong>Acolhedora</strong>, para paciente insegura ou primeira vez: <em>&quot;Que bom te receber. Antes de qualquer coisa eu queria te ouvir com calma: o que te trouxe aqui e o que mais tem te incomodado quando você se olha.&quot;</em></li><li><strong>Objetiva</strong>, para perfil executivo: <em>&quot;Nossa avaliação tem três partes: eu pergunto, eu avalio e te devolvo, e no final apresento o plano e o investimento. Leva cerca de quarenta minutos.&quot;</em></li><li><strong>Sofisticada</strong>, para quem já fez em outros lugares: <em>&quot;Meu trabalho aqui não é te oferecer procedimentos. É entender que resultado você quer e desenhar o caminho mais coerente para o seu rosto.&quot;</em> É a mais poderosa e a mais arriscada: sem o pedido de permissão no final, soa arrogante.</li></ul>
+<p><strong>Dúvida que sempre aparece:</strong> <em>&quot;posso mesmo dizer que o preço fica para o final?&quot;</em> Sim, e deve. O que não pode é fugir se ela insistir. Se pedir uma faixa, dê a faixa e retome: <em>&quot;o valor exato depende do que a gente definir junto agora.&quot;</em></p>
+<p><strong>Sobre rapport.</strong> Não condene a conversa leve: ela ajuda, principalmente com paciente tensa. O erro é <em>depender</em> dela. Diga: <em>&quot;a paciente pode adorar você e mesmo assim não entender por que deveria investir doze mil reais.&quot;</em> O que ela precisa perceber é que você está presente, que não há julgamento, que a consulta não está sendo acelerada e que a recomendação vai ser dela.</p>
+<p><strong>Exercício de escuta (7 min).</strong> Em duplas: uma conta uma queixa por dois minutos, a outra só ouve, sem interromper e sem responder, e depois repete o que ouviu usando <em>as palavras exatas</em> da colega. Quase ninguém consegue na primeira tentativa. É o exercício mais revelador do treinamento.</p>
+<p>Preparação e abertura</p>
+<p>Movimento 2 · autoridade</p>
+<h3 id="curriculo-e-pano-de-fundo-criterio-e-autoridade">Currículo é pano de fundo. Critério é autoridade.</h3>
+<p>Arrogância</p>
+<p>&quot;Eu faço isso há doze anos, pode confiar. Se você quiser fazer diferente, eu não assino embaixo.&quot;</p>
+<p>Convicção</p>
+<p>&quot;Eu recomendo começar por aqui, e vou te explicar o motivo. Se depois de entender você preferir outro caminho, a gente ajusta juntas, mas quero que você decida sabendo o que eu penso.&quot;</p>
+<p>O gesto que mais constrói confiança: saber dizer não</p>
+<p>Não ao procedimento isolado &quot;Eu <strong>não indicaria</strong> esse procedimento sozinho para o que você me descreveu. Ele resolve uma parte e ia te deixar com a sensação de que não valeu.&quot;</p>
+<p>Não ao excesso agora &quot;A gente <strong>não precisa tratar tudo hoje</strong>. Existem duas coisas que mudam mais o seu resultado, e eu começaria por elas.&quot;</p>
+<p>Não ao desnecessário &quot;Sinceramente, isso aí <strong>você não precisa</strong>. Prefiro te devolver esse investimento para uma frente que muda de verdade.&quot;</p>
+<p><strong>Por que dizer não constrói autoridade.</strong> A paciente que já fez procedimentos em outros lugares está acostumada a ouvir sim para tudo. Quando alguém recusa algo que ela mesma pediu, ela entende que a recomendação seguinte é confiável, porque não é automática.</p>
+<p><strong>Todo &quot;não&quot; bem dado tem três partes:</strong> a recusa, o motivo e o caminho alternativo. Um &quot;não&quot; sem alternativa deixa a paciente sem saída e vira frustração.</p>
+<p><strong>Mais dois &quot;nãos&quot; úteis:</strong> <em>&quot;não recomendaria essa quantidade; acima de um certo ponto o resultado deixa de parecer natural, e naturalidade foi o que você me pediu&quot;</em> e <em>&quot;esse resultado da referência que você trouxe é bonito, mas foi feito em um rosto com proporções diferentes das suas; eu não faria igual em você, e vou te mostrar o que eu faria&quot;</em>.</p>
+<p><strong>Cuidado ético.</strong> Dizer não precisa ser verdade técnica, nunca técnica de venda. Se a especialista recusa algo pequeno só para parecer criteriosa e emenda um plano maior, a paciente percebe a manobra.</p>
+<p><strong>O que quase não funciona:</strong> exibir currículo. Cursos, congressos e anos de formação. A paciente não tem repertório para avaliar isso e já ouviu de todo mundo. O que funciona é ritmo estável sem gaguejar no preço, explicar o raciocínio, mostrar critério de priorização e saber recusar.</p>
+<p><strong>Pergunta para o público (4 min):</strong> &quot;qual foi a última vez que você disse não para uma paciente, e o que aconteceu depois?&quot; As respostas quase sempre terminam com a paciente fechando mais.</p>
+<p>Diagnóstico</p>
+<p>Movimento 3 · o ponto de partida</p>
+<p>A paciente diz &quot;Quero fazer botox.&quot;</p>
+<p>Isso não é o diagnóstico. É o vocabulário que ela tem para descrever um incômodo. Seis pacientes podem dizer a mesma frase e estarem falando de seis coisas diferentes.</p>
+<p>O que pode estar por trás</p>
+<p>&quot;Quero parecer menos cansada&quot;</p>
+<p>Pode não ser toxina. Pode ser olheira, sustentação ou qualidade de pele.</p>
+<p>&quot;Quero suavizar essas linhas&quot;</p>
+<p>Aqui a toxina resolve, e o plano pode ser pequeno mesmo.</p>
+<p>&quot;Tenho um evento próximo&quot;</p>
+<p>Muda a ordem e o prazo do protocolo inteiro, não o procedimento.</p>
+<p>&quot;Tenho medo de envelhecer&quot;</p>
+<p>É prevenção e manutenção. Pede plano contínuo, não intervenção pontual.</p>
+<p>&quot;Não quero parecer artificial&quot;</p>
+<p>Ela pediu botox porque acha que é o mais seguro, não porque é o que precisa.</p>
+<p>&quot;Quero me sentir melhor em fotos&quot;</p>
+<p>O critério de sucesso é a foto, e isso muda o que você prioriza.</p>
+<p>As duas perguntas que abrem</p>
+<p>&quot;O que te fez pensar em botox?&quot; e, logo depois, &quot;o que você gostaria que mudasse quando se olhasse no espelho?&quot;. Duas perguntas, e a conversa deixa de ser sobre o procedimento.</p>
+<p><strong>Deixe alguns segundos de silêncio</strong> depois de mostrar os seis cartões. Este slide costuma virar a chave da turma.</p>
+<p><strong>Reforce o ponto contraintuitivo:</strong> em dois dos seis casos a resposta correta pode ser um plano pequeno mesmo. Investigar não significa transformar toda paciente em protocolo completo: significa descobrir o que resolve. <em>Se a turma sair achando que o objetivo é sempre subir o plano, o treinamento falhou.</em></p>
+<p><strong>A frase que sustenta o bloco inteiro:</strong> a paciente pode chegar pedindo um procedimento; a especialista precisa descobrir o resultado que ela realmente busca. Quem tem formação para traduzir um incômodo em recomendação coerente é a especialista. Fazer só o que foi pedido não é respeito: é abrir mão do trabalho para o qual ela estudou. E prescrever mais do que a paciente precisa é o mesmo erro na direção oposta.</p>
+<p><strong>Antecipe a objeção da turma:</strong> &quot;mas eu tenho medo de parecer que estou empurrando.&quot; Responda: empurrar é oferecer o que ela não precisa; prescrever é mostrar o caminho até o resultado que ela mesma descreveu. A diferença está em quem definiu o objetivo. Se o objetivo veio da paciente, você está prescrevendo.</p>
+<p><strong>Pergunte:</strong> &quot;quando foi a última vez que você perguntou para a paciente o que a fez pensar naquele procedimento?&quot;</p>
+<p>Diagnóstico</p>
+<p>Movimento 3 · etapas 05 a 08</p>
+<h3 id="a-avaliacao-comum-fica-na-superficie-e-pula-direto-para-a-solucao">A avaliação comum fica na superfície e pula direto para a solução.</h3>
+<p>O que você precisa descobrir · sete camadas</p>
+<p>01 Procedimento pedido &quot;Quero botox.&quot; Quase nunca é o diagnóstico.</p>
+<p>02 Queixa declarada O que ela diz quando você pergunta. Ainda é superfície.</p>
+<p>03 Problema percebido O que ela enxerga no espelho, apontando.</p>
+<p>04 Impacto na vida Evitar foto, mudar a maquiagem, não se reconhecer.</p>
+<p>05 Medo Ficar artificial, gastar sem ver diferença, ouvir comentário.</p>
+<p>06 Desejo e prioridade Como quer se perceber, e o que resolveria primeiro.</p>
+<p>07 Solução indicada Só é confiável se as seis anteriores foram investigadas.</p>
+<p>E em que ordem perguntar · cinco níveis</p>
+<p>NÍVEL 1 Situação</p>
+<p>NÍVEL 2 Problema</p>
+<p>NÍVEL 3 Impacto</p>
+<p>NÍVEL 4 Desejo</p>
+<p>NÍVEL 5 Limites</p>
+<p>Regra</p>
+<p>Cada nível só se abre se o anterior foi respondido. Três a quatro perguntas por nível bastam.</p>
+<p><strong>Como conduzir:</strong> percorra as camadas de cima para baixo dizendo <em>&quot;a avaliação comum fica entre a 01 e a 02, e pula direto para a 07.&quot;</em> É a explicação mais econômica de por que planos completos não são aceitos.</p>
+<p><strong>A camada mais negligenciada é a prioridade.</strong> Sem ela, o plano vira uma lista de tudo o que poderia ser feito, e a paciente escolhe pelo preço em vez de escolher pelo resultado. A pergunta é literalmente: <em>&quot;se fosse possível resolver só uma coisa, qual seria?&quot;</em></p>
+<p><strong>Duas camadas que ficaram fora da tela por espaço, mas existem:</strong> <em>expectativa</em> (o que ela imagina que vai acontecer, em quanto tempo e com qual intensidade, é aqui que nasce a frustração se não for alinhada) e <em>objetivo</em> (o resultado concreto, muitas vezes ligado a um momento: casamento, formatura, volta ao trabalho).</p>
+<p><strong>Por que a ordem dos níveis importa.</strong> Perguntar sobre desejo antes de entender o problema produz respostas vagas (&quot;quero ficar bonita&quot;). Perguntar sobre impacto antes de nomear o problema soa invasivo. A pirâmide não é burocracia: é a ordem em que a paciente <em>consegue</em> responder.</p>
+<p><strong>O nível 3 é o que mais falta nas avaliações reais.</strong> É o que transforma &quot;tenho flacidez&quot; em &quot;evito foto de perfil e mudei o jeito de me arrumar&quot;. A partir daí a paciente tem um motivo para investir que não é estético, é pessoal.</p>
+<p><strong>Limite ético, sempre.</strong> O nível 3 existe para <em>compreender</em> a motivação, nunca para agravar a dor. Se a paciente ficou desconfortável, acolha e siga. Cutucar mais fundo depois desse sinal é manipulação.</p>
+<p><strong>Nível 5 é seguro jurídico.</strong> Saber o que ela teme e o que não quer mudar é o que protege a clínica de uma paciente insatisfeita com um resultado tecnicamente correto.</p>
+<p>Diagnóstico</p>
+<p>Ferramenta · banco de perguntas</p>
+<h3 id="escolha-tres-por-nivel-nunca-leia-a-lista-inteira">Escolha três por nível. Nunca leia a lista inteira.</h3>
+<p>NÍVEL 1 Situação</p>
+<ul><li>O que trouxe você até aqui?</li><li>O que mais incomoda você hoje?</li><li>Você já realizou algum procedimento? Como foi?</li><li>Existe alguma região que você não gostaria de mudar?</li></ul>
+<p>NÍVEL 2 Problema</p>
+<ul><li>O que exatamente te incomoda nessa região?</li><li>Isso aparece mais no espelho, nas fotos ou nos vídeos?</li><li>O que você já tentou fazer para melhorar?</li><li><strong>Por que você decidiu procurar ajuda agora?</strong></li></ul>
+<p>NÍVEL 3 Impacto</p>
+<ul><li><strong>Como isso faz você se sentir?</strong></li><li>Existe alguma situação em que isso incomoda mais?</li><li>Isso afeta suas fotos ou o jeito que você se arruma?</li><li>Tem algum momento importante se aproximando?</li></ul>
+<p>NÍVEL 4 Desejo</p>
+<ul><li>Como você gostaria de se perceber?</li><li>O que seria um bom resultado para você?</li><li><strong>O que você quer preservar no seu rosto?</strong></li><li>Você busca mudança discreta ou mais perceptível?</li></ul>
+<p>NÍVEL 5 Limites</p>
+<ul><li>Existe algum resultado que você teme?</li><li><strong>O que faria você achar que ficou artificial?</strong></li><li>Você tem alguma referência que gostou? E alguma que não?</li><li>Alguma experiência anterior deixou insegurança?</li></ul>
+<p>Se você só tiver quatro perguntas</p>
+<p>São as quatro em destaque. A primeira revela o gatilho e quase sempre um prazo. A segunda sai do rosto e chega na pessoa. A terceira e a quarta desarmam o medo de ficar artificial antes de ele virar objeção.</p>
+<p><strong>Este slide é ferramenta, não roteiro.</strong> Ao vivo, não leia as vinte perguntas. Escolha três e mostre que porta cada uma abre.</p>
+<p><strong>Perguntas do banco completo que não couberam na tela</strong>, use conforme o caso: <em>há quanto tempo você percebe isso?</em> · <em>em quais momentos você percebe mais?</em> · <em>alguém já comentou algo com você sobre isso?</em> (use só com rapport bom: pode tocar em ferida real, e nesse caso a especialista acolhe e não explora) · <em>o que faria você olhar o resultado e sentir que valeu a pena?</em> · <em>o que você não gostaria que mudasse?</em></p>
+<p><strong>Cinco regras para não virar interrogatório:</strong> uma pergunta por vez, nunca duas na mesma frase; dois segundos de silêncio depois da resposta; toda pergunta nova nasce de algo que ela disse, não da lista; a cada três perguntas, uma devolução curta (&quot;entendi&quot;, &quot;faz sentido&quot;); se ela travar em um tema, saia dele e volte depois por outra porta.</p>
+<p><strong>Sinal de alerta:</strong> se a paciente começar a responder com uma palavra só, você virou entrevista. Pare e devolva algo antes de continuar.</p>
+<p><strong>Exercício (8 min).</strong> Role-play em trios: uma paciente, uma especialista, uma observadora. A especialista tem cinco minutos e <em>só pode fazer perguntas</em>, sem propor nada. A observadora conta quantas foram abertas e quantas foram fechadas.</p>
+<p>Diagnóstico</p>
+<p>Movimento 3 · Etapa 08</p>
+<h3 id="tres-campos-que-precisam-sair-de-toda-avaliacao-preenchidos">Três campos que precisam sair de toda avaliação preenchidos.</h3>
+<p>DOR</p>
+<p>O que incomoda hoje, e o que isso provoca na vida dela.</p>
+<p>Pergunta que revela</p>
+<p>&quot;Em que momento isso mais te incomoda?&quot;</p>
+<p>Como se escreve</p>
+<p>Com as palavras dela. &quot;Rosto cansado nas fotos&quot;, não &quot;ptose de terço médio&quot;.</p>
+<p>MEDO</p>
+<p>O que ela teme no resultado, no processo ou na reação dos outros.</p>
+<p>Pergunta que revela</p>
+<p>&quot;Existe algum resultado que você teme?&quot;</p>
+<p>Como se escreve</p>
+<p>Nomeando o temor: ficar artificial, gastar sem ver diferença, ouvir comentário em casa.</p>
+<p>DESEJO</p>
+<p>Como ela quer se perceber, e o que quer preservar.</p>
+<p>Pergunta que revela</p>
+<p>&quot;O que faria você olhar e sentir que valeu a pena?&quot;</p>
+<p>Como se escreve</p>
+<p>Como estado, não como procedimento. &quot;Parecer descansada e continuar sendo eu.&quot;</p>
+<p>A regra que fecha a ferramenta</p>
+<p>A prescrição precisa responder aos três. Se o plano trata a dor mas ignora o medo, a paciente não fecha. Se trata dor e medo mas não conecta ao desejo, ela fecha e depois acha que não valeu.</p>
+<p><strong>Limite ético desta ferramenta, diga explicitamente.</strong> Dor, medo e desejo servem para <em>compreender</em> a motivação e desenhar a recomendação certa. Não servem para amplificar sofrimento. A diferença aparece na prática: você pergunta uma vez, entende, registra e segue. Quem volta ao tema três vezes está cutucando.</p>
+<p><strong>O medo é o campo mais decisivo e o menos investigado.</strong> Praticamente toda objeção de &quot;vou pensar&quot; em HOF tem um medo não dito por trás: medo de ficar artificial, medo do julgamento em casa, medo de gastar e não ver diferença. Perguntar cedo transforma objeção futura em item já resolvido na consulta.</p>
+<p><strong>Erros comuns em cada campo:</strong> usar a dor para pressionar; não perguntar sobre o medo (ele não some por não ser mencionado, reaparece como objeção); e assumir o desejo pela idade ou pela queixa, duas pacientes com a mesma flacidez querem coisas diferentes.</p>
+<p><strong>Como isso vira prescrição.</strong> Exemplo real de encadeamento: dor &quot;rosto cansado, perdi o contorno&quot; leva a frente de sustentação primeiro; medo &quot;pavor de ficar esticada&quot; leva a doses fracionadas, etapas espaçadas, reavaliação entre elas; desejo &quot;descansada e elegante, continuando eu&quot; leva a critério de sucesso definido por ela. <strong>Medo se responde com processo, não com promessa.</strong> &quot;Fazemos por etapas justamente para você acompanhar e a gente parar no ponto que você gostar&quot; vale mais que &quot;pode confiar, comigo não fica artificial&quot;.</p>
+<p><strong>Cheque com a turma:</strong> &quot;na sua última avaliação, você conseguiria escrever esses três campos agora, de memória?&quot;</p>
+<p>Diagnóstico</p>
+<p>Movimento 3 · Etapa 07</p>
+<h3 id="a-proxima-pergunta-nao-vem-da-lista-vem-da-palavra-que-ela-acabou-de-usar">A próxima pergunta não vem da lista. Vem da palavra que ela acabou de usar.</h3>
+<p>Resposta dela &quot;Ah, eu me acho acabada nas fotos, sabe? Principalmente de lado.&quot;</p>
+<p>Palavra relevante <strong>&quot;Acabada&quot;</strong> é emocional. <strong>&quot;De lado&quot;</strong> é anatômica. As duas merecem uma pergunta.</p>
+<p>Pergunta que segue &quot;Quando você diz acabada, o que você vê nessa foto que te dá essa sensação?&quot;</p>
+<p>Nova resposta &quot;O contorno some. Parece que escorreu. E eu fico com cara de brava, mesmo sem estar.&quot;</p>
+<p>Confirmação &quot;Então são duas coisas: a perda de contorno de perfil e a expressão que passa uma mensagem que não é a sua. É isso?&quot;</p>
+<p>Registro Escreva as palavras dela: <strong>&quot;acabada&quot;, &quot;de lado&quot;, &quot;escorreu&quot;, &quot;cara de brava&quot;</strong>.</p>
+<p>Três tipos de palavra que pedem pergunta</p>
+<p>Emocional</p>
+<p>&quot;acabada&quot;, &quot;estranha&quot;, &quot;sem vida&quot;, &quot;brava&quot;</p>
+<p>De localização</p>
+<p>&quot;de lado&quot;, &quot;aqui embaixo&quot;, &quot;só nessa parte&quot;</p>
+<p>De intensidade</p>
+<p>&quot;muito&quot;, &quot;só um pouquinho&quot;, &quot;sempre&quot;</p>
+<p>O ciclo</p>
+<p>Resposta, palavra, pergunta, confirmação, registro. E volta ao topo. Essa é a técnica inteira.</p>
+<p><strong>Demonstre ao vivo.</strong> Peça uma queixa real de alguém da turma e faça três ciclos de aprofundamento na frente de todos. É a demonstração mais convincente do treinamento inteiro.</p>
+<p><strong>Por que registrar as palavras exatas.</strong> Quando você devolve o diagnóstico usando as palavras dela, ela reconhece imediatamente. Quando devolve traduzido para o seu vocabulário técnico, ela ouve outra pessoa falando de outro rosto.</p>
+<p><strong>Uma técnica que muda o registro da conversa: o espelho.</strong> Enquanto ela <em>descreve</em>, é opinião. Quando ela <em>aponta</em>, vira evidência compartilhada. Peça: &quot;me mostra no espelho onde você sente que desceu?&quot; Além disso, você descobre que muitas vezes o que ela aponta é diferente do que escreveu na ficha.</p>
+<p><strong>O erro mais comum da especialista experiente:</strong> identificar o caso em vinte segundos e adiantar a conclusão. Estar certo cedo demais é o erro mais caro da avaliação, porque a paciente resiste a um diagnóstico que ela não ajudou a construir. A diferença não é o conteúdo, é <em>quem chega à conclusão</em>.</p>
+<p><strong>Cinco regras para não virar interrogatório</strong> (repita se não deu tempo no slide anterior): uma pergunta por vez; dois segundos de silêncio; toda pergunta nasce de algo que ela disse; a cada três perguntas, uma devolução curta; se ela travar, saia do tema e volte depois.</p>
+<p>Diagnóstico</p>
+<p>Movimento 3 · ferramenta</p>
+<h3 id="a-paciente-entrega-dez-informacoes-nos-dois-primeiros-minutos-voce-vai-precisar-delas-no-minuto-quarenta">A paciente entrega dez informações nos dois primeiros minutos. Você vai precisar delas no minuto quarenta.</h3>
+<p>Ficha de diagnóstico imprimível</p>
+<p>Queixa principal <em>apontada no espelho</em></p>
+<p>Palavras exatas dela <em>entre aspas, sem traduzir</em></p>
+<p>Dor <em>e o que provoca no dia a dia</em></p>
+<p>Medo <em>do resultado, do processo, dos outros</em></p>
+<p>Desejo <em>e o que quer preservar</em></p>
+<p>Momento importante <em>evento e data</em></p>
+<p>Prioridade <em>o que resolveria primeiro</em></p>
+<p>Limites <em>o que não quer mudar</em></p>
+<p>Anotação que não serve para nada</p>
+<p>&quot;Paciente quer bioestimulador.&quot;</p>
+<p>Registra um produto. Daqui não sai devolutiva, nem justificativa de plano, nem mensagem de retomada. Daqui só sai orçamento.</p>
+<p>Anotação que sustenta a avaliação inteira</p>
+<p>&quot;Sente perda de sustentação: diz que o rosto &#x27;escorreu&#x27;. Percebe mais em foto de perfil e evita se fotografar de lado. Teme ficar artificial, uma amiga &#x27;ficou esticada&#x27;. Quer melhora discreta antes da formatura da filha, em outubro. Não quer mexer em lábio.&quot;</p>
+<p>Daqui sai a devolutiva, a ordem do plano, a resposta ao medo, o cronograma e a mensagem de retomada.</p>
+<p><strong>Objeção que sempre aparece:</strong> &quot;mas anotar não deixa a consulta fria?&quot; Fria é anotar de cabeça baixa e sem olhar. Anotar bem é olhar, ouvir, escrever uma linha e voltar o olho. E dá para anunciar: <em>&quot;vou anotando porque quero usar exatamente as suas palavras depois.&quot;</em> Isso transforma o gesto em cuidado.</p>
+<p><strong>Mostre o encadeamento ao vivo.</strong> Pegue a anotação da direita e demonstre como ela vira, na hora: (1) devolutiva, (2) justificativa do plano, (3) resposta ao medo, (4) cronograma, (5) mensagem de retomada. Cinco entregas de cinco linhas. É o argumento mais forte para a turma passar a anotar.</p>
+<p><strong>Campos que ficaram fora da tela e valem no prontuário:</strong> queixas secundárias em ordem de importância para ela, procedimentos anteriores (o que fez, quando, onde e como avaliou) e resultado esperado com as palavras dela.</p>
+<p><strong>Teste de qualidade:</strong> leia sua anotação três dias depois. Se não conseguir reconstruir a avaliação e escrever uma mensagem pessoal para essa paciente sem consultar a memória, a anotação não está boa.</p>
+<p><strong>Onde isso vive:</strong> no prontuário ou no sistema da clínica, junto do registro clínico, não em papel solto. Se a clínica usa o Copiloto REVON, esses campos alimentam o registro da oportunidade e permitem a retomada do slide 21.</p>
+<p><strong>Exercício (5 min).</strong> Peça que reescrevam uma anotação real recente no formato da direita. Quem não lembrar dos detalhes acabou de provar por que precisa anotar.</p>
+<p>Devolutiva e prescrição</p>
+<p>Movimento 4 · etapas 09 e 10</p>
+<h3 id="antes-de-receber-a-solucao-a-paciente-precisa-ouvir-o-proprio-caso-organizado-e-concordar-com-ele">Antes de receber a solução, a paciente precisa ouvir o próprio caso organizado e concordar com ele.</h3>
+<p>O que ela disse, solto &quot;O rosto escorreu&quot; &quot;Fico com cara de brava&quot; &quot;Evito foto de perfil&quot; &quot;A maquiagem craquela&quot; &quot;Esse vinco aqui do lado&quot;</p>
+<p>Organizado em frentes</p>
+<p>Sustentação e contorno</p>
+<p>Resolve o &quot;escorreu&quot;, o vinco e a foto de perfil. É a prioridade dela.</p>
+<p>Expressão</p>
+<p>Resolve a &quot;cara de brava&quot; que não corresponde ao que ela sente.</p>
+<p>Qualidade de pele</p>
+<p>Resolve a maquiagem que craquela. Pode vir depois.</p>
+<p>A devolutiva · recapitular, organizar, confirmar &quot;Deixa eu te devolver o que eu entendi. O que mais te incomoda não é uma região isolada: você percebe que o rosto perdeu sustentação, e é isso que te dá a sensação de estar sempre cansada, principalmente nas fotos de perfil. Você quer melhorar isso sem alterar as suas características, e tem a formatura da sua filha em outubro. <strong>É isso?</strong>&quot;</p>
+<p>O SINAL DA ETAPA</p>
+<p>Enquanto ela não disser &quot;é exatamente isso&quot;, não prescreva.</p>
+<p>Ninguém aceita a solução de um problema que ainda não reconheceu ter.</p>
+<p><strong>O agrupamento é o movimento mais técnico da consulta inteira.</strong> Transformar cinco ou seis queixas soltas em duas ou três frentes é o que faz a paciente escolher pelo <em>resultado</em> em vez de escolher pelo preço. Sem agrupamento, o plano parece uma lista de itens, e lista de itens se corta pelo mais barato.</p>
+<p><strong>Os cinco passos completos da devolutiva:</strong> recapitular com as palavras dela, sem interpretar ainda; organizar em frentes; confirmar e esperar a resposta; demonstrar entendimento explicando o que você viu tecnicamente e ligando ao que ela sente; e anunciar que vai propor um caminho, dizendo qual é a prioridade.</p>
+<p><strong>Por que a devolutiva funciona.</strong> Ela faz a paciente ouvir, de fora, um conjunto de queixas que ela nunca tinha organizado. A reação comum é &quot;nossa, eu nunca tinha juntado tudo isso&quot; . A partir daí ela deixa de estar comprando um procedimento e passa a estar resolvendo um caso.</p>
+<p><strong>Não pule a confirmação.</strong> Se ela corrigir alguma coisa, ótimo: você acabou de evitar um plano errado. Se confirmar, você acabou de ganhar autorização para prescrever.</p>
+<p><strong>Sinal de que a devolutiva foi rasa:</strong> ela responde &quot;é&quot;. Sinal de que foi boa: ela <em>complementa com mais uma informação</em>. Boa devolutiva sempre gera material novo.</p>
+<p>Devolutiva e prescrição</p>
+<p>Movimento 5 · posicionamento</p>
+<h3 id="o-que-voce-quer-fazer-e-a-pergunta-de-quem-tira-pedido-a-especialista-responde-antes-de-perguntar">&quot;O que você quer fazer?&quot; é a pergunta de quem tira pedido. A especialista responde antes de perguntar.</h3>
+<p>Tiradora de pedido</p>
+<p>&quot;Você quer fazer quantas seringas? A gente tem o pacote de duas e o de quatro. Qual você prefere?&quot;</p>
+<p>Especialista</p>
+<p>&quot;Para o resultado que você descreveu, eu não trataria só essa região. Eu priorizaria estes dois pontos, nesta ordem, e vou te explicar por quê.&quot;</p>
+<p>O que a especialista precisa dizer em voz alta, antes de falar de valor</p>
+<p>01</p>
+<p>O que eu percebi</p>
+<p>02</p>
+<p>O que considero prioritário</p>
+<p>03</p>
+<p>O que <strong>não</strong> considero necessário</p>
+<p>04</p>
+<p>Por que estou recomendando este caminho</p>
+<p>Convicção não é agressividade</p>
+<p>Convicção é recomendar com clareza e assumir a responsabilidade da recomendação. Agressividade é não aceitar que a paciente escolha diferente. A primeira aumenta a confiança. A segunda encerra a relação.</p>
+<p><strong>Os itens 03 e 04 são os que fazem diferença.</strong> Dizer o que <em>não</em> é necessário e por que você escolheu aquele caminho é o que separa prescrição de catálogo. Se você só fala do que faria, a paciente não tem como saber se você escolheu ou se ofereceu tudo.</p>
+<p><strong>Outros três itens da lista completa</strong>, se houver tempo: o que pode ser feito agora, o que pode ficar para depois e o que você não recomendaria. &quot;O que fica para depois&quot; não é técnica de parcelamento de venda: é clínica, porque existe ordem correta e algumas coisas só fazem sentido depois de outras terem assentado.</p>
+<p><strong>Frase que resume o slide:</strong> <em>&quot;a paciente tem o direito de escolher. Ela não tem obrigação de saber o que escolher. Essa parte é sua.&quot;</em></p>
+<p><strong>Analogia útil, com cuidado.</strong> Um ortopedista examina, explica e prescreve; ninguém sai de lá escolhendo quantas sessões de fisioterapia vai fazer. A analogia serve para explicar autoridade técnica, <em>não</em> para justificar tirar a autonomia da paciente. Ela decide; você recomenda com critério.</p>
+<p>Devolutiva e prescrição</p>
+<p>Movimento 5 · Etapa 11</p>
+<h3 id="seis-passos-nesta-ordem-procedimento-e-o-sexto-nunca-o-primeiro">Seis passos, nesta ordem. Procedimento é o sexto, nunca o primeiro.</h3>
+<p>01</p>
+<p>Relembrar o objetivo</p>
+<p>Com as palavras dela, ligando ao que ela acabou de confirmar.</p>
+<p>02</p>
+<p>Nomear o resultado</p>
+<p>O estado final buscado, não a lista do que será feito.</p>
+<p>03</p>
+<p>Apresentar a estratégia</p>
+<p>&quot;Eu estruturaria isso em três frentes.&quot; O guarda-chuva.</p>
+<p>04</p>
+<p>Mostrar as prioridades</p>
+<p>O que vem primeiro e por que sem isso o resto não se sustenta.</p>
+<p>05</p>
+<p>Explicar as etapas</p>
+<p>Sequência no tempo, intervalos e reavaliações.</p>
+<p>06</p>
+<p>Detalhar o técnico</p>
+<p>Agora sim: procedimentos, produtos, quantidades e cuidados.</p>
+<p>Forma fraca &quot;Então vamos usar duas seringas de preenchedor, um bioestimulador e a toxina. Fica nesse valor aqui.&quot;</p>
+<p>Forma forte · o plano é o mesmo &quot;Para recuperar a sustentação que você sente que perdeu, suavizar esse aspecto cansado e manter as suas características, eu estruturaria o tratamento em <strong>três frentes</strong>. A primeira devolve estrutura, e vem antes porque sem sustentação o resto não se mantém. Vou te explicar o que entra em cada uma.&quot;</p>
+<p><strong>Faça a turma reparar em um detalhe:</strong> na forma forte nenhum nome de produto foi dito ainda, e <em>nada foi omitido</em>. Os produtos entram logo depois, no passo 06. A ordem preserva a informação e muda a percepção.</p>
+<p><strong>Por que &quot;três frentes&quot; funciona melhor que &quot;três procedimentos&quot;.</strong> Frente é objetivo. Procedimento é item. Objetivo não tem preço de referência no Instagram; item tem.</p>
+<p><strong>O passo 06 é obrigatório.</strong> Omitir informação técnica não é estratégia comercial, é falha profissional. A paciente tem direito de saber o que vai ser usado nela. O que muda é a ordem: a técnica entra como detalhamento de um raciocínio já construído.</p>
+<p><strong>O passo 05 é o que resolve ansiedade.</strong> Boa parte do &quot;vou pensar&quot; nasce de a paciente não saber em quanto tempo vê resultado e quantas vezes vai precisar voltar. Explicar o cronograma antes do preço reduz muito essa objeção.</p>
+<p><strong>Teste de qualidade da prescrição:</strong> a paciente conseguiria explicar o plano para uma amiga sem usar nome de produto? Cada frente tem justificativa ligada a algo que ela mesma disse? Existe algum item que você não sabe justificar, então ele sai. Ela entendeu o que acontece se fizer só a primeira frente? Ela sabe quanto tempo leva até ver o primeiro resultado?</p>
+<p><strong>Dúvida frequente:</strong> &quot;preciso colocar a quantidade no orçamento?&quot; Coloque o que for exigido pelo registro e pelo consentimento, e apresente na consulta como detalhamento. Orçamento que <em>começa</em> com &quot;4ml&quot; convida a paciente a negociar mililitro em vez de discutir resultado.</p>
+<p><strong>Exercício (8 min).</strong> Em duplas, cada uma apresenta um plano real seguindo os seis passos, em três minutos. A colega marca em que passo ela pulou direto para produto.</p>
+<p>Devolutiva e prescrição</p>
+<p>Movimento 5 · como organizar prioridades</p>
+<h3 id="tres-niveis-para-que-ela-decida-com-consciencia-e-nao-por-corte">Três níveis, para que ela decida com consciência e não por corte.</h3>
+<p>Nível essencial</p>
+<p>O que precisa ser feito para tratar a prioridade principal.</p>
+<p>Nunca é uma versão pior do plano: é a primeira frente, completa. Entrega um resultado percebido mesmo que ela pare aqui.</p>
+<p>Nível recomendado</p>
+<p>O plano que eu considero ideal para o objetivo que você me descreveu.</p>
+<p>É o que a especialista de fato indica. Apresente como recomendação justificada, e não como a opção do meio de uma tabela.</p>
+<p>Nível complementar</p>
+<p>O que pode vir depois, quando fizer sentido, ou o que é opcional.</p>
+<p>Manutenção e ajustes finos. Futuro possível com data de reavaliação, nunca pressão adicional. Diga com todas as letras que não é necessário agora.</p>
+<p>Isto não é uma tabela de preços em três colunas</p>
+<p>A diferença entre organizar prioridades e fatiar preço está em uma coisa só: no essencial a paciente recebe um resultado completo <strong>de uma frente</strong>, e não um pedaço mal resolvido do plano ideal. Se o essencial não entrega nada sozinho, ele não deveria existir.</p>
+<p><strong>Cuidado ao apresentar:</strong> este slide pode ser lido como técnica de precificação em três opções, e não é. Diga explicitamente: <em>&quot;a lógica aqui é clínica antes de ser comercial. O essencial existe porque algumas pacientes vão começar por uma frente só, e elas precisam sair com resultado, não com um plano pela metade.&quot;</em></p>
+<p><strong>Como apresentar na consulta.</strong> Comece pelo <em>recomendado</em>, que é a sua indicação de verdade. Só apresente o essencial se aparecer restrição real. Começar pelo essencial ensina a paciente a comprar o menor.</p>
+<p><strong>Regra de sequência dentro do essencial:</strong> se o plano será feito em partes, coloque na primeira parte aquilo que mostra resultado <em>mais rápido</em>. Quem vê resultado cedo volta motivada para a segunda etapa. Se a primeira etapa é toda de efeito lento, a segunda muitas vezes não acontece. Isso não é técnica de venda: é sequenciamento clínico com bom senso.</p>
+<p><strong>O que caracteriza um protocolo íntegro</strong> (versus combinação aleatória): parte de um diagnóstico confirmado; tem objetivo declarado em uma frase; tem prioridade, com um primeiro e um porquê; cada item é justificável isoladamente; respeita a necessidade real e não a capacidade de pagar; respeita segurança e intervalos; pode ser executado em etapas sem perder a lógica; evita excesso; e faz sentido clínico e financeiro ao mesmo tempo.</p>
+<p><strong>A regra que protege todo mundo:</strong> mais procedimentos não significa melhor prescrição. Um protocolo grande que você não consegue justificar item por item é pior para a paciente e pior para a clínica: fecha uma vez e destrói a indicação.</p>
+<p><strong>Pergunta útil:</strong> &quot;você consegue explicar, agora, por que cada item do seu último orçamento estava ali?&quot; Se alguém hesitar em um item, esse item não deveria estar no orçamento.</p>
+<p>Devolutiva e prescrição</p>
+<p>Movimento 5 · etapas 12 e 13</p>
+<h3 id="o-procedimento-e-o-meio-o-beneficio-explica-o-que-muda-a-transformacao-conecta-isso-a-vida-dela">O procedimento é o meio. O benefício explica o que muda. A transformação conecta isso à vida dela.</h3>
+<p>Linguagem técnica Benefício Transformação percebida</p>
+<p>Estímulo de colágeno Melhora de firmeza e sustentação ao longo dos meses &quot;A pele volta a parecer mais firme e o rosto passa a parecer mais descansado.&quot;</p>
+<p>Toxina botulínica Suavização da contração muscular da expressão &quot;A expressão fica mais leve, sem perder a naturalidade nem congelar o rosto.&quot;</p>
+<p>Preenchimento estratégico Reposição ou estruturação de suporte em pontos específicos &quot;Melhora de proporção e de contorno, principalmente no perfil.&quot;</p>
+<p>Plano em etapas com reavaliação Ajuste progressivo com controle a cada fase &quot;A gente acompanha junto e para no ponto em que você se sentir bem.&quot;</p>
+<p>O caso que você mostra</p>
+<p>Escolha pelo que é <strong>parecido</strong>, não pelo que é impressionante: mesma queixa, faixa etária próxima, mesmo tipo de medo e mesmo estilo de resultado. E feche sempre com o limite: <em>&quot;o rosto dela é diferente do seu, então o caminho e o resultado vão ser diferentes.&quot;</em></p>
+<p>O que nunca entra</p>
+<p>Promessa de resultado, garantia, comparação com cirurgia, prazo exato de duração e qualquer frase que comece com &quot;você vai ficar&quot;. Fale em <strong>melhora esperada</strong> e em <strong>visão de resultado possível</strong>.</p>
+<p><strong>A coluna da direita não substitui as outras duas.</strong> Uma especialista que só fala transformação soa vaga e perde credibilidade técnica. O trajeto completo é técnica, benefício, transformação, nessa ordem e em poucas palavras.</p>
+<p><strong>Mais duas linhas de tradução</strong>, se a clínica trabalhar com isso: <em>tecnologia de firmeza</em> leva a ação em camadas mais profundas, sem agulha e sem afastamento leva a &quot;você continua a rotina normalmente e o efeito aparece de forma gradual&quot;; <em>protocolo de qualidade de pele</em> leva a textura, viço e uniformidade leva a &quot;a maquiagem para de craquelar e a pele fica com aspecto mais saudável&quot;.</p>
+<p><strong>Sobre linguagem.</strong> Explique como se estivesse falando com uma pessoa inteligente que não é da área. Se você precisou de três frases e ela ainda perguntou &quot;então o que isso faz?&quot;, explique de novo mais simples. Use verbos de melhora, &quot;melhora&quot;, &quot;suaviza&quot;, &quot;tende a&quot;, &quot;costuma&quot;, e nunca &quot;resolve&quot;, &quot;acaba com&quot;, &quot;garante&quot;. Isso protege a clínica e alinha expectativa.</p>
+<p><strong>Como apresentar um caso em seis passos:</strong> contexto, queixa, desejo, estratégia, resultado e limite da comparação. Um caso <em>narrado</em> convence muito mais que uma galeria de antes e depois passada rápido: o antes e depois vira comparação, o caso narrado vira identificação. Dois casos no máximo, e só com autorização de imagem registrada.</p>
+<p><strong>O erro mais comum:</strong> mostrar o caso mais impressionante da galeria. Ele impressiona e desalinha: ela passa a esperar aquele resultado, no rosto dela, que é outro caso.</p>
+<p><strong>Exercício (6 min).</strong> Sorteie três procedimentos que a clínica realiza e peça que a turma preencha as três colunas em voz alta. A terceira é sempre a mais difícil, e é a que mais falta.</p>
+<p>Valor, decisão e objeções</p>
+<p>Movimento 6 · construção de valor</p>
+<h3 id="quando-o-preco-aparece-antes-do-valor-tudo-parece-caro">Quando o preço aparece antes do valor, tudo parece caro.</h3>
+<p>Entendimento</p>
+<p>Ela entende o próprio caso</p>
+<p>+</p>
+<p>Personalização</p>
+<p>O plano é dela, não é padrão</p>
+<p>+</p>
+<p>Autoridade</p>
+<p>Você demonstrou critério</p>
+<p>+</p>
+<p>Clareza</p>
+<p>Ela consegue explicar em casa</p>
+<p>+</p>
+<p>Segurança</p>
+<p>Ela sabe o que esperar</p>
+<p>+</p>
+<p>Relevância</p>
+<p>Resolve algo que importa agora</p>
+<p>=</p>
+<p>Valor percebido</p>
+<p>O número faz sentido dentro de um raciocínio</p>
+<p>SEM OS SEIS</p>
+<p>A paciente só tem um critério: comparar com o que viu por aí.</p>
+<p>E nessa comparação a clínica perde sempre, porque sempre existe alguém mais barato fazendo o procedimento isolado com o mesmo nome.</p>
+<p>HONESTIDADE NECESSÁRIA</p>
+<p>Nem toda objeção financeira é falta de valor.</p>
+<p>Às vezes ela entendeu tudo, valorizou tudo e simplesmente não tem esse recurso agora. Insistir aí não constrói valor: destrói a relação. O que se faz é ajustar o plano e combinar um prazo real.</p>
+<p><strong>Ancore os seis componentes no que já foi feito.</strong> Entendimento e personalização vêm do diagnóstico. Autoridade e clareza vêm da abertura e da prescrição. Segurança vem da prova. Relevância vem do momento importante que ela citou. Nada aqui é novo: é a soma do treinamento inteiro. Diga isso.</p>
+<p><strong>Checklist mental antes de dizer o número</strong> (oito coisas que ela precisa ter entendido): que foi ouvida; que existe um diagnóstico; que a recomendação é dela; que cada etapa tem motivo; que o plano leva ao resultado que ela descreveu; que existe segurança e reavaliação; que você tem critério, porque recusou algo; e que aquele plano não caberia em outra paciente.</p>
+<p><strong>O cartão da direita é obrigatório.</strong> Muitos treinamentos de venda ensinam que &quot;objeção de preço é sempre falta de valor&quot;. Isso é falso e é perigoso, porque leva a especialista a insistir com quem já disse não com sinceridade.</p>
+<p><strong>Como diferenciar na prática:</strong> falta de valor soa como <em>&quot;achei caro para o que é&quot;</em>; falta de recurso soa como <em>&quot;eu quero muito, mas agora não consigo&quot;</em>. As duas frases pedem condutas opostas. A pergunta que separa em segundos: &quot;o plano em si faz sentido para você?&quot;</p>
+<p>Valor, decisão e objeções</p>
+<p>Movimento 6 · Etapa 14</p>
+<h3 id="sete-passos-o-quinto-e-o-mais-dificil-e-o-mais-decisivo">Sete passos. O quinto é o mais difícil e o mais decisivo.</h3>
+<p>01</p>
+<p>Recapitular o plano</p>
+<p>Em três frases: objetivo, frentes e ordem.</p>
+<p>02</p>
+<p>Confirmar entendimento</p>
+<p>&quot;Ficou claro o caminho?&quot;</p>
+<p>03</p>
+<p>Apresentar o investimento</p>
+<p>Número dito em tom normal, sem pedir desculpa.</p>
+<p>04</p>
+<p>Explicar as condições</p>
+<p>Objetivamente, sem prometer nada além.</p>
+<p>05</p>
+<p>Fazer silêncio</p>
+<p>Pare de falar. Deixe ela processar.</p>
+<p>06</p>
+<p>Permitir a reação</p>
+<p>Ouça sem interromper e sem se defender.</p>
+<p>07</p>
+<p>Perguntar como ela se sente</p>
+<p>&quot;Como você se sente em relação a esse plano?&quot;</p>
+<p>Como soa na prática &quot;Recapitulando: são três frentes, começando pela sustentação, porque é o que devolve o contorno que você sente que perdeu. O investimento do plano completo é de <strong>[valor]</strong>. Pode ser à vista ou parcelado em até [x] vezes. <em>[silêncio]</em>&quot;</p>
+<p>Os três erros que mais custam</p>
+<ul><li><strong>Pedir desculpa pelo preço.</strong> Ela entende: &quot;nem ela acha que vale isso&quot;.</li><li><strong>Falar demais depois do número.</strong> Ela entende: &quot;está nervosa, dá para negociar&quot;.</li><li><strong>Oferecer desconto antes de ouvir.</strong> Ela entende: &quot;o preço real é o de baixo&quot;.</li></ul>
+<p><strong>Treine o silêncio, literalmente.</strong> Peça que a turma conte até cinco mentalmente depois de dizer o valor. Cinco segundos parecem uma eternidade para quem fala e são normais para quem ouve. Quem preenche o silêncio quase sempre preenche com desconto, justificativa ou redução do plano, e aí a paciente entende que o primeiro número não era o número.</p>
+<p><strong>Interpretação errada mais comum:</strong> ler o silêncio dela como rejeição. Silêncio depois do preço é <em>raciocínio</em>. Interromper o raciocínio da paciente para se defender é dizer que nem você acredita no valor.</p>
+<p><strong>Por que &quot;como você se sente em relação a esse plano?&quot; é melhor que &quot;e aí, o que você acha?&quot;.</strong> A primeira convida a falar do que sente, e é aí que aparece o medo, a dúvida ou a restrição real. A segunda convida a um sim ou não seco.</p>
+<p><strong>Mais quatro erros da lista completa:</strong> reduzir o plano por nervosismo (ela entende que metade não era necessária); interpretar silêncio como não; pressionar por resposta imediata (ela entende que você precisa vender, não cuidar dela); e inventar urgência (ela conclui que isso é técnica de venda, e que o resto também deve ser).</p>
+<p><strong>Sobre o orçamento escrito:</strong> se a clínica entrega impresso ou digital, entregue <em>depois</em> de dizer o valor em voz alta. Papel entregue primeiro faz a paciente ler em vez de ouvir.</p>
+<p><strong>Pergunta para o público:</strong> &quot;quantas de vocês já ofereceram desconto antes de a paciente dizer qualquer coisa?&quot; É sempre a maioria. Esse é o erro mais caro dos três, porque o efeito não é nessa venda: é nas próximas dez, e nas amigas dela.</p>
+<p>Valor, decisão e objeções</p>
+<p>Movimento 6 · Etapa 16</p>
+<h3 id="a-primeira-frase-quase-nunca-e-a-objecao-real-um-unico-fluxo-trata-todas">A primeira frase quase nunca é a objeção real. Um único fluxo trata todas.</h3>
+<p>01</p>
+<p>Acolher</p>
+<p>02</p>
+<p>Entender</p>
+<p>03</p>
+<p>Aprofundar</p>
+<p>04</p>
+<p>Isolar</p>
+<p>05</p>
+<p>Confirmar</p>
+<p>06</p>
+<p>Responder</p>
+<p>07</p>
+<p>Próximo passo</p>
+<p>Família 01 Insegurança sobre a solução &quot;preciso pensar&quot; &quot;quero pesquisar&quot; &quot;medo de ficar artificial&quot; &quot;começar com menos&quot;</p>
+<p>O que costuma significar</p>
+<p>Uma dúvida ou um medo que não foi dito na consulta. Quase sempre o medo do resultado ou do comentário das pessoas.</p>
+<p>Pergunta que abre</p>
+<p>&quot;O que exatamente você quer pensar melhor? Talvez eu já consiga esclarecer agora.&quot;</p>
+<p>Erro mais comum</p>
+<p>Aceitar sem investigar e responder com promessa: &quot;comigo isso não acontece&quot;.</p>
+<p>Caminho</p>
+<p>Medo se responde com <strong>processo</strong>: etapas, reavaliação e controle dela sobre continuar ou parar.</p>
+<p>Família 02 Participação de outra pessoa &quot;vou falar com meu marido&quot; &quot;preciso conversar com alguém&quot;</p>
+<p>O que costuma significar</p>
+<p>Duas coisas diferentes: ela quer dividir a decisão, ou o recurso depende da outra pessoa. A conduta muda conforme a resposta.</p>
+<p>Pergunta que abre</p>
+<p>&quot;É mais para dividir a decisão com ele, ou tem a ver com o investimento?&quot;</p>
+<p>Erro mais comum</p>
+<p>Aceitar e encerrar. Ela sai para explicar sozinha, em casa, um plano que ainda não sabe explicar bem.</p>
+<p>Caminho</p>
+<p>Ofereça <strong>ajudar a explicar</strong>: um resumo escrito com o objetivo e o porquê de cada frente. Nunca contorne a decisão dela.</p>
+<p>Família 03 Barreira financeira &quot;está caro&quot; &quot;não cabe agora&quot; &quot;não tenho limite&quot; &quot;agora não consigo&quot;</p>
+<p>O que costuma significar</p>
+<p>Acima do que ela imaginava, condição de pagamento que não funciona, valor não construído, ou indisponibilidade real agora.</p>
+<p>Pergunta que abre</p>
+<p>&quot;Caro em relação ao que você tinha em mente, ou é a forma de pagamento? E o plano em si faz sentido para você?&quot;</p>
+<p>Erro mais comum</p>
+<p>Dar desconto na hora, o que confirma que o preço era negociável e apaga a chance de descobrir o que travou.</p>
+<p>Caminho</p>
+<p>Mexa primeiro em <strong>prazo, etapas e forma de pagamento</strong>. Preço é a última alavanca, e sempre com contrapartida.</p>
+<p><strong>A tese do slide:</strong> não existem dez objeções, existem três famílias e um único fluxo. Isso é o que torna o método memorizável.</p>
+<p><strong>O passo 04, isolar, é o que quase ninguém faz e o que mais economiza tempo.</strong> A frase é: &quot;é só isso ou tem mais alguma coisa te segurando?&quot; Sem isolar, você resolve o preço e aí aparece o marido. Duas objeções em sequência cansam a paciente e enfraquecem a consulta.</p>
+<p><strong>A pergunta de três alternativas do passo 03</strong> funciona porque não pede confissão, pede escolha: <em>&quot;quando você diz que está caro, é porque o valor ficou acima do que você imaginava, é porque a condição não funciona para você, ou é porque você ainda não está segura sobre o plano?&quot;</em> Diga devagar, com pausa entre elas, e sinalize a intenção (&quot;para eu te ajudar direito&quot;). Dita rápido, soa a script decorado.</p>
+<p><strong>Exemplo completo, família 03, para demonstrar ao vivo:</strong> Paciente: &quot;Nossa, está caro.&quot; · Especialista: <em>&quot;Entendo. Quando você diz caro, é o valor acima do que imaginava, a condição de pagamento, ou você ainda não está segura sobre o plano?&quot;</em> · Paciente: &quot;Eu imaginava uns oito mil. Mas o plano faz sentido.&quot; · Especialista: <em>&quot;Certo. Então é o tamanho do valor, e não o plano. É só isso ou tem mais alguma coisa te segurando?&quot;</em></p>
+<p><strong>Detalhes por família que não couberam:</strong></p>
+<ul><li><strong>&quot;Quero pesquisar&quot;</strong> tem a melhor resposta possível: <em>ensine a paciente a pesquisar</em>. &quot;Pergunte se vão avaliar o rosto todo antes de indicar, pergunte por que aquela ordem, e pergunte o que <em>não</em> vão fazer em você.&quot; Nunca desqualifique colega: além de antiético, é péssimo negócio.</li><li><strong>&quot;Quero fazer só o botox&quot;</strong>: ela tem o direito, o seu dever é garantir decisão informada. Diga o que aquilo entrega <em>e o que não entrega</em>, execute bem e marque a reavaliação. Essa reavaliação costuma ser a consulta em que o plano completo é aceito.</li><li><strong>&quot;Quero começar com menos&quot;</strong>: comece pela frente de resultado mais rápido e mais perceptível, e nunca por um pedaço que não entrega nada sozinho.</li><li><strong>&quot;Não tenho limite no cartão&quot;</strong> é barreira operacional, não recusa: costuma vir de quem já decidiu. Dividir entre dois cartões, entrada, ou etapas em meses diferentes resolvem. Ofereça só o que a clínica realmente pratica.</li><li><strong>&quot;Vou voltar outro dia&quot;</strong> é a saída educada e a que mais some. Pergunte na porta: <em>&quot;antes de você ir, teve alguma parte que não ficou clara?&quot;</em> e <em>&quot;quando faria sentido eu te chamar?&quot;</em></li></ul>
+<p><strong>Limite ético do bloco:</strong> investigar objeção não é insistir. Uma pergunta de esclarecimento é cuidado; três perguntas depois de ela sinalizar que quer encerrar é pressão. Quando a recusa é clara, registre, agradeça e combine retomada.</p>
+<p><strong>Exercício (10 min).</strong> Retome a avaliação real que cada uma trouxe na abertura do treinamento. Pergunte: em que família estava a objeção? Você chegou a isolar? Existe um próximo passo com data?</p>
+<p>Valor, decisão e objeções</p>
+<p>Movimentos 6 e 7</p>
+<h3 id="negociar-nao-e-dar-desconto-e-nao-fechar-hoje-nao-e-perder-a-paciente">Negociar não é dar desconto. E não fechar hoje não é perder a paciente.</h3>
+<p>Antes do preço, três alavancas melhores</p>
+<p>01</p>
+<p>Prazo</p>
+<p>Começar no mês que vem</p>
+<p>02</p>
+<p>Etapas</p>
+<p>Dividir o plano em fases</p>
+<p>03</p>
+<p>Forma de pagar</p>
+<p>Entrada, cartões, parcelas</p>
+<p>Negociação saudável</p>
+<p>Vem depois de uma objeção real e isolada. Tem contrapartida. Preserva o plano clínico. Acontece uma vez.</p>
+<p>Desconto por insegurança</p>
+<p>Vem antes de qualquer objeção. Só mexe no preço. Encolhe o plano no susto. Acontece toda vez.</p>
+<p>Se ela não fechar hoje, isto precisa existir</p>
+<p>Registro de avaliação não fechada antes da próxima paciente</p>
+<ul><li>Motivo declarado, entre aspas</li><li>Objeção real, se foi isolada</li><li>Plano e valor apresentados</li><li>Prioridade dela</li><li>Prazo que ela mesma citou</li><li>Pessoa envolvida na decisão</li><li>Próxima ação e responsável</li><li><strong>Data da retomada, na agenda</strong></li></ul>
+<p>A conta que ninguém faz</p>
+<p>A paciente que avaliou e não fechou é a oportunidade mais avançada da clínica: já foi captada, qualificada, compareceu e entendeu o plano. Todo o custo já foi pago. O que falta é uma conversa, não uma paciente nova.</p>
+<p><strong>A ordem das alavancas é o ponto técnico.</strong> Antes de mexer em preço existem três opções melhores: prazo, etapas e forma de pagamento. Só depois se discute valor, e mesmo aí como <em>condição com contrapartida</em>, não como desconto puro.</p>
+<p><strong>Sobre contrapartida.</strong> Toda condição especial precisa de uma razão: fechamento na consulta, pagamento à vista, autorização de imagem, horário de menor procura. Condição sem contrapartida ensina que o preço era inflado.</p>
+<p><strong>Seis perguntas antes de oferecer qualquer condição:</strong> ela quer fazer? Confia no plano? O tratamento faz sentido clínico? A única barreira é mesmo financeira? Qual formato ela mesma disse que seria possível? A condição respeita as regras da clínica? Se a resposta a qualquer uma for não, <em>não ofereça condição</em>: desconto não resolve falta de confiança nem falta de entendimento.</p>
+<p><strong>Regra da clínica que vale combinar:</strong> a especialista precisa saber, antes da consulta, qual margem ela pode oferecer sozinha. Improvisar na frente da paciente é o que gera condição que o financeiro depois não honra.</p>
+<p><strong>A cadência de retomada</strong> (ilustrativa, adapte ao combinado com cada paciente): <em>no mesmo dia</em>, resumo escrito do plano com o porquê de cada frente, é o material que ela usa para explicar em casa; <em>no dia seguinte</em>, uma dúvida e não uma cobrança; <em>alguns dias depois</em>, algo de valor, como um caso semelhante ou uma explicação que ela pediu, sem pedir resposta; <em>na data combinada</em>, aí sim a retomada da decisão.</p>
+<p><strong>A diferença entre retomada e insistência é o conteúdo, não a frequência.</strong> Compare: &quot;Oi! Passando para saber se você decidiu. Temos uma condição especial essa semana.&quot; , fala do interesse da clínica e introduz desconto sem objeção. Contra: <em>&quot;Fernanda, lembrei de você hoje. Atendi uma paciente com a mesma questão de contorno de perfil, e ela também tinha medo de ficar artificial. Te mandei o caso aqui embaixo. Você tinha me falado da formatura em outubro: se a ideia continuar de pé, precisaríamos começar até o fim de julho. Como você ficou pensando?&quot;</em>, usa as palavras dela, o medo dela, o prazo dela. Só existe porque a avaliação foi registrada.</p>
+<p><strong>Encerramento com dignidade:</strong> se depois da data combinada ela não responder, envie uma última mensagem: <em>&quot;vou parar de te escrever para não te incomodar. Quando fizer sentido, é só me chamar que retomamos exatamente de onde paramos.&quot;</em></p>
+<p><strong>Pergunta desconfortável para o público:</strong> &quot;das pacientes que avaliaram e não fecharam nos últimos 90 dias, quantas você consegue nomear e dizer por que não fecharam?&quot;</p>
+<p>Aplicação</p>
+<p>Simulação · parte 1 de 3</p>
+<h3 id="claudia-47-anos-marcou-pedindo-preenchimento-no-sulco-nasogeniano">Cláudia, 47 anos. Marcou pedindo preenchimento no sulco nasogeniano.</h3>
+<p>O que chegou antes</p>
+<p>Perfil Advogada, duas filhas adolescentes</p>
+<p>Queixa declarada &quot;Esse bigode chinês está me incomodando muito.&quot;</p>
+<p>Histórico Toxina duas vezes, em outra clínica. Achou o atendimento apressado.</p>
+<p>Menção espontânea &quot;Não quero nada exagerado, trabalho em um lugar conservador.&quot;</p>
+<p>Faixa citada Perguntou se daria para fazer com uns seis mil</p>
+<p>Por que agora</p>
+<p>&quot;O que fez você marcar essa semana?&quot;</p>
+<p>Cláudia</p>
+<p>&quot;Vou virar sócia do escritório em janeiro, vão fazer fotos novas. E eu me vi numa foto e falei: nossa, eu pareço <strong>exausta</strong>.&quot;</p>
+<p>Palavra relevante</p>
+<p>&quot;Quando você diz exausta, o que exatamente você viu na foto?&quot;</p>
+<p>Cláudia</p>
+<p>&quot;Tudo meio <strong>caído</strong>. O rosto parece que desceu. E eu fico com <strong>cara de brava</strong>, mesmo sem estar.&quot;</p>
+<p>Espelho</p>
+<p>&quot;Me mostra no espelho onde você sente que desceu?&quot;</p>
+<p>Cláudia</p>
+<p>&quot;Aqui, a bochecha. E aí sobra isso embaixo. E o vinco fica marcado por causa disso, <strong>não é?</strong>&quot;</p>
+<p>O que aconteceu em seis falas</p>
+<p>Apareceu um <strong>momento com data</strong>, uma <strong>palavra emocional</strong>, uma <strong>palavra anatômica</strong> e uma <strong>expressão indesejada</strong>. E a própria paciente ligou o vinco à perda de sustentação. A especialista ainda não olhou o rosto nem citou nenhum procedimento.</p>
+<p><strong>Antes de avançar, pergunte:</strong> &quot;com o resumo do WhatsApp, o que vocês já suspeitam tecnicamente?&quot; A maioria diz perda de sustentação do terço médio. Em seguida: &quot;e o que aconteceria se vocês dissessem isso nos primeiros dois minutos?&quot; Resposta: ela ouviria como &quot;você quer me vender mais coisa&quot;.</p>
+<p><strong>A pergunta &quot;por que agora&quot; sozinha destravou o evento com data</strong>, que muda o cronograma inteiro e é o argumento mais forte da consulta.</p>
+<p><strong>Repare no que a especialista não fez:</strong> não corrigiu a paciente quando ela disse &quot;bigode chinês&quot;, não explicou anatomia e não mencionou nenhum procedimento. Corrigir vocabulário cedo cria distância.</p>
+<p><strong>A frase &quot;não é?&quot; da Cláudia é ouro:</strong> a paciente pediu confirmação, ou seja, já está construindo o diagnóstico junto. A partir daí a avaliação técnica vai <em>confirmar</em> algo que ela mesma disse, e não contrariar o que ela pediu.</p>
+<p><strong>Continuação da investigação, se quiser fazer o role-play completo.</strong> Impacto: <em>&quot;isso muda alguma coisa no seu dia a dia?&quot;</em> leva a &quot;Evito foto. E em reunião por vídeo eu fico subindo o notebook, porque de baixo fica horrível. Isso é ridículo, né?&quot; (a especialista valida: <em>&quot;não é ridículo, é bem comum&quot;</em>). Desejo: <em>&quot;se desse tudo certo, o que faria você sentir que valeu a pena?&quot;</em> leva a &quot;Queria parecer <strong>descansada</strong>. E ser levada a sério sem parecer dura. Não quero parecer mais nova, quero parecer bem.&quot; Medo: <em>&quot;existe algum resultado que você teme?&quot;</em> leva a &quot;Pavor de ficar com cara de outra pessoa. Uma sócia fez e comentaram pelas costas. E meu marido acha isso tudo besteira.&quot; Limites: leva a &quot;Meu sorriso. E lábio eu não quero, de jeito nenhum.&quot;</p>
+<p><strong>Guarde a menção ao marido:</strong> ela volta como objeção na parte 3. Objeção antecipada na investigação deixa de ser surpresa e vira item previsto.</p>
+<p>Aplicação</p>
+<p>Simulação · parte 2 de 3</p>
+<h3 id="a-ficha-preenchida-vira-a-devolutiva-a-devolutiva-confirmada-vira-a-prescricao">A ficha preenchida vira a devolutiva. A devolutiva confirmada vira a prescrição.</h3>
+<p>Ficha · Cláudia</p>
+<p>Palavras dela &quot;exausta&quot; · &quot;desceu&quot; · &quot;cara de brava&quot;</p>
+<p>Dor Evita fotos, ajusta a câmera em reuniões</p>
+<p>Medo Comentário no escritório e reação do marido</p>
+<p>Desejo &quot;Descansada e levada a sério, sem parecer dura&quot;</p>
+<p>Momento Sociedade em janeiro, com fotos</p>
+<p>Limites Sorriso preservado. Lábio fora do plano.</p>
+<p>Devolutiva</p>
+<p>&quot;Você marcou por causa do vinco, mas o que você mesma apontou foi que a bochecha <strong>desceu</strong>, e é isso que te dá esse aspecto de <strong>exausta</strong> nas fotos. Você tem a sociedade em janeiro, e duas linhas vermelhas: nada que faça as pessoas comentarem, e o seu sorriso preservado. <strong>É isso?</strong>&quot;</p>
+<p>Cláudia</p>
+<p>&quot;É exatamente isso. Você resumiu melhor do que eu falei. <strong>O vinco é o de menos</strong>, é essa cara de cansada.&quot;</p>
+<p>Prescrição</p>
+<p>&quot;Então o objetivo é <strong>parecer descansada e ser levada a sério, sem parecer dura</strong>. Eu estruturaria em duas frentes agora: a primeira devolve <strong>sustentação</strong> onde você apontou, e vem primeiro porque é ela que suaviza o vinco por consequência. A segunda trabalha a <strong>expressão</strong>, em dose contida, para não travar seu sorriso.&quot;</p>
+<p>O que fica fora</p>
+<p>&quot;E o que eu <strong>não vou fazer</strong>: lábio está fora, você me disse e eu concordo, nem seria minha prioridade aqui.&quot;</p>
+<p>O momento decisivo</p>
+<p>&quot;O vinco é o de menos&quot; foi <strong>a paciente reordenando a própria prioridade</strong>, em voz alta, sem que ninguém a contrariasse. Se a especialista tivesse dito isso no minuto dois, teria a mesma informação e a paciente teria resistido. A diferença não é o conteúdo: é quem chega à conclusão.</p>
+<p><strong>Mostre o encadeamento com o dedo na tela:</strong> cada elemento da devolutiva veio de um campo da ficha. Nada foi inventado e nada foi interpretado além do que ela disse.</p>
+<p><strong>Conte quantas palavras da Cláudia a especialista usou:</strong> &quot;desceu&quot;, &quot;exausta&quot;, &quot;descansada&quot;, &quot;levada a sério sem parecer dura&quot;, &quot;sorriso&quot;. Cinco. É isso que faz o plano soar como dela.</p>
+<p><strong>A fala do &quot;não vou fazer&quot; é a que mais constrói confiança.</strong> Numa consulta em que ela espera ouvir uma lista crescente, recusar algo desarma a desconfiança comercial inteira.</p>
+<p><strong>A prescrição completa, com os seis passos</strong>, para o role-play: 01 objetivo com as palavras dela; 02 estratégia (&quot;duas frentes agora e uma terceira só depois de janeiro&quot;); 03 prioridade e o porquê da ordem; 04 a segunda frente e sua função; 05 o que fica de fora; 06 etapas e prazo, <em>&quot;trabalhando de trás para frente a partir das fotos de janeiro: primeira etapa agora, reavaliação em trinta dias, segunda etapa em seguida. Você chega nas fotos com tudo assentado, e ninguém vai ver nada &#x27;fresco&#x27;.&quot;</em> Só então o técnico: <em>&quot;na prática, a primeira frente usa [produto e técnica]...&quot;</em></p>
+<p><strong>Repare que a fala do prazo responde ao medo sem falar do medo.</strong> &quot;Ninguém vai ver nada fresco&quot; trata diretamente do medo de comentário no escritório, e trata com cronograma, não com promessa.</p>
+<p><strong>Se houver tempo, mostre a prova:</strong> <em>&quot;quero te mostrar um caso. Ela tinha 49 anos, também trabalha em ambiente formal e chegou com o mesmo medo que você. O rosto dela é diferente do seu, então o caminho e o resultado vão ser diferentes; te mostro para você entender a lógica, não para prometer o mesmo resultado.&quot;</em> A resposta da Cláudia é o objetivo da etapa: <em>&quot;ela está bem, mas não está com aquela cara de quem fez. É isso que eu quero.&quot;</em></p>
+<p>Aplicação</p>
+<p>Simulação · parte 3 de 3</p>
+<h3 id="duas-objecoes-em-uma-frase-separar-isolar-responder-cada-uma-conduzir">Duas objeções em uma frase. Separar, isolar, responder cada uma, conduzir.</h3>
+<p>Investimento</p>
+<p>&quot;Ficou claro o caminho? Então: o investimento do plano completo é de <strong>[valor]</strong>. Pode ser à vista ou parcelado em até [x] vezes.&quot; <em>[silêncio]</em></p>
+<p>Cláudia</p>
+<p>&quot;Hmm. É mais do que eu tinha imaginado, eu tinha pensado em uns seis. E eu preciso falar com meu marido.&quot;</p>
+<p>Separar</p>
+<p>&quot;Entendo, e são duas coisas diferentes. Sobre falar com ele: é mais para dividir a decisão, ou tem a ver com o investimento?&quot;</p>
+<p>Cláudia</p>
+<p>&quot;É mais dividir. O dinheiro é meu, mas ele acha essas coisas bobagem. Eu ia ter que explicar.&quot;</p>
+<p>Isolar</p>
+<p>&quot;Certo. Então, além de conversar com ele e do valor estar acima do que você imaginava, <strong>tem mais alguma coisa te segurando?</strong>&quot;</p>
+<p>Cláudia</p>
+<p>&quot;Não, é isso. O plano eu achei ótimo, sinceramente.&quot;</p>
+<p>Responder e conduzir</p>
+<p>&quot;Então eu te mando hoje um resumo escrito com o porquê de cada frente, para ele ler o raciocínio e não só o valor. E sobre o investimento: dá para ajustar o parcelamento, ou fazer só a primeira frente agora, que <strong>funciona sozinha</strong>. <strong>Você conversa com ele no fim de semana e eu te chamo na segunda</strong>, já deixo o horário reservado. Pode ser?&quot;</p>
+<p>O desfecho</p>
+<p>Nenhum desconto foi oferecido, nenhum plano foi encolhido, nenhum defeito foi criado e nenhuma urgência foi inventada. Não houve fechamento na consulta: houve <strong>próximo passo com data, autorização e horário reservado</strong>. Em plano de valor alto, esse é frequentemente o melhor desfecho possível de uma primeira avaliação.</p>
+<p><strong>Percorra os movimentos com a turma:</strong> acolher e separar, isolar, responder cada uma, conduzir com data. Nenhum desconto, nenhum plano encolhido, e a decisão avançou.</p>
+<p><strong>A frase mais importante é a do isolamento.</strong> A resposta (&quot;o plano eu achei ótimo&quot;) confirma que o trabalho do diagnóstico e da prescrição funcionou, e que a barreira é só de viabilidade. Sem essa pergunta, você trata uma objeção e a outra continua viva.</p>
+<p><strong>No caso real, a Cláudia escolheu fazer o plano completo</strong> com parcelamento ajustado, e a especialista <em>não</em> pediu isso. Ela ofereceu a versão menor com honestidade, e a paciente recusou sozinha: <em>&quot;se der para parcelar melhor, eu prefiro fazer tudo. Não quero fazer metade e ficar esperando.&quot;</em> Oferecer o caminho menor sem pressão costuma produzir exatamente esse efeito.</p>
+<p><strong>E se ela tivesse escolhido só a primeira frente?</strong> Também seria um bom desfecho: paciente atendida, expectativa alinhada, reavaliação agendada. Diga isso à turma, para ninguém sair achando que o objetivo é sempre o plano cheio.</p>
+<p><strong>Três reações comuns e erradas nesse momento</strong>, para debater: oferecer condição especial na hora (ensina que o preço era negociável e deixa a objeção do marido intacta); reduzir o plano para caber nos seis mil (invalida a recomendação que ela acabou de aceitar); e aceitar, entregar o orçamento e dizer que fica à disposição (é o mais comum na vida real, e o que produz o &quot;vou pensar&quot; que nunca volta).</p>
+<p><strong>Exercício final (15 min).</strong> Role-play em trios: uma faz a Cláudia, uma faz a especialista, uma observa com o checklist do próximo slide na mão. Depois inverta os papéis. O feedback é sempre por critério, nunca &quot;foi bom&quot; ou &quot;foi ruim&quot;.</p>
+<p>Aplicação</p>
+<p>Para colar na gaveta da sala de avaliação</p>
+<h3 id="dez-verificacoes-na-ordem-em-que-a-consulta-acontece">Dez verificações, na ordem em que a consulta acontece.</h3>
+<p>01</p>
+<p>Eu li o <strong>contexto</strong> dela antes de entrar?</p>
+<p>06</p>
+<p>Ela disse <strong>&quot;é exatamente isso&quot;</strong>?</p>
+<p>02</p>
+<p>Eu expliquei <strong>como a avaliação ia funcionar</strong>?</p>
+<p>07</p>
+<p>Eu disse algo que <strong>não faria</strong>, e por quê?</p>
+<p>03</p>
+<p>Eu perguntei <strong>&quot;por que agora&quot;</strong>?</p>
+<p>08</p>
+<p>Eu <strong>recapitulei</strong> antes de dizer o valor?</p>
+<p>04</p>
+<p>Ela <strong>apontou no espelho</strong>, ou só descreveu?</p>
+<p>09</p>
+<p>Eu fiquei em <strong>silêncio</strong> depois do número?</p>
+<p>05</p>
+<p>Eu sei a <strong>dor</strong>, o <strong>medo</strong> e o <strong>desejo</strong> dela?</p>
+<p>10</p>
+<p>Existe um <strong>próximo passo com data</strong>?</p>
+<p>A melhor avaliação</p>
+<p>Não é aquela em que a especialista fala mais. É aquela em que a paciente <strong>se sente compreendida</strong>, entende o próprio caso, confia na recomendação e consegue <strong>decidir com consciência</strong>. Quando isso acontece, o fechamento deixa de ser uma disputa no final da consulta.</p>
+<p><strong>Este é o material que sobrevive ao treinamento.</strong> Dez perguntas de sim ou não. Se a clínica imprimir uma única coisa deste deck, que seja esta.</p>
+<p><strong>As quatro de maior impacto imediato</strong>, se ela só conseguir prestar atenção em quatro: &quot;por que agora&quot;, &quot;é exatamente isso&quot;, &quot;eu fiquei em silêncio&quot; e &quot;existe um próximo passo com data&quot;.</p>
+<p><strong>Se uma resposta for não, não é para se culpar:</strong> é para saber exatamente o que treinar na próxima. Uma avaliação por semana com atenção deliberada a um único item vale mais do que tentar mudar tudo de uma vez.</p>
+<p><strong>Como implementar na clínica sem sobrecarregar.</strong> Não tente mudar doze coisas na segunda-feira. Comece por três: <em>o resumo do WhatsApp antes da consulta</em>, <em>a ficha de diagnóstico aberta na mesa</em> e <em>o registro de avaliação não fechada</em>. Essas três sozinhas mudam a consulta e criam a base para todas as outras. Combine com a gestora quem garante que elas existam, impressas ou no sistema, até a próxima semana.</p>
+<p><strong>Como o treino continua:</strong> estudo, observação de uma avaliação conduzida por quem já aplica, role-play, feedback por critério, aplicação em avaliações reais e auditoria mensal. Na auditoria, não olhe só a taxa de fechamento: olhe quantas fichas de diagnóstico estão completas, quantas avaliações não fechadas têm motivo registrado e quantas retomadas aconteceram na data combinada. Esses três indicadores mudam <em>antes</em> do faturamento.</p>
+<p><strong>Encerramento sugerido.</strong> Leia a faixa dourada, deixe alguns segundos e faça uma última pergunta: &quot;qual é a primeira coisa que você vai fazer diferente na sua próxima avaliação?&quot; Peça que cada pessoa responda em uma frase, em voz alta. Isso transforma o treinamento em compromisso público, e é o que mais aumenta a chance de aplicação. Depois, combine a data do role-play e da primeira auditoria: <em>um treinamento sem próximo passo com data comete exatamente o erro que passou noventa minutos ensinando a evitar.</em></p>
+<p>REVON · Aceleradora de crescimento</p>
+<p>Notas Índice</p>
+<p>Notas do apresentador N para fechar</p>
+<p>clique para ir ao slide · O ou Esc para fechar</p>
+</main>
+</body>
+</html>

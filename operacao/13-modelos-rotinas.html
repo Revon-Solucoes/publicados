@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modelos das rotinas semanais e mensais</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Modelos das rotinas semanais e mensais</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-18</p>
+<p>Artefato citado pelo playbook <a href="1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a>, passos A.4, A.10 e A.12.</p>
+<hr>
+<h2 id="1-modelo-de-registro-da-auditoria-semanal">1 · Modelo de registro da auditoria semanal</h2>
+<p><strong>Passo:</strong> A.4. A lista fechada de pontos de perda já está no passo, este é só o formato de registro, semana a semana.</p>
+<table><thead><tr><th>Data</th><th>Conversa</th><th>Ponto de perda</th><th>Item de verificação</th><th>O que teria mudado</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p>Teto de cinco linhas por semana, quatro de perda e uma reservada para conversa que deu certo, categoria 4 do A.4.</p>
+<p><strong>A coluna do item de verificação existe para a correção ter endereço.</strong> Cada ponto de perda é a causa de um resultado, e o mapa de qual causa alimenta qual está na seção T.7 do playbook. Falconi, <em>Gerenciamento da Rotina do Trabalho do Dia a Dia</em>, página 88: cada item de controle é um efeito, e tem uma ou mais causas relacionadas a ele.</p>
+<p><strong>O teto de cinco é o filtro</strong>, da página 60 do mesmo livro: toda operação tem mais desvios do que consegue tratar, e sem um critério que define o que entra a auditoria lista tudo e não corrige nada.</p>
+<p><strong>Os três destinos do mesmo achado, sempre separados:</strong></p>
+<table><thead><tr><th>Destino</th><th>O que leva</th><th>Para quem</th></tr></thead><tbody><tr><td>Registro</td><td>O fato cru, com data e hora</td><td>Documento interno, é prova</td></tr><tr><td>Devolutiva</td><td>A correção da semana, como ajuda</td><td>Secretária</td></tr><tr><td>Relatório</td><td>Aderência em número, com o que a Revon vai fazer</td><td>Doutora</td></tr></tbody></table>
+<p><strong>Correção da semana, escolhida entre as linhas acima, uma só:</strong></p>
+<blockquote><p>[descrição da única correção levada ao telefonema semanal]</p></blockquote>
+<p><strong>Como escolher, quando houver mais de uma candidata:</strong> vale a que alimenta o item de controle que está atrás no momento, eleito no balanço do dia 30. Não a mais chamativa da semana.</p>
+<p><strong>Como dizer, no telefonema do A.3:</strong> reconhecimento específico primeiro, e a correção emendada com <strong>&quot;e&quot;</strong>, nunca com &quot;mas&quot;. Carnegie, <em>Como Fazer Amigos e Influenciar Pessoas</em>, página 251: o &quot;mas&quot; faz o reconhecimento anterior soar como técnica, e quem ouve passa a duvidar dele.</p>
+<p><strong>O que relatar de volta, e agradecer:</strong> o que a secretária contar que saiu do usual entra aqui como linha, mesmo quando não virar correção. Falconi, página 49: quem opera relata os desvios, os bons e os ruins, e quem recebe agradece pelo relato.</p>
+<hr>
+<h2 id="2-modelo-de-pauta-mensal">2 · Modelo de pauta mensal</h2>
+<p><strong>Passo:</strong> A.10. As 12 peças do ciclo, fechadas de uma vez.</p>
+<table><thead><tr><th>Nº</th><th>Tema</th><th>Pilar</th><th>Função</th><th>Candidata a impulsionamento</th></tr></thead><tbody><tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>...</td><td></td><td></td><td></td><td></td></tr><tr><td>12</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p><strong>Pilares:</strong> critério clínico, educação, naturalidade, autoridade humana, localidade, conversão. Proporção de V1: 3 educação, 2 critério clínico, 2 naturalidade, 2 autoridade humana, 1 localidade, 2 conversão.</p>
+<p><strong>Função de cada tema:</strong> atrair, educar, gerar confiança, provocar interação, preparar a avaliação. Tema sem função não entra na pauta.</p>
+<p><strong>Marcar a candidata a impulsionamento na própria pauta</strong>, nunca depois de editada.</p>
+<hr>
+<h2 id="3-roteiro-da-reuniao-mensal">3 · Roteiro da reunião mensal</h2>
+<p><strong>Passo:</strong> A.12. Sessão ao vivo, repetida todo mês. Coordenação conduz, CS anota. Tom de voz segue o T.6.</p>
+<h3 id="abertura-com-numero">Abertura, com número</h3>
+<p>Não com pergunta:</p>
+<ul><li>Total de consultas do mês</li><li>Contra a linha de base do passo 1.10: <strong>contribuição</strong></li><li>Faturamento do período contra as mensalidades pagas: <strong>patamar</strong></li></ul>
+<p><strong>São os itens de controle da seção T.7</strong>, e a reunião mensal é onde eles são lidos com a cliente. Os itens de verificação, que são as causas, ficam na auditoria semanal e não vêm para esta mesa.</p>
+<h3 id="o-primeiro-valor-nas-palavras-dela">O primeiro valor, nas palavras dela</h3>
+<p>Ler em voz alta o que ela respondeu no passo 1.12, e dizer onde a operação está em relação àquilo. <strong>Vale igual quando ainda não chegou.</strong> O que não pode é o mês fechar sem que aquilo tenha sido mencionado.</p>
+<p>Donna Weber, <em>Onboarding Orquestrado</em>, página 184: o primeiro valor é o que reverbera na cliente, e não o que a Revon considera entrega. Levantar e nunca mais mencionar transforma a pergunta em cortesia, e ela percebe.</p>
+<p><strong>Nomear as duas leituras separadamente, sempre</strong>, para o cliente não fundir os dois números numa discussão sobre algo que ninguém definiu qual é.</p>
+<h3 id="o-que-a-revon-entregou">O que a Revon entregou</h3>
+<p>Em coisa entregue, não em esforço: peça publicada, conversa auditada, compromisso conferido.</p>
+<h3 id="o-que-caiu-do-lado-do-cliente">O que caiu do lado do cliente</h3>
+<p>Com nome e data: gravação atrasada, compromisso de treinamento não sustentado, linha do Portão 2 em aberto.</p>
+<h3 id="o-plano-de-sucesso-atualizado-na-frente-dela">O plano de sucesso, atualizado na frente dela</h3>
+<p>O que mudou na clínica, o que mudou de risco, o que saiu ou entrou de responsabilidade. Weber, página 84: o plano fica em lugar de fácil acesso e é atualizado com regularidade. Plano que não se atualiza vira documento de venda.</p>
+<h3 id="fechamento">Fechamento</h3>
+<p>O que muda no mês seguinte, decidido pela Revon e apresentado. Do passo 2.1 em diante nada vai para aprovação, e a reunião mensal não abre exceção.</p>
+</main>
+</body>
+</html>

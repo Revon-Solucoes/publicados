@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A base da Meta e do Instagram, o que precisa estar de pé antes do primeiro impulsionamento</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>A base da Meta e do Instagram, o que precisa estar de pé antes do primeiro impulsionamento</h1></header>
+<p>NOTA 2026-08-17: quem aperta o botão impulsionar é a <strong>Revon</strong>, com acesso de parceira, e não a doutora. Ver <code>decisoes.md</code>, entrada de 2026-08-17. Isso muda duas coisas deste documento: o acesso de parceira precisa permitir criar e editar anúncio, e não apenas ler desempenho como diz a seção &quot;O que a Revon precisa ter guardado de cada clínica&quot;; e o &quot;treinamento que fica com a doutora&quot;, no fim, vira o combinado de que quem aperta impulsionar durante os 90 dias é a Revon, para a leitura do teste ficar limpa. <strong>Não é proibição:</strong> o botão é dela e ela pode apertar, e o que a assessoria entrega é ela saber o que vale a pena impulsionar. O resto do documento continua valendo, inclusive as quatro regras e o roteiro de conferência.</p>
+<p>NOTA: seis afirmações deste documento foram conferidas contra fonte oficial da plataforma, na pesquisa de <code>operacao/pesquisa-midia-e-ferramentas.md</code>. O que a fonte oficial diz está no ponto onde cada uma aparece, marcado <code>Conferido em fonte oficial</code>.</p>
+<p>Na mesma data, quatro mudanças de moldura, e não de regra: o &quot;erro clássico&quot; da Regra 1 vira o comportamento padrão do aplicativo, com fechar a corrente virando pré-requisito com prazo; a irreversibilidade sai do texto e vira pendência marcada <code>[SUG]</code>, porque o que não migra é o dado histórico e a conta talvez possa ser reivindicada; fuso e moeda da conta de anúncios entram no roteiro de conferência; e as pendências de teste viram duas sessões nomeadas, na seção &quot;As duas sessões de teste que faltam&quot;. Ver <code>decisoes.md</code>, entradas de 2026-08-17.</p>
+<p><strong>Para:</strong> Ellen <strong>De:</strong> Thiago <strong>Data:</strong> 16/08/2026</p>
+<hr>
+<h2 id="por-que-este-documento-existe">Por que este documento existe</h2>
+<p>A gente mudou o jeito de fazer tráfego para as clínicas. Em vez de campanha montada por dentro do gerenciador de anúncios, o caminho passa a ser <strong>a doutora produzindo criativo alinhado ao posicionamento dela e impulsionando o próprio conteúdo</strong>, o botão &quot;Impulsionar&quot; do Instagram.</p>
+<p>A razão é comercial, não técnica: quem chega por um vídeo em que a doutora fala do jeito dela chega mais alinhado com a proposta dela. Volume a gente já sabe comprar; alinhamento não se compra no gerenciador.</p>
+<p><strong>Só que essa mudança tem um preço, e é ele que este documento trata.</strong> O impulsionamento é mais fácil de fazer e muito mais fácil de fazer errado. Feito fora do arranjo certo, ele fica invisível para o HOF, e &quot;invisível&quot; aqui não quer dizer &quot;relatório incompleto&quot;. Quer dizer <strong>paciente que não entra no sistema</strong>.</p>
+<p>Este documento é o arranjo certo. São quatro regras. Nenhuma é opcional.</p>
+<hr>
+<h2 id="o-ponto-que-muda-tudo-impulsionar-e-anunciar">O ponto que muda tudo: impulsionar É anunciar</h2>
+<p>A primeira coisa que costuma confundir: muita gente trata &quot;impulsionar&quot; como se fosse uma função do Instagram, e &quot;anunciar&quot; como se fosse outra coisa, que mora no gerenciador. <strong>Não são duas coisas.</strong></p>
+<p>Palavra da própria Meta, na central de ajuda para empresas:</p>
+<blockquote><p><em>&quot;A boosted post is billed to the ad account belonging to whomever promoted it.&quot;</em> <em>Uma publicação impulsionada é cobrada da conta de anúncios de quem a impulsionou.</em></p></blockquote>
+<p>Ou seja: quando a doutora aperta &quot;Impulsionar&quot;, a Meta cria um anúncio de verdade, dentro de uma conta de anúncios de verdade, e cobra dessa conta. O que importa para nós é que <strong>dá para ler os números por lá.</strong></p>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> A edição documentada do anúncio criado no Instagram acontece <strong>no app ou no instagram.com</strong>, e permite apenas <strong>aumentar</strong> o orçamento diário e <strong>aumentar</strong> a duração. Para reduzir orçamento é preciso encerrar o anúncio e criar outro. https://pt-br.facebook.com/business/help/380757175862444 O que a Meta publica sobre o Gerenciador é que ali o anúncio <strong>pode ser pausado</strong>. https://pt-br.facebook.com/business/help/190490051321426 <code>[NÃO ENCONTRADO]</code> afirmação oficial de que o post impulsionado pelo app do Instagram aparece e é editável no Gerenciador, e o que exatamente seria editável lá. A frase mais próxima é ambígua: &quot;As métricas de criação da campanha, configurações de orçamento e desempenho só estão disponíveis no Gerenciador de Anúncios&quot;. https://pt-br.facebook.com/business/help/317083072148603</p></blockquote>
+<p><strong>A pergunta inteira, então, é uma só: cobrado de QUAL conta de anúncios?</strong></p>
+<ul><li>Se for uma conta que está dentro do portfólio de negócios da clínica, com a Revon como parceira → <strong>a gente lê tudo</strong>: quanto ela investiu, quantas vezes o vídeo apareceu, quantos cliques teve, dia a dia, post a post.</li><li>Se o Instagram criar sozinho uma conta pessoal, ligada ao perfil pessoal dela, com o cartão dela solto ali → <strong>a gente não lê nada.</strong> Nem nós, nem ninguém além dela mesma, olhando o celular.</li></ul>
+<p>O que não migra é o <strong>dado histórico</strong>: gasto e desempenho já registrados ficam na conta em que nasceram.</p>
+<blockquote><p><strong><code>[SUG]</code> de 17/08/2026, pendente de verificação.</strong> Esta linha dizia &quot;E não dá para consertar depois&quot;. Isso vai além do que está verificado. O que se sabe é que dado de anúncio não migra de conta. <strong>A conta em si pode poder ser reivindicada por um portfólio de negócios</strong>, e nesse caso a leitura passaria a existir dali para frente, sem recuperar o histórico. Isto é julgamento nosso, não é fonte oficial e não foi conferido.  <strong>Pendência aberta:</strong> verificar em fonte oficial se conta de anúncios criada pelo perfil pessoal pode ser reivindicada por um portfólio de negócios, e com quais limites. <strong>Até fechar, nada afirmativo para cliente em nenhuma das duas direções</strong>, nem &quot;o seu histórico está perdido&quot; nem &quot;a gente traz a conta&quot;.  Por que esta pendência tem prioridade comercial: boa parte das clínicas prospectadas já impulsiona pelo celular. Hoje a resposta de venda é &quot;seu histórico está perdido&quot;, quando pode ser &quot;a gente traz a conta&quot;. A diferença entre as duas muda a conversa inteira, e nenhuma das duas está provada.</p></blockquote>
+<hr>
+<h2 id="as-quatro-regras">As quatro regras</h2>
+<h3 id="regra-1-a-conta-de-anuncios-mora-no-portfolio-de-negocios-da-clinica-com-a-revon-como-parceira">Regra 1 · A conta de anúncios mora no portfólio de negócios da clínica, com a Revon como parceira</h3>
+<p>Antes do primeiro impulsionamento, a clínica precisa ter:</p>
+<ol><li>um <strong>portfólio de negócios</strong> (Business Manager) próprio;</li><li>uma <strong>conta de anúncios</strong> dentro dele;</li><li>a <strong>forma de pagamento da doutora</strong> cadastrada <strong>nessa conta</strong>;</li><li>a <strong>Revon adicionada como parceira</strong>, com acesso à conta de anúncios.</li></ol>
+<p><strong>Quem paga continua sendo ela.</strong> Isto não é a Revon pagando mídia da cliente: é o cartão dela preso a uma conta que a gente enxerga, em vez de uma conta que some.</p>
+<p>⚠️ <strong>O comportamento padrão do aplicativo, que não é erro dela:</strong> a doutora aperta &quot;Impulsionar&quot; no celular, o Instagram não encontra conta de anúncios ligada, cria uma na hora, sozinho, vinculada ao perfil pessoal dela, e pede o cartão.</p>
+<p><strong>Conferido em fonte oficial, 17/08/2026.</strong> Isso não é descuido de quem aperta. A Meta publica o impulsionamento criado <strong>sem</strong> conta de anúncios como um dos dois caminhos previstos: ele &quot;pode ser criado ligado a uma conta de anúncios do Facebook&quot; ou sem ela, e a escolha muda forma de pagamento e configurações. https://help.instagram.com/814425323514595</p>
+<p>Duas consequências, e nenhuma delas muda a regra:</p>
+<p><strong>(a) Fechar a corrente é pré-requisito com prazo, e não aviso.</strong> Os quatro itens acima ficam prontos <strong>antes de qualquer conversa sobre impulsionar</strong> com a clínica, e não como recomendação a ser lembrada na hora certa. Enquanto a corrente estiver aberta, o padrão do aplicativo vence, porque o padrão não depende de ninguém errar.</p>
+<p><strong>(b) O texto que vai para cliente muda de forma.</strong> Sai &quot;não faça isso&quot;. Entra <strong>&quot;o aplicativo faz assim por padrão, então a gente resolve antes&quot;</strong>. A primeira frase põe culpa em quem não errou e ainda deixa a corrente aberta; a segunda descreve a plataforma e dá à Revon uma tarefa com prazo.</p>
+<p>A Regra 1 continua igual. Mudam a moldura e a posição dela na sequência.</p>
+<h3 id="regra-2-o-instagram-profissional-esta-ligado-a-pagina-e-a-pagina-esta-no-mesmo-portfolio">Regra 2 · O Instagram profissional está ligado à Página, e a Página está no mesmo portfólio</h3>
+<p>O impulsionamento só encontra a conta de anúncios certa se a corrente estiver inteira:</p>
+<blockquote><p><strong>Instagram profissional → Página do Facebook → portfólio de negócios → conta de anúncios</strong></p></blockquote>
+<p>Se qualquer elo faltar, o Instagram improvisa, e improviso do Instagram é a conta pessoal da Regra 1.</p>
+<p>Além disso, é essa mesma ligação que permite ler o desempenho do conteúdo dela (alcance, visualizações, salvamentos, compartilhamentos). Sem ela, o HOF não enxerga nem o pago nem o orgânico.</p>
+<p>⚠️ A conta do Instagram precisa ser <strong>profissional</strong> (Empresa ou Criador). Perfil pessoal não impulsiona e não devolve número nenhum.</p>
+<h3 id="regra-3-o-destino-do-impulsionamento-e-sempre-o-whatsapp">Regra 3 · O destino do impulsionamento é SEMPRE o WhatsApp</h3>
+<p><strong>Esta é a regra mais importante do documento, e a mais fácil de errar.</strong></p>
+<p>Quando ela impulsiona, o Instagram pergunta para onde mandar quem clicar. As opções são, em geral: o perfil dela, o site, o Direct do Instagram, ou o WhatsApp.</p>
+<p><strong>Só o destino WhatsApp faz o lead entrar no HOF.</strong></p>
+<p>O motivo é direto: o HOF escuta o WhatsApp. Quando alguém clica num anúncio com destino WhatsApp e manda a primeira mensagem, a Meta carimba essa mensagem com a identificação do anúncio que a trouxe. É isso que faz o HOF saber que aquela paciente veio de um impulsionamento, e de qual.</p>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> O carimbo existe, e tem um pré-requisito. A fonte oficial diz que a primeira mensagem chega com um objeto <code>referral</code>, com <code>source_id</code> (o ID do anúncio), <code>source_url</code>, <code>source_type</code>, <code>body</code>, <code>headline</code>, <code>media_type</code>, <code>image_url</code>, <code>video_url</code>, <code>thumbnail_url</code> e <code>ctwa_clid</code>, e que esse <code>referral</code> chega <strong>como propriedade da notificação de mensagem recebida via webhook, o que exige a Cloud API</strong>. https://developers.facebook.com/documentation/business-messaging/whatsapp/webhooks/reference/messages/text Número que existe <strong>só no aplicativo do WhatsApp Business, sem Cloud API</strong>, não recebe webhook e portanto não recebe carimbo.  <strong>Isso não é o caso das nossas clínicas.</strong> Elas operam em <strong>CoEx</strong>, em que o número está na Cloud API e o aplicativo continua existindo naquele mesmo número. <strong>Em CoEx o webhook dispara, e o requisito está satisfeito.</strong> É justamente por isso que CoEx é o modo padrão da operação, e não uma exceção a conferir depois.  Nota lateral, que não muda nada do acima: <code>[NÃO ENCONTRADO]</code> confirmação oficial de que o aplicativo mostre à clínica, na tela dele, uma etiqueta ou um cartão com o anúncio de origem. Procurado na Central de Ajuda do WhatsApp, com três páginas tentadas e redirecionamento em todas. <strong>Não afirmar isso a cliente sem fonte.</strong> O carimbo que a operação usa é o do webhook, lido no sistema, e não depende daquela tela.  Duas consequências que valem para as quatro regras: o <code>ctwa_clid</code> é <strong>omitido quando o posicionamento do anúncio é o Status do WhatsApp</strong> (mesma fonte); e a janela de atribuição do lado do WhatsApp é de <strong>sete dias</strong>, ou seja, a pessoa pode iniciar a conversa até sete dias depois de interagir com o anúncio e a Meta ainda recebe os dados dessa interação. https://faq.whatsapp.com/785493319976156</p></blockquote>
+<p>Se o destino for <strong>perfil, site ou Direct</strong>, o que acontece é:</p>
+<ul><li>a paciente não cai no WhatsApp da clínica;</li><li>a triagem não roda;</li><li>a ficha não nasce;</li><li><strong>ela não aparece em lugar nenhum do sistema.</strong></li></ul>
+<p>Não é relatório com furo. É paciente perdida. Impulsionamento com destino errado é dinheiro gasto para gerar contato que ninguém atende.</p>
+<h3 id="regra-4-o-whatsapp-do-impulsionamento-e-o-mesmo-numero-que-o-hof-atende">Regra 4 · O WhatsApp do impulsionamento é o mesmo número que o HOF atende</h3>
+<p>Consequência da Regra 3, e igualmente obrigatória. Se o número escolhido no impulsionamento for outro, o celular da recepção, um número antigo, o pessoal da doutora, o resultado é o mesmo da Regra 3 quebrada: mensagem chegando onde o sistema não escuta.</p>
+<p><strong>Conferir o número na hora de configurar o impulsionamento faz parte do processo.</strong> Toda vez, não só na primeira.</p>
+<hr>
+<h2 id="o-que-passa-a-ser-possivel-com-as-quatro-regras-de-pe">O que passa a ser possível com as quatro regras de pé</h2>
+<table><thead><tr><th>A doutora consegue ver</th><th>De onde sai</th></tr></thead><tbody><tr><td>Quanto investiu em impulsionamento no período</td><td>conta de anúncios</td></tr><tr><td>Quantas vezes o conteúdo apareceu e quantos cliques teve</td><td>conta de anúncios</td></tr><tr><td><strong>Qual post trouxe quais pacientes</strong></td><td>o carimbo do anúncio na primeira mensagem, entregue por webhook da Cloud API</td></tr><tr><td>Quanto cada post faturou, e o retorno sobre o que gastou</td><td>carimbo + CRM</td></tr><tr><td>Alcance, visualizações, salvamentos e compartilhamentos de cada conteúdo</td><td>Instagram</td></tr><tr><td>Quanto o post rendeu no total, somando orgânico e impulsionado</td><td>Instagram</td></tr><tr><td>Perfil de quem alcança e de quem engaja (idade, gênero, cidade)</td><td>Instagram</td></tr></tbody></table>
+<p>O ganho que vale sublinhar é o da terceira linha: <strong>saber qual vídeo virou paciente.</strong> É o que fecha o ciclo entre o posicionamento que a gente trabalha com ela e o resultado que ela cobra da gente. Nenhuma outra métrica faz isso.</p>
+<hr>
+<h2 id="o-que-continua-impossivel-e-e-melhor-a-gente-dizer-antes">O que continua impossível, e é melhor a gente dizer antes</h2>
+<p>Honestidade aqui evita promessa que não se cumpre depois:</p>
+<ul><li><strong>Impulsionamento feito por fora do arranjo não volta.</strong> Se ela impulsionar pelo cartão solto, aquele gasto não entra no sistema, e não tem como recuperar depois.</li><li><strong>Lead de Direct não existe para nós.</strong> Quem manda mensagem no Direct do Instagram não passa pelo HOF. Se ela quiser trabalhar Direct, isso é operação manual dela, fora do sistema.</li><li><strong>O número de hoje não é final.</strong> Ler resultado no dia seguinte ao impulsionamento é ler dado que ainda vai mudar. Passados 28 dias ele congela.</li></ul>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> Um atraso de 48 horas nos números do Instagram é <code>[NÃO ENCONTRADO]</code> em fonte oficial: procurado na documentação de Insights da plataforma Instagram e nas páginas de insights do <code>help.instagram.com</code>, sem resultado. <strong>A frase não vai para cliente enquanto não houver fonte ou medição nossa.</strong> O que a fonte oficial sustenta é outra coisa, e chega a uma conclusão operacional parecida por caminho diferente: <em>&quot;Insights refresh every 15 minutes and do not change after 28 days of being reported&quot;</em> e <em>&quot;Insights metrics may continue to update for a couple of days after an ad has completed&quot;</em>. https://developers.facebook.com/docs/marketing-api/insights/best-practices/ Do lado do Instagram, o que existe publicado é que os dados de insights ficam disponíveis por 90 dias e que várias métricas são declaradas estimadas e em desenvolvimento. https://help.instagram.com/1533933820244654</p></blockquote>
+<ul><li><strong>Perfil de audiência só a partir de mais de 100 contas alcançadas.</strong> Abaixo disso a Meta não devolve demografia, para proteger a privacidade de quem é pouca gente.</li></ul>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> O corte não é de seguidores, e a diferença importa. A fonte oficial diz que a demografia de público exige períodos predefinidos e <strong>mais de 100 contas alcançadas</strong>, ou engajadas no recorte de contas engajadas, e não é limite de seguidores. https://help.instagram.com/1533933820244654 e https://help.instagram.com/788388387972460/ O limite por seguidores existe, mas para outra coisa: as tendências de total de seguidores só aparecem &quot;quando eles totalizarem pelo menos 100 pessoas&quot; (mesma segunda fonte), e na API <em>&quot;Some metrics are not available on Instagram accounts with fewer than 100 followers.&quot;</em> https://developers.facebook.com/docs/instagram-platform/insights Na prática é melhor notícia do que a redação antiga: impulsionamento compra alcance, e uma clínica com 60 seguidores que impulsiona um Reel passa dos 100 alcançados no primeiro dia e enxerga a demografia.</p></blockquote>
+<ul><li><strong>O Instagram diz quanto custou aquele post, e não devolve isso para sistema nenhum.</strong> Quem está com o celular na mão vê o custo. Um sistema que precise ler o número de fora e cruzar com paciente continua dependendo da conta de anúncios, o que devolve tudo à Regra 1.</li></ul>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> O Instagram sozinho diz quanto custou. Ao turbinar, o Instagram dá acesso a insights do anúncio com <strong>resultados de metas do anúncio</strong>, <strong>custo por meta do anúncio</strong> e <strong>gasto</strong>, além das métricas de conteúdo, e turbinar exige conta profissional. https://help.instagram.com/788388387972460/ A Regra 1 continua de pé, por outro motivo: o que o app mostra é para o olho humano naquele aparelho, não para leitura de sistema. <code>[NÃO ENCONTRADO]</code> &quot;Impressões&quot;, &quot;cliques no link&quot; e &quot;custo por resultado&quot; como nomes de métrica dentro do app: procurado em três páginas de insights do Instagram. Esses três continuam sendo da conta de anúncios.</p></blockquote>
+<ul><li><strong>Não existe teto diário de verba, e o teto que dá para prometer é o semanal.</strong> A Meta pode gastar acima do valor diário combinado num dia e compensar dentro da mesma semana.</li></ul>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> Este documento não afirmava um teto diário com todas as letras, e vendia um: o item 3 do treinamento pedia &quot;orçamento e prazo definidos&quot;, e o roteiro de conferência fixava um teste de R$ 5 como se o mínimo fosse conhecido. A fonte oficial diz que a Meta pode gastar <strong>até 75% acima do orçamento diário</strong> num dia, ou seja, um teto diário de 175% do valor, e que o teto da semana é sete vezes o diário, contando de domingo a sábado. https://pt-br.facebook.com/business/help/190490051321426 Os <strong>25%</strong> que costumam ser citados são de outro caso, na mesma fonte: quando o conjunto começa ou o orçamento muda no meio da semana, o gasto restante daquela semana pode subir até 25% do diário. Na prática, quem combina R$ 20 por dia com a doutora precisa saber que um dia pode sair R$ 35. Sobre o piso: <strong>não há valor mínimo em reais publicado.</strong> A Meta diz que o artigo usa dólar e que &quot;os orçamentos mínimos podem variar de acordo com o país e o objetivo&quot;, sem tabela por país. https://pt-br.facebook.com/business/help/203183363050448 <code>[NÃO ENCONTRADO]</code> se o orçamento do turbinado é diário ou total: a documentação da Meta se contradiz, com o fluxo do Instagram perguntando &quot;quanto você deseja gastar diariamente&quot; (https://pt-br.facebook.com/business/help/2090822074310288) e a página que compara turbinado e anúncio descrevendo o orçamento como total, &quot;quanto deseja gastar durante a campanha&quot; (https://pt-br.facebook.com/business/help/317083072148603). Isso não se decide na mesa, só na tela.</p></blockquote>
+<hr>
+<h2 id="roteiro-de-conferencia-antes-de-liberar-a-clinica-para-impulsionar">Roteiro de conferência, antes de liberar a clínica para impulsionar</h2>
+<p>Marcar item por item. Enquanto tiver um aberto, <strong>a clínica não impulsiona.</strong></p>
+<ul><li>[ ] Instagram da clínica é conta <strong>profissional</strong> (Empresa ou Criador)</li><li>[ ] Página do Facebook existe e está <strong>ligada ao Instagram</strong></li><li>[ ] <strong>Portfólio de negócios</strong> da clínica criado</li><li>[ ] Página <strong>dentro</strong> do portfólio</li><li>[ ] <strong>Conta de anúncios</strong> criada dentro do portfólio</li><li>[ ] <strong>Fuso horário e moeda</strong> da conta de anúncios conferidos <strong>no momento da criação</strong>: fuso de Brasília, moeda em real. Os dois se definem quando a conta nasce e <strong>não se corrigem depois em conta já criada</strong>. O fuso desloca todo relatório diário, porque a Meta reporta no fuso da conta e não no de quem olha: <em>&quot;We report ad insights data in the ad account&#x27;s timezone.&quot;</em> https://developers.facebook.com/docs/marketing-api/insights/best-practices/ A moeda é <code>[SUG]</code>: mesma propriedade e mesma irreversibilidade aparente, mas não conferida em fonte oficial nem na tela.</li><li>[ ] <strong>Forma de pagamento da doutora</strong> cadastrada na conta de anúncios</li><li>[ ] <strong>Revon adicionada como parceira</strong>, com acesso à conta de anúncios</li><li>[ ] Número do <strong>WhatsApp que o HOF atende</strong> conectado ao Instagram</li><li>[ ] Esse mesmo número está na <strong>Cloud API do WhatsApp</strong>, dentro do portfólio da clínica. <strong>CoEx satisfaz o requisito</strong>, e é como as clínicas operam: em CoEx o número está na Cloud API, o aplicativo continua existindo naquele número e o webhook dispara. Sem Cloud API não há webhook, e sem webhook não há carimbo (ver a correção da Regra 3)</li><li>[ ] <strong>Teste real:</strong> um impulsionamento de verba mínima, destino WhatsApp, e conferir se a mensagem chega no HOF carimbada com o anúncio</li></ul>
+<blockquote><p><strong>Conferido em fonte oficial.</strong> A Meta <strong>não publica valor mínimo em reais</strong>, então qualquer número em real aqui é aposta e não valor conferido. Abrir a tela, anotar o mínimo que ela aceita e fixar o número aqui depois.  A leitura desse teste também muda: ele só prova a corrente inteira <strong>se for lido no sistema, e não no celular</strong>. Conferir no aplicativo não distingue uma paciente carimbada de uma não carimbada, porque <code>[NÃO ENCONTRADO]</code> fonte oficial dizendo o que o aplicativo comum mostra do anúncio de origem.</p></blockquote>
+<p>O último item não é zelo excessivo. É o único que prova que a corrente inteira está fechada, e todos os outros podem estar marcados e ainda assim haver um elo solto.</p>
+<hr>
+<h2 id="as-duas-sessoes-de-teste-que-faltam">As duas sessões de teste que faltam</h2>
+<p>O que este documento ainda não sabe cabe em <strong>duas sessões</strong>, e não em quatro frentes soltas. Nenhuma das duas se resolve na mesa: as duas são tela.</p>
+<p><strong>A ordem é B antes de A, e é de propósito.</strong> A Sessão A decide a redação de uma frase. A Sessão B decide se a atribuição de peça para paciente <strong>existe</strong>, e sem ela a medição da frente de impulsionamento inteira não tem como ser feita, o que atinge relatório, balanço e indicador de ritmo. É o teste mais caro de errar e é barato de rodar, e já está pendente com o Thiago de todo jeito. A razão está escrita aqui porque, sem ela registrada, a próxima pessoa roda a A primeiro só porque a A aparecia antes.</p>
+<h3 id="sessao-b-primeira-um-impulsionamento-de-verba-minima-destino-whatsapp-numero-em-coex-dois-aparelhos">Sessão B · Primeira. Um impulsionamento de verba mínima, destino WhatsApp, número em CoEx, dois aparelhos</h3>
+<ol><li><strong>O carimbo.</strong> A primeira mensagem chega com o objeto <code>referral</code>, lido <strong>no sistema e não no celular</strong>.</li><li><strong>Os casos de borda:</strong> clique sem envio; clique no desktop; aparelho sem WhatsApp; paciente que apaga a mensagem pronta antes de mandar.</li><li><strong>Se o objeto <code>referral</code> chega com os mesmos campos em CoEx e em Cloud API pura.</strong> É a única coisa em aberto sobre o CoEx. Que o webhook dispara em CoEx já está resolvido, e está afirmado na Regra 3 e no roteiro de conferência.</li></ol>
+<p>Esta é a <strong>mesma sessão do teste já pendente com o Thiago</strong>, e não uma sessão a mais.</p>
+<h3 id="sessao-a-depois-sem-gastar-verba-numa-conta-de-anuncios-que-ja-existe">Sessão A · Depois. Sem gastar verba, numa conta de anúncios que já existe</h3>
+<ol><li><strong>Legibilidade do impulsionamento no Gerenciador.</strong> Um post impulsionado pelo app aparece lá com <strong>gasto, impressões e cliques, dia a dia</strong>? É o que sustenta a promessa &quot;a gente lê tudo&quot; da Regra 1, e segue <code>[NÃO ENCONTRADO]</code> em fonte oficial.</li><li><strong>O mínimo em reais.</strong> Fixa o valor do último item do roteiro acima, que hoje está em aberto. <strong>Não bloqueia a Sessão B:</strong> quem roda a B vê o mínimo na própria tela de impulsionamento, na hora de publicar. A Sessão A é o que transforma esse número em item de roteiro, para não depender de alguém lembrar.</li><li><strong>Orçamento do turbinado, diário ou total.</strong> A documentação da Meta se contradiz nas duas páginas citadas na correção sobre verba. Só a tela resolve.</li></ol>
+<h3 id="o-que-saiu-da-fila-de-teste">O que saiu da fila de teste</h3>
+<p>O que o <strong>aplicativo comum do WhatsApp Business</strong> mostra do anúncio de origem saiu da fila e fica só como nota neste documento. As clínicas operam <strong>sempre em CoEx</strong>, então esse caso não é delas. A nota continua valendo para uma coisa só: não afirmar nada sobre o que aquele aplicativo mostra em material de venda, já que segue <code>[NÃO ENCONTRADO]</code> em fonte oficial.</p>
+<hr>
+<h2 id="o-que-a-revon-precisa-ter-guardado-de-cada-clinica">O que a Revon precisa ter guardado de cada clínica</h2>
+<p>Para o sistema buscar os números sozinho, precisamos registrar, por clínica:</p>
+<table><thead><tr><th>O quê</th><th>Para quê</th></tr></thead><tbody><tr><td>Identificador da <strong>conta de anúncios</strong></td><td>buscar investimento, aparições e cliques</td></tr><tr><td>Identificador da <strong>conta do Instagram</strong> profissional</td><td>buscar o desempenho do conteúdo</td></tr><tr><td><strong>Autorização de acesso</strong> concedida pela clínica</td><td>é o que permite as duas buscas acima</td></tr></tbody></table>
+<p>É o mesmo tipo de acesso que a gente já pede para o WhatsApp. Não é acesso a mensagem privada, nem a Direct, nem a dado pessoal de seguidor: é leitura de número de desempenho.</p>
+<hr>
+<h2 id="o-treinamento-que-fica-com-a-doutora">O treinamento que fica com a doutora</h2>
+<p>Três frases. Se ela sair da call sabendo só isso, está resolvido:</p>
+<ol><li><strong>Impulsione sempre pela conta de anúncios da clínica</strong>, nunca aceitando o cartão que o Instagram sugere na hora.</li><li><strong>O destino é sempre WhatsApp</strong>, e sempre o número da clínica.</li><li><strong>Um post por vez, com prazo definido e verba combinada por semana</strong>, nunca por dia, para dar para comparar um conteúdo com outro depois. O teto que a plataforma cumpre é o semanal: num dia isolado a Meta pode gastar até 75% acima do valor diário e compensar na mesma semana. https://pt-br.facebook.com/business/help/190490051321426</li></ol>
+<hr>
+<p><em>Rodapé original, de 16/08/2026, mantido como registro histórico: &quot;Documento provisório, mora em <code>04-temp/</code> conforme a regra de arquivo do repositório. Não é lei e não deve ser citado como autoridade. Serve para alinhar com a Ellen a base operacional antes de a adequação da tela entrar na fila.&quot;</em></p>
+<p><strong>Estado atual, 17/08/2026.</strong> O documento foi incorporado a este repositório, mora em <a href="base-meta-instagram.html"><code>operacao/base-meta-instagram.md</code></a> e <strong>é fonte do playbook dos 90 dias</strong>, junto de <code>briefing-90-dias.md</code> e <code>grove-carnegie-90-dias.md</code>. As quatro regras e o roteiro de conferência viraram o checkpoint obrigatório da semana 1, no passo 7.1. A ressalva do rodapé original sobre não ser autoridade não vale mais, com a exceção registrada na nota do topo.</p>
+</main>
+</body>
+</html>

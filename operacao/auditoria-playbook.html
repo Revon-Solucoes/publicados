@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auditoria do playbook dos 90 dias</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Auditoria do playbook dos 90 dias</h1></header>
+<p>STATUS: VIGENTE, auditoria da noite de 18 para 19/08/2026 Autor: Claude Code, sob delegação da Ellen | 2026-08-19</p>
+<p>O que se conferiu: se o playbook e os documentos que ele usa descrevem o produto atual, e se as fontes que o briefing declara foram de fato usadas.</p>
+<p>Três blocos, e a separação entre eles é o que importa: <strong>o que eu corrigi</strong>, <strong>o que eu decidi</strong> e <strong>o que só a Ellen decide</strong>.</p>
+<h2 id="como-esta-auditoria-foi-feita">Como esta auditoria foi feita</h2>
+<p>Sete auditores independentes leram o <em>Onboarding Orquestrado</em> capítulo a capítulo contra a fase correspondente do playbook. Quatro auditaram defasagem em treze documentos. Três leram os demais livros declarados. Cada um recebeu instrução de ser severo e de não inventar correspondência.</p>
+<p><strong>Duas limitações declaradas.</strong> O PDF do <em>Onboarding Orquestrado</em> extrai com cerca de 85% de fidelidade, perdendo a letra &quot;a&quot; e acentos: serve para dizer o que o livro prescreve, não para citação literal. E o contrato foi deliberadamente excluído como fonte, a pedido da Ellen.</p>
+<hr>
+<h1 id="o-que-ja-foi-aplicado-em-19-08">O que já foi aplicado, em 19/08</h1>
+<p>Quatro dos seis livros declarados passaram de &quot;não sustenta&quot; ou &quot;sustenta em parte&quot; para sustentado, com a página de cada afirmação conferida no PDF antes de escrever.</p>
+<table><thead><tr><th>Livro</th><th>O que entrou</th><th>Onde</th></tr></thead><tbody><tr><td>Falconi</td><td>item de controle e item de verificação, com o mapa de qual causa alimenta qual resultado, e o item prioritário eleito no gate do dia 30</td><td>seção T.7, passos A.4, A.6, A.8, G.30, G.60</td></tr><tr><td>Falconi</td><td>anomalia nos dois níveis: o desvio do dia, relatado e agradecido, e a crônica, que escala</td><td>seção T.3, passo A.2</td></tr><tr><td>Grove</td><td>a curva de supervisão por bloco, com a queda de maturidade na semana 3 e a regra de só reduzir depois de maturidade no volume atual</td><td>seção T.8, passos A.2, A.3, 4.5</td></tr><tr><td>Carnegie</td><td>os quatro princípios, com a troca do &quot;mas&quot; pelo &quot;e&quot; e a boa reputação para zelar</td><td>seção T.5, passos A.3, A.4, A.8, 4.5</td></tr><tr><td>Goldratt</td><td>a definição de restrição, a hora perdida no gargalo, a flutuação em eventos dependentes, e o segundo candidato a restrição, que é a agenda da clínica</td><td>seção T.4, passo G.30</td></tr><tr><td>Ries e Trout</td><td>a grade de atributos no dever de casa, e as duas perguntas de autoridade externa</td><td><code>10-roteiro-posicionamento.md</code>, dever de casa, abertura e E1</td></tr><tr><td>Donna Weber</td><td>o plano de sucesso, com as nove seções, nascendo na venda e atualizado todo mês</td><td>passo V.1, item 5 de <code>7-modelos-internos.md</code>, passos 0.3, 0.5 e A.12</td></tr><tr><td>Donna Weber</td><td>o primeiro valor fixado com a cliente, nas palavras dela</td><td>passo 1.12, e amarrado em A.6, A.12 e G.30</td></tr><tr><td>Donna Weber</td><td>passagem de bastão separada do kickoff, com quem vendeu presente</td><td>passos 0.3 e 0.5, item 1 de <code>6-mensagens-implantacao.md</code></td></tr></tbody></table>
+<p><strong>Duas correções que vieram junto.</strong> O crédito de Carnegie estava em Sylvia Ann Hewlett nos passos A.4 e A.8, e agora cada regra aponta para o autor que a sustenta. E saiu de A.4 e T.5 a cláusula de contrato usada como argumento, pela regra de que o contrato não é fonte para o playbook.</p>
+<p><strong>Os três mecanismos de Donna Weber entraram em 19/08</strong>, depois de a Ellen decidir os três pontos que dependiam dela. Na pergunta da passagem de bastão ela decidiu seguir a fonte, contra a minha recomendação de manter as duas reuniões juntas.</p>
+<p><strong>Os onze documentos que não citavam fonte foram tratados em 19/08</strong>, e o resultado está em <a href="fontes-por-documento.html"><code>operacao/fontes-por-documento.md</code></a>, que é o mapa de uma linha por documento. A regra que ficou: documento interno cita com página, material entregue à cliente tem a ciência aplicada e a citação no passo do playbook, documento técnico não tem fonte de gestão, e onde não há fonte está escrito que não há.</p>
+<p><strong>O que ficou declarado como sem fonte externa</strong>, e é a parte honesta desta auditoria: o texto das oito mensagens de social selling, os sete movimentos da consulta com a matriz de objeções, o conteúdo técnico de gravação, os blocos E4 e E6 do roteiro de posicionamento, e o ritmo de edição em segundos. Em todos, quem valida é a auditoria semanal com conversa de clínica real.</p>
+<hr>
+<h1 id="bloco-1-o-que-eu-corrigi">Bloco 1 · O que eu corrigi</h1>
+<p>Erro verificável, com fonte para o conserto. Tudo commitado.</p>
+<h2 id="produto-que-a-revon-nao-entrega-mais">Produto que a Revon não entrega mais</h2>
+<p>A oferta mudou em 11/08/2026. O produto atual é posicionamento, conteúdo com impulsionamento de parte das peças, social selling, sistema Revon HOF e treinamento comercial. Cinco documentos ainda descreviam o anterior.</p>
+<table><thead><tr><th>Documento</th><th>O que dizia</th><th>O que passou a dizer</th></tr></thead><tbody><tr><td><code>2-dados-do-cliente.md</code></td><td>coluna Bloqueia citando &quot;gate do dia 5&quot; e &quot;a subida no dia 5&quot;</td><td>o portão que cada linha trava</td></tr><tr><td><code>2-dados-do-cliente.md</code></td><td>&quot;A estrutura de campanha&quot;, &quot;A campanha&quot;, &quot;O teto da campanha&quot;</td><td>verba de impulsionamento, impulsionamento, teto de demanda</td></tr><tr><td><code>5-roteiro-apresentacao-planejamento.md</code></td><td>&quot;sua campanha sobe no dia [DATA]&quot;</td><td>&quot;seu impulsionamento começa no dia [DATA]&quot;</td></tr><tr><td><code>metodo-FACE-revon-hof.md</code></td><td>&quot;Gestão avançada de tráfego pago&quot;</td><td>impulsionamento de parte do conteúdo já publicado</td></tr><tr><td><code>metodo-FACE-revon-hof.md</code></td><td>&quot;Gestão dos anúncios&quot;, &quot;Otimização das campanhas&quot;</td><td>seleção do que impulsionar e acompanhamento da resposta</td></tr><tr><td><code>9-conteudo-e-edicao.md</code></td><td>&quot;harmonização orofacial&quot; em texto próprio</td><td>&quot;harmonização facial&quot;, conforme a decisão de 15/08</td></tr></tbody></table>
+<p>A frase do roteiro da apresentação é a mais grave das seis, porque era dita em voz alta para a cliente e prometia uma entrega que não existe.</p>
+<h2 id="a-tabela-de-fontes-do-briefing">A tabela de fontes do briefing</h2>
+<p>Ela declarava seis livros como fonte do playbook, sem dizer que três deles não sustentam nada do que está escrito. Passou a ter uma coluna dizendo o que sustenta e o que não, apurado livro a livro.</p>
+<p>Junto, o briefing afirmava como fato que os dados do impulsionamento são lidos no Gerenciador de Anúncios. O documento técnico <code>base-meta-instagram.md</code> marca isso como não confirmado em fonte oficial, e o briefing passou a dizer o mesmo.</p>
+<h2 id="o-guia-de-conteudo-ligado-a-base-propria">O guia de conteúdo, ligado à base própria</h2>
+<p>A seção de gravação já tinha lastro no corpus de Reels. As de roteiro, edição e publicação, cerca de 60% do documento, eram conhecimento genérico, enquanto a <code>pesquisa-harmonizapro.md</code> já tinha medido estrutura de roteiro, tipos de gancho, CTA por objetivo e a diferença de audiência entre os dois perfis.</p>
+<p>Entrou o mapa de onde cada resposta está, e não o conteúdo, com a ressalva que decide o uso: <strong>o corpus é de contas que falam com donos de clínica, e a clínica fala com paciente.</strong> Aproveita-se a estrutura e o tipo, nunca a frase.</p>
+<h2 id="residuo-de-historico-no-playbook">Resíduo de histórico no playbook</h2>
+<p>Duas menções ao desenho antigo escaparam da limpeza de 18/08, por falha de método minha: busquei &quot;extinto&quot; no masculino e não peguei &quot;extinta&quot;, e usei busca por linha num texto onde a expressão quebrava em duas. As duas saíram, e o método de busca agora normaliza o texto antes de procurar.</p>
+<h2 id="o-que-foi-auditado-e-esta-correto">O que foi auditado e está correto</h2>
+<p>Não precisou de nada: <code>3-roteiro-sessao-diagnostica-dia-1.md</code>, <code>6-mensagens-implantacao.md</code>, <code>7-modelos-internos.md</code>, <code>8-perfil-e-social-selling.md</code>, <code>13-modelos-rotinas.md</code> e <code>14-gates-garantia-comunicacoes.md</code>.</p>
+<p>O roteiro da diagnóstica é o mais importante dessa lista, porque é lido na frente da cliente.</p>
+<hr>
+<h1 id="bloco-2-o-que-eu-decidi">Bloco 2 · O que eu decidi</h1>
+<p>Decisões que tomei sozinho, sob delegação, e que a Ellen pode reverter uma a uma.</p>
+<ul><li><strong>Regerei os HTML de <code>2-dados-do-cliente</code> e <code>5-roteiro-apresentacao</code> no estilo do MIV.</strong> Eles estavam no estilo anterior ao brandbook. O motivo é que HTML divergindo do <code>.md</code> é pior que estilo novo. Reverter é regerar com o template antigo.</li><li><strong>Não superei o <code>4-modelo-documento-interno.md</code>.</strong> Ele é de 08/08, tem 14 seções com estrutura de campanha, landing page e gate do dia 5, e foi substituído na prática pelo <code>11-documento-interno.md</code>, de 18/08, com 5 seções. Mas ele guarda as cinco réguas com prazos, os scripts, o plano de treinamento e o escopo de usuários, que não encontrei em outro lugar. Superá-lo hoje perderia isso.</li><li><strong>Não reescrevi a seção 2 do <code>estrategia-campanhas-hof.md</code>.</strong> São 65 linhas descrevendo estrutura de campanha de tráfego, e reescrevê-las exige decidir como a Revon opera o impulsionamento, o que é produto e não conserto. O documento já tem nota própria avisando.</li></ul>
+<hr>
+<h1 id="bloco-3-o-que-so-a-ellen-decide">Bloco 3 · O que só a Ellen decide</h1>
+<p>Aqui está o resultado da auditoria de fonte, e ele é duro.</p>
+<h2 id="o-achado-que-atravessa-tudo-o-plano-de-sucesso">O achado que atravessa tudo: o plano de sucesso</h2>
+<p>O termo aparece <strong>51 vezes</strong> no <em>Onboarding Orquestrado</em> e <strong>zero vezes</strong> no repositório inteiro.</p>
+<p>No livro ele não é um artefato entre outros: é o que costura as seis etapas. Nasce com o vendedor durante a venda, com seções fixas (visão do cliente, resultados desejados, o que foi comprado, plano de implementação, funções e responsabilidades, recursos do cliente, treinamento, riscos, aprovação). É transferido na passagem de bastão, revisado no kickoff, guia a adoção e é atualizado na revisão.</p>
+<p>Sem ele, cada etapa vira evento solto. É o que o playbook tem hoje.</p>
+<p>E ele resolveria, sozinho, o <code>[PERGUNTAR]</code> que ficou aberto na fase 1 sobre quem no comercial é dono do embarque.</p>
+<h2 id="o-segundo-nada-e-definido-com-o-cliente">O segundo: nada é definido com o cliente</h2>
+<p>Não existe &quot;primeiro valor&quot;, que no livro é o momento em que o cliente percebe benefício real, fixado <strong>em conjunto com ele</strong>. O playbook tem Portão 1, Copiloto no ar e Portão 2, e nenhum foi escolhido pelo que a dona da clínica considera sucesso. O livro nomeia esse erro: login não é vitória rápida.</p>
+<p>Não há nenhuma vitória rápida desenhada entre o dia 0 e o Portão 2.</p>
+<h2 id="fase-por-fase">Fase por fase</h2>
+<table><thead><tr><th>Fase</th><th>O que o livro prescreve</th><th>O que existe</th></tr></thead><tbody><tr><td>1 Embarque</td><td>vender o valor do onboarding antes de fechar a venda, e iniciar o plano de sucesso</td><td>só o alerta de não prometer o que não se entrega</td></tr><tr><td>2 Passagem de bastão</td><td><strong>duas</strong> reuniões: uma interna com o vendedor, uma com o cliente onde o vendedor passa o bastão ao vivo</td><td>nenhuma reunião: escuta da gravação e ligação da coordenação sozinha</td></tr><tr><td>3 Kickoff</td><td>plano de sucesso revisado, plano de projeto compartilhado, papéis dos dois lados, frequência de reuniões</td><td>sessão diagnóstica, sem plano e sem cronograma acordado</td></tr><tr><td>4 Adoção</td><td>vitórias rápidas, gestão de mudança em três níveis, campanha de comunicação</td><td>oito rotinas operacionais</td></tr><tr><td>5 Revisão</td><td>reunião <strong>com o cliente</strong> ao fim do onboarding, com pauta fixa</td><td>calibração técnica sem o cliente, no meio dos 90 dias</td></tr><tr><td>6 Expansão</td><td>cinco frentes, incluindo modelo de maturidade do cliente</td><td>consolidação e fechamento</td></tr></tbody></table>
+<p>O livro é explícito, na página 119, que passagem de bastão e kickoff não se fazem na mesma reunião, porque uma trata de relacionamento e metas e a outra de detalhes de implementação. O dia 1 do playbook faz as duas.</p>
+<h2 id="a-contradicao-mais-concreta">A contradição mais concreta</h2>
+<p>O passo E.4 determina que a apuração da garantia no dia 90 é comunicada de forma reativa, só se o cliente perguntar. Dois auditores independentes apontaram como a contradição mais direta com a fonte, cujo princípio central é provar valor de forma proativa e recorrente.</p>
+<p>É decisão registrada da Ellen, com aposta declarada, e o playbook mitiga registrando internamente que o patamar não foi atingido. Não foi tocada.</p>
+<h2 id="o-que-nao-e-falha-e-esta-separado-de-proposito">O que NÃO é falha, e está separado de propósito</h2>
+<ul><li>O livro desaconselha que quem cuida da conta faça a capacitação, e recomenda equipe separada. A Revon não tem esse tamanho.</li><li>Ticket de suporte e biblioteca de autoatendimento são vocabulário de software.</li><li>Adiar a expansão para depois dos 90 dias se sustenta pelo próprio capítulo 9.</li><li>No tratamento do cliente que não adota, o playbook tem instrumento mais forte que o livro, com o gate e o registro de anomalia.</li></ul>
+<h2 id="o-documento-oficial-de-produto-nao-menciona-o-copiloto">O documento oficial de produto não menciona o Copiloto</h2>
+<p><a href="../produto/definicao-produto-assessoria.html"><code>produto/definicao-produto-assessoria.md</code></a> descreve a triagem por IA, mas o Copiloto, que é a outra metade da entrega 4, não aparece em lugar nenhum. Escrever isso é definir produto, não corrigir erro.</p>
+<h2 id="as-outras-fontes-declaradas-no-briefing">As outras fontes declaradas no briefing</h2>
+<p>O <code>briefing-90-dias.md</code> declara seis livros como fonte. O resultado por livro, auditado contra o texto:</p>
+<table><thead><tr><th>Livro</th><th>O que o briefing declara</th><th>Veredito</th></tr></thead><tbody><tr><td>Goldratt, <em>The Goal</em></td><td>onde olhar quando algo não vai bem, e o pulmão</td><td><strong>sustentado</strong></td></tr><tr><td>Falconi, <em>Gerenciamento da Rotina</em></td><td>formato do POP, itens de controle e verificação, anomalia</td><td><strong>parcial</strong></td></tr><tr><td>Ries e Trout, <em>Posicionamento</em></td><td>a entrega de posicionamento ao cliente</td><td><strong>sustentado</strong></td></tr><tr><td>Grove, <em>Alta Performance</em></td><td>curva de supervisão nos 90 dias, e o 1:1</td><td><strong>não sustentado</strong></td></tr><tr><td>Carnegie, <em>Como fazer amigos</em></td><td>rotina de contato, como a CS se apresenta</td><td><strong>parcial</strong></td></tr><tr><td>Donna Weber, <em>Onboarding Orquestrado</em></td><td>o arco cronológico e as etapas</td><td><strong>não sustentado</strong></td></tr></tbody></table>
+<p><strong>Goldratt é a melhor citação de fonte do documento inteiro.</strong> Restrição e pulmão são traduções fiéis de gargalo e buffer: a gravação é o recurso que limita o sistema, e o estoque de seis peças à frente dela existe para a semana ruim da especialista não parar a publicação. O que ficou de fora é a teoria que sustenta o mecanismo, a lógica de flutuação estatística em eventos dependentes, e o mapeamento de um segundo recurso quase-restrito no funil.</p>
+<p><strong>Falconi se sustenta pela metade.</strong> O formato do POP é fiel: cada passo aponta para um procedimento em documento próprio. Mas <strong>item de controle e item de verificação não aparecem uma única vez no playbook</strong>, apesar de o briefing declarar que o formato veio deles. E &quot;anomalia&quot;, no playbook, é gatilho de escalada por reincidência, três semanas seguidas no mesmo ponto; no livro é qualquer desvio do padrão, registrado a cada ocorrência e tratado pela causa raiz. A palavra foi importada, o conceito não.</p>
+<p>O que ficou na mesa, de Falconi: separar indicador de processo de indicador de resultado nas rotinas semanais A.4 e A.8, que já têm tabela pronta para receber isso.</p>
+<h2 id="o-roteiro-de-posicionamento-e-a-parte-mais-bem-fundamentada">O roteiro de posicionamento é a parte mais bem fundamentada</h2>
+<p>Esta era a maior preocupação: definir a posição da cliente com base em método e não em achismo. <strong>O roteiro se sustenta.</strong></p>
+<p>Dos seis blocos de extração, quatro correspondem a conceitos nomeados no Ries e Trout, dois deles quase literais:</p>
+<table><thead><tr><th>Bloco</th><th>No livro</th></tr></thead><tbody><tr><td>E1 · a posição que ela já ocupa</td><td>cap. 19, p.187: começar pelo que o cliente já está disposto a oferecer</td></tr><tr><td>E2 · a escada da cidade</td><td>cap. 4, p.42-44: a escada de produtos na mente, e o degrau de cima</td></tr><tr><td>E3 · o sacrifício</td><td>cap. 24, p.232: &quot;a essência do posicionamento é o sacrifício&quot;</td></tr><tr><td>E5 · a fraqueza estrutural da concorrente</td><td>cap. 20, p.193-196: a estratégia nasce de estudar a concorrência, e a fraqueza tem que ser estrutural</td></tr><tr><td>E4 · o teste dos territórios</td><td>acréscimo da Revon, clínico e regulatório, sem fonte no livro</td></tr><tr><td>E6 · a conta da cidade</td><td>acréscimo da Revon, cálculo de capacidade, sem fonte no livro</td></tr></tbody></table>
+<p>Nenhuma contradição com o livro. Os dois acréscimos são coerentes com ele, e o critério de aceite do E5, que pergunta se a fraqueza sobrevive a &quot;e se ela resolver isso mês que vem&quot;, é exatamente o critério do caso do banco de Nova Jersey.</p>
+<p><strong>Uma divergência entre auditores que eu resolvi conferindo.</strong> O auditor sustentou que o capítulo 23 não trata de posicionar profissional para cliente, e sim de carreira, e que a citação estaria errada de endereço. Fui ao livro: a página 206 tem a frase &quot;Eu sou o melhor advogado de Dallas&quot; e o método de se definir por um conceito único, que é exatamente o que a pesquisa cita. O contexto do capítulo é carreira, mas o material citado existe e se aplica. <strong>A pesquisa não errou.</strong></p>
+<p>O que o livro tem e o roteiro não usa: a pesquisa de diferencial semântico do cap. 19, p.182, que compararia a clínica e as concorrentes em atributos numa escala, e a tática de autoridade externa do cap. 21, p.198, em que a credibilidade vem de um terceiro e não da própria voz.</p>
+<h2 id="grove-a-curva-de-supervisao-nao-existe-no-playbook">Grove: a curva de supervisão não existe no playbook</h2>
+<p>O briefing declara que a &quot;curva de supervisão ao longo dos 90 dias&quot; veio de Grove. O livro sustenta o conceito, com a maturidade aplicável à tarefa e a regra de 1:1 mais frequente com quem é inexperiente. <strong>Mas o playbook não implementa curva nenhuma.</strong> O contato diário do A.2, o telefonema semanal do A.3 e a reunião mensal do A.12 rodam com o mesmo formato e a mesma cadência da semana 2 até o dia 90. A supervisão é constante.</p>
+<p>A curva existe no documento-ponte <code>grove-carnegie-90-dias.md</code>, e não chegou ao processo.</p>
+<h2 id="carnegie-a-pratica-esta-la-com-outro-nome">Carnegie: a prática está lá, com outro nome</h2>
+<p>A substância comportamental está implementada, nos passos A.2, A.3 e A.4 e na seção T.5: abrir pelo que deu certo antes de corrigir, uma correção por vez, nunca no calor da conversa. Mas o playbook não cita Carnegie nenhuma vez, e atribui essas mesmas regras a Sylvia Ann Hewlett, <em>Executive Presence</em>, <strong>que não está na tabela de fontes do briefing</strong>.</p>
+<p>Ou seja: a tabela declara um livro que o documento não cita, e o documento cita um livro que a tabela não declara.</p>
+<h2 id="a-resposta-a-pergunta-que-originou-a-auditoria">A resposta à pergunta que originou a auditoria</h2>
+<p>O playbook **não tem base verificável no *Onboarding Orquestrado***. Ele tem base na operação da Revon e nas decisões registradas em <code>decisoes.md</code>, o que não é pouco, mas não é o que a tabela de fontes do <code>briefing-90-dias.md</code> declara.</p>
+<p>E há uma parte disso que é responsabilidade minha, registrada aqui para não se perder: as sete fases foram escritas em 18/08 a partir da descrição que a Ellen deu na conversa, não do livro. Eu não tinha lido o livro. O resultado foi um documento com o vocabulário certo e os mecanismos ausentes.</p>
+<hr>
+<h1 id="o-que-foi-auditado">O que foi auditado</h1>
+<table><thead><tr><th>Alvo</th><th>Como</th><th>Resultado</th></tr></thead><tbody><tr><td>playbook, 7 fases</td><td>7 auditores, capítulo a capítulo do <em>Onboarding Orquestrado</em></td><td>vocabulário sim, mecanismos não</td></tr><tr><td>6 livros declarados</td><td>leitura contra o playbook</td><td>3 sustentam, 1 parcial, 2 não</td></tr><tr><td>corpus de 340 Reels e 2 podcasts</td><td>contra o guia de conteúdo, e em 19/08 contra o treinamento da secretária</td><td>gravação e roteiro convergem; a prescrição sobre a operação da clínica passou a ser usada</td></tr><tr><td>17 documentos</td><td>defasagem contra o produto de 11/08</td><td>6 corrigidos, 11 vigentes</td></tr><tr><td>inventário de artefatos</td><td>linha a linha contra o disco</td><td>confere inteiro</td></tr></tbody></table>
+<p><strong>Não auditado, e é preciso dizer:</strong> o contrato, por pedido expresso; os documentos de <code>produto/revon-hof/</code>, que são especificação técnica do sistema; e as pesquisas <code>pesquisa-posicionamento-e-conteudo.md</code>, <code>pesquisa-midia-e-ferramentas.md</code> e <code>relatorio-analise-influencers.md</code>, que são fonte e não processo.</p>
+<h1 id="o-que-fazer-em-ordem-de-consequencia">O que fazer, em ordem de consequência</h1>
+<ol><li>~~<strong>Decidir se o plano de sucesso entra.</strong>~~ Decidido e feito em 19/08.</li><li>~~<strong>Decidir o primeiro valor com a cliente.</strong>~~ Decidido e feito em 19/08.</li><li>~~<strong>Separar passagem de bastão de kickoff.</strong>~~ Decidido e feito em 19/08.</li><li>~~<strong>Consolidar <code>4-modelo-documento-interno.md</code></strong>~~ Resolvido em 19/08 por aviso de vigência, e não por fusão: o antigo continua sendo a fonte das cinco réguas e dos scripts, que não têm casa em outro lugar.</li><li>~~<strong>Descrever o Copiloto no documento oficial de produto.</strong>~~ Feito em 19/08, seção 7.3.</li><li>~~<strong>Reescrever a seção 2 do <code>estrategia-campanhas-hof.md</code>.</strong>~~ Feito em 19/08, em cima do impulsionamento.</li><li>~~<strong>Corrigir a atribuição de Carnegie no playbook</strong>~~ Feito em 19/08.</li><li>~~<strong>Decidir a tensão do roteiro de conteúdo.</strong>~~ <strong>A tensão não existe, e o item estava mal formulado por mim.</strong> Conferido em 19/08 no corpus: a fonte do nicho prescreve vídeo roteirizado <strong>e</strong> manda não decorar nem ler, gravando frase por frase, porque transmitir segurança pesa mais que reproduzir o texto. É exatamente o que o guia da Revon já manda, em <code>9-conteudo-e-edicao.md</code> e na orientação de gravação. Os dois lados dizem a mesma coisa: o roteiro é fixo no conteúdo, e a execução não é decorada.</li></ol>
+<p><strong>Não resta item aberto.</strong> O oitavo caiu por erro meu de leitura da fonte, e a correção está na própria linha dele.</p>
+</main>
+</body>
+</html>

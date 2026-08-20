@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roteiro da conversa de posicionamento</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Roteiro da conversa de posicionamento</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-18</p>
+<p>Artefato citado pelo passo 2.0 do playbook <a href="1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a>. Extraído da Parte 6 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>, que continua sendo a fonte do porquê de cada regra. Este arquivo é a condução, não a pesquisa.</p>
+<p><strong>Quando:</strong> dia 2, primeira coisa da manhã. <strong>Duração:</strong> 75 minutos, sem pausa. <strong>Quem conduz:</strong> coordenação. <strong>Quem registra:</strong> CS, em tempo real, porque não há intervalo para passar a limpo depois.</p>
+<h2 id="o-metodo-por-tras-desta-conversa">O método por trás desta conversa</h2>
+<p>**Al Ries e Jack Trout, <em>Posicionamento</em>, edição brasileira em <code>00_FONTE/</code>, lida inteira.** O método está escrito por extenso, com sete passos e critério de aceite em cada um, em <a href="metodo-posicionamento.html"><code>operacao/metodo-posicionamento.md</code></a>. Os seis blocos abaixo extraem a matéria-prima que esses passos precisam.</p>
+<table><thead><tr><th>Bloco</th><th>De onde vem</th></tr></thead><tbody><tr><td>E1 · a posição que ela já ocupa</td><td>cap. 19, começar pelo que o cliente já está disposto a oferecer</td></tr><tr><td>E2 · a escada da cidade</td><td>cap. 4, a escada de produtos na mente, e o degrau de cima</td></tr><tr><td>E3 · o sacrifício</td><td>cap. 24, p. 232, &quot;a essência do posicionamento é o sacrifício&quot;</td></tr><tr><td>E5 · a fraqueza estrutural da concorrente</td><td>cap. 20, a estratégia nasce de estudar a concorrência</td></tr><tr><td>E4 · o teste dos territórios</td><td><strong>acréscimo da Revon</strong>, clínico e regulatório, sem fonte no livro</td></tr><tr><td>E6 · os insumos da conta</td><td><strong>acréscimo da Revon</strong>, coleta para o cálculo de capacidade, sem fonte no livro</td></tr></tbody></table>
+<h3 id="o-que-do-livro-nao-se-transfere-e-e-aqui-que-se-erra">O que do livro NÃO se transfere, e é aqui que se erra</h3>
+<p>Três coisas que o livro celebra e que não valem para clínica de HOF. A íntegra, com as páginas, está em <a href="metodo-posicionamento.html"><code>operacao/metodo-posicionamento.md</code></a>.</p>
+<p><strong>A posição de &quot;número dois&quot; declarada.</strong> O livro elogia a Avis por dizer que era a segunda. Locação de carro é commodity e o cliente não corre risco; <strong>em saúde, dizer-se a segunda lê-se como inferioridade clínica.</strong> O que se usa é a estrutura, que é relacionar-se com o que já está na cabeça da paciente, e nunca a forma. É a maior ressalva da lista.</p>
+<p><strong>Atacar o concorrente pelo nome.</strong> O livro celebra o Tylenol atacando a aspirina. Aqui esbarra no Código de Ética Odontológica e no custo social de uma cidade pequena, onde as duas donas se encontram no mesmo evento. <strong>A fraqueza da concorrente entra no E5 como diagnóstico interno, e nunca vira peça de conteúdo com nome.</strong></p>
+<p><strong>As táticas, todas.</strong> O livro só conhece compra de espaço em TV, rádio, jornal e outdoor. <strong>A estratégia continua valendo porque é sobre a mente e não sobre o canal; as táticas, não.</strong> O que sustenta a execução em rede social é outra fonte: a documentação da Meta, o corpus de 340 Reels do nicho e a PARTE 3 da pesquisa, que é a voz da paciente.</p>
+<hr>
+<h2 id="antes-da-conversa-dever-de-casa-da-revon">Antes da conversa, dever de casa da Revon</h2>
+<p>Nada disto se pergunta na hora, se apura antes e a conversa abre devolvendo o resultado:</p>
+<ol><li>As avaliações do Google da clínica, com o adjetivo que se repete</li><li>Os últimos trinta comentários e directs públicos do perfil</li><li>Os perfis de três a cinco concorrentes da cidade, bio transcrita literalmente</li><li>Objeções que aparecem de verdade em comentário de conteúdo de HOF de terceiros, não a que a doutora imagina</li><li>Auditoria de conformidade do perfil, resposta binária, item por item</li><li>A grade de atributos, com a clínica e as concorrentes lado a lado</li></ol>
+<p>O item 5 muda quem está sendo avaliado na sala: a Revon chega dizendo que encontrou infrações no feed dela, e por qual artigo, em vez de chegar perguntando.</p>
+<h3 id="a-grade-de-atributos-e-de-onde-ela-vem">A grade de atributos, e de onde ela vem</h3>
+<p>Fonte: Al Ries e Jack Trout, <em>Posicionamento</em>, capítulo 19, páginas 182 e 183. A técnica do livro se chama diferencial semântico: o potencial cliente recebe um conjunto de atributos e classifica cada concorrente numa escala. No caso do banco de Long Island foram seis atributos, quatro genéricos do setor e <strong>dois exclusivos daquela cidade</strong>, e foi a grade que mostrou que a posição defensável não estava em nenhum dos quatro genéricos.</p>
+<p><strong>A adaptação, e ela é declarada.</strong> A Revon não entrevista pacientes antes do dia 2, porque não há prazo para isso. A grade se monta com a evidência pública que os itens 1 a 4 acima já coletam: avaliação do Google, comentário, direct e bio. Escala de 1 a 5, uma linha por clínica, preenchida por quem fez o dever de casa, com a evidência citada ao lado de cada nota. Nota sem evidência fica em branco, e branco também é informação.</p>
+<table><thead><tr><th>Atributo</th><th>A clínica</th><th>Concorrente 1</th><th>Concorrente 2</th><th>Concorrente 3</th></tr></thead><tbody><tr><td>Quem atende a avaliação é a dona</td><td></td><td></td><td></td><td></td></tr><tr><td>Resultado natural, citado em palavra da paciente</td><td></td><td></td><td></td><td></td></tr><tr><td>Preço percebido</td><td></td><td></td><td></td><td></td></tr><tr><td>Tempo de casa na cidade</td><td></td><td></td><td></td><td></td></tr><tr><td>Atributo local 1</td><td></td><td></td><td></td><td></td></tr><tr><td>Atributo local 2</td><td></td><td></td><td></td><td></td></tr></tbody></table>
+<p><strong>Os dois atributos locais são obrigatórios, e são o ponto da técnica.</strong> Saem do que aparece repetido nas avaliações daquela cidade e em nenhuma outra: estacionamento, atendimento em horário de trabalho, ser a única com determinado equipamento, atender pacientes de cidades vizinhas. Grade só com atributo genérico devolve o que já se sabia.</p>
+<p><code>[LEITURA]</code> O livro é explícito, na página 182, que a grade serve para duas coisas, e a segunda importa aqui tanto quanto a primeira: criar a estratégia, e <strong>vender a estratégia para quem está dentro do negócio há anos</strong>. A doutora enxerga a clínica dela de um jeito que quem passou minutos com a marca não enxerga, e a grade é o que torna a devolutiva da abertura conferível em vez de opinativa.</p>
+<h2 id="a-agenda-em-minutos">A agenda, em minutos</h2>
+<table><thead><tr><th>Bloco</th><th>Minutos</th><th>Acumulado</th></tr></thead><tbody><tr><td>Abertura com a devolutiva numérica</td><td>12</td><td>12</td></tr><tr><td>E1 · A posição que ela já ocupa</td><td>8</td><td>20</td></tr><tr><td>E2 · A escada da cidade</td><td>8</td><td>28</td></tr><tr><td>E3 · O sacrifício</td><td>10</td><td>38</td></tr><tr><td>E4 · O teste dos territórios</td><td>12</td><td>50</td></tr><tr><td>E5 · A fraqueza estrutural, da concorrente e da prática</td><td>8</td><td>58</td></tr><tr><td>E6 · Os insumos da conta</td><td>5</td><td>63</td></tr><tr><td>Colchão de interrupção</td><td>12</td><td>75</td></tr></tbody></table>
+<p><strong>Os últimos 12 minutos não são folga, são orçamento de interrupção.</strong> A sessão de 75 minutos é desenhada para ser interrompida, e o colchão absorve isso na hora em que acontece.</p>
+<p><code>[PENDÊNCIA]</code> <strong>O E1 e o E5 ganharam pergunta e não ganharam minuto.</strong> O E1 passou de seis para sete perguntas e o E5 de cinco para oito, porque sem elas os caminhos A e B do passo 3 do método ficam sem entrada. Os minutos da tabela não foram mexidos, e cada um dos dois blocos tem agora a sua ordem de queda escrita por extenso. Rodando a conversa pela primeira vez, cronometrar os dois: não cabendo, a decisão é da Ellen, entre esticar os blocos contra o colchão ou cortar pergunta.</p>
+<p><strong>Antes de contar pergunta, verificar redundância.</strong> Quem conduzir a primeira precisa reparar se as três perguntas de prática do E5 já respondem alguma das perguntas de concorrente. Respondendo, o bloco não cresceu de verdade, e isso se descobre conduzindo, não somando pergunta no papel.</p>
+<h2 id="regras-de-conducao-as-mesmas-do-dia-1">Regras de condução, as mesmas do dia 1</h2>
+<p>Pergunta aberta primeiro, fechamento depois. Uma pergunta por vez. Silêncio depois da pergunta, sem preencher o vazio por ela. Repetir com as palavras dela. Registrar durante, não depois.</p>
+<p>Mais três, específicas desta conversa:</p>
+<ul><li><strong>Anotar literal, sem traduzir.</strong> A frase que ela usa passou pelo filtro dela mesma, e reescrever desfaz esse trabalho.</li><li><strong>Nunca oferecer a resposta.</strong> Se ela travar, o silêncio é o instrumento. Sugerir alternativa contamina o dado.</li><li><strong>Não decidir na sala.</strong> A decisão é da Revon, no passo 2.1. Se ela propuser uma posição, anotar como insumo, nunca fechar ali.</li></ul>
+<h2 id="abertura-12-min">Abertura, 12 min</h2>
+<p>Antes de qualquer pergunta, dizer a agenda em voz alta, incluindo a hora de terminar. E dizer: <em>&quot;Hoje eu não vou pedir que você decida nada. Vou pedir informação que só você tem. A decisão do posicionamento é nossa, e a gente apresenta amanhã.&quot;</em></p>
+<p>Três coisas, nesta ordem, ditas antes de qualquer pergunta:</p>
+<ol><li><strong>O retrato em número</strong>, do passo 1.10: ticket médio e dos protocolos completos, separados; o mix em duas listas, o que sustenta o faturamento hoje e o que ela gostaria que sustentasse; o gargalo, em uma etapa. Dito como retrato dela, nunca como acusação.</li><li><strong>O que a cidade diz que ela é</strong>, do dever de casa acima: o que as avaliações e comentários dizem, com as palavras exatas; quantas clínicas de harmonização a cidade tem, com duas ou três bios lidas em voz alta, sem comentar. <strong>A grade de atributos entra aqui</strong>, na tela, com a clínica e as concorrentes lado a lado e a evidência ao lado de cada nota. Ler as linhas em silêncio de comentário: a grade fala sozinha, e o atributo em que ela está atrás de todo mundo é o que abre o E2 sem a Revon precisar dizer nada.</li><li><strong>A auditoria de conformidade</strong>, item por item.</li></ol>
+<p>O número vem primeiro porque é dela e é incontestável, e é o que compra atenção para os outros dois, que soam como opinião se vierem antes.</p>
+<h2 id="e1-a-posicao-que-ela-ja-ocupa-8-min">E1 · A posição que ela já ocupa · 8 min</h2>
+<ul><li>&quot;Quando uma paciente nova chega, o que ela diz que ouviu falar de você?&quot;</li><li>&quot;Quem te indica? Fala de uma indicação recente, e o que a pessoa disse ao indicar.&quot;</li><li>&quot;Qual é o elogio que você mais ouve, e que você já nem escuta mais de tanto ouvir?&quot;</li><li>&quot;Tem alguma coisa pela qual você é conhecida e da qual você não gosta?&quot;</li><li>&quot;Quem, de fora daqui, já disse em público que você é boa nisso? Professor, sociedade, título, prêmio, veículo, colega que encaminha.&quot;</li><li>&quot;Você tem número que só você tem? Quantos casos daquele protocolo, em quantos anos.&quot;</li><li>&quot;Quando uma paciente chega falando de harmonização, o que ela já traz na cabeça? Com as palavras dela, não com as suas.&quot;</li></ul>
+<p><strong>A última pergunta não é sobre a doutora, é sobre a categoria</strong>, e é a que alimenta o caminho A do passo 3 do método. As outras levantam o que a cidade pensa <strong>dela</strong>; esta levanta o que a cidade pensa de <strong>harmonização facial</strong>. Sem ela não há como nomear a cola da categoria, e quem conduz vai improvisar na hora de gerar as candidatas. A versão de campo da mesma pergunta está no passo 1 do método, item 2b, e é feita a cinco pessoas antes da conversa.</p>
+<p><strong>As duas últimas perguntas são a autoridade externa</strong>, do capítulo 21, páginas 197 e 198 do mesmo livro. A tese ali é que a credibilidade sobe quando vem de um terceiro reconhecido e não da própria voz, porque é seguro para quem decide não precisar confiar no próprio julgamento. Traduzido para HOF: título registrado, formação com nome que a paciente reconhece, e volume próprio de casos valem mais na peça do que a clínica afirmando sobre si mesma. <strong>É extração, não promessa:</strong> o que sair daqui vira insumo da linha editorial no passo 2.2, e o que não existir não se inventa.</p>
+<p><strong>Se o E1 estourar os 8 minutos, são as duas da autoridade externa que caem primeiro</strong>, e só elas: título, formação e prêmio estão em fonte pública e a Revon apura sem ela.</p>
+<p><strong>A pergunta da categoria não cai nunca</strong>, porque sem ela o caminho A do passo 3 não tem de onde partir e quem conduz vai inventar a cola da categoria na hora. Ela e as quatro primeiras são o que não se apura de fora.</p>
+<p><strong>Fechamento em voz alta:</strong></p>
+<p><em>&quot;Então hoje, na cabeça da paciente, você é a que [x]. Fechado assim?&quot;</em></p>
+<p><strong>Tarefa de casa, entregue aqui, prazo até o dia 3:</strong> mandar um áudio para dez pacientes antigas com uma pergunta só, sem alternativa: <em>&quot;quando você pensa em mim, o que vem à cabeça primeiro?&quot;</em></p>
+<h2 id="e2-a-escada-da-cidade-8-min">E2 · A escada da cidade · 8 min</h2>
+<p>O que se pede é ordem, não lista.</p>
+<ul><li>&quot;Se eu parar dez mulheres na rua desta cidade e perguntar quem faz harmonização aqui, que nome sai primeiro?&quot;</li><li>&quot;E o segundo?&quot;</li><li>&quot;Essa pessoa que sai primeiro, ela é conhecida por quê? Em uma palavra.&quot;</li><li>&quot;Há quanto tempo ela está aqui?&quot;</li><li>&quot;Tem alguém de fora, da capital, para quem as suas pacientes viajam?&quot;</li></ul>
+<p><strong>Critério de aceite:</strong> um nome no primeiro degrau, ou a constatação explícita de que não sai nome nenhum. Meio termo não serve.</p>
+<h2 id="a-virada-entre-o-e2-e-o-e3">A virada, entre o E2 e o E3</h2>
+<p>Não há pausa. Dizer em voz alta: <em>&quot;Até agora a gente falou do que a cidade acha. Agora eu preciso falar de escolha sua, e é a parte que costuma incomodar.&quot;</em> Avisar que vai incomodar reduz a resistência.</p>
+<p>Enquanto isso, em até um minuto: quem registra passa a limpo os fechamentos de E1 e E2, e quem conduz decide, olhando o relógio, se algum bloco da cauda (E5 ou E6) vai precisar cair.</p>
+<h2 id="e3-o-sacrificio-10-min">E3 · O sacrifício · 10 min</h2>
+<p>O bloco mais difícil da hora.</p>
+<ul><li>&quot;Lista tudo que a clínica oferece hoje. Tudo mesmo, inclusive o que quase não sai.&quot;</li><li>&quot;Desses, quais dão dinheiro e quais só ocupam a cadeira?&quot;</li><li>&quot;Qual desses você faria de graça, pelo prazer de fazer?&quot;</li><li>&quot;E qual você faz porque apareceu, e não porque escolheu?&quot;</li><li>&quot;Se eu te dissesse que para ser conhecida por uma coisa você precisa parar de anunciar três, quais três você tiraria?&quot;</li><li>&quot;O que você já disse não para uma paciente este mês?&quot;</li></ul>
+<p>A pergunta dos três é sobre <strong>anunciar</strong>, não sobre <strong>fazer</strong>. Parar de anunciar é decisão de comunicação, território da Revon. Parar de fazer é decisão clínica e comercial dela. Confundir os dois transforma pergunta de marketing em ameaça ao faturamento.</p>
+<p><strong>Teste da lista de compras:</strong> <em>&quot;Se eu perguntar a dez pacientes antigas o que vem à cabeça quando pensam em você, quantas coisas diferentes vão sair?&quot;</em> Se vierem três, o nome já esticou. Se vier &quot;ela faz tudo&quot;, o nome já é genérico demais.</p>
+<p><strong>Última pergunta do bloco, que fecha ele:</strong> <em>&quot;Quais casos você tem orgulho de mostrar?&quot;</em> Vem por último de propósito: depois de dez minutos falando do que vai deixar de anunciar, ela responde com o que sobrou, e o que sobra é o posicionamento aparecendo sozinho.</p>
+<p><strong>Critério de aceite:</strong> ela consegue dizer em voz alta o que vai deixar de anunciar. Se não houver recusa, não houve escolha, e o bloco não fechou.</p>
+<h2 id="e4-o-teste-dos-territorios-12-min">E4 · O teste dos territórios · 12 min</h2>
+<p>Não é para ela escolher: é para a Revon descobrir quais territórios ela pode ocupar. Cada resposta é um filtro binário.</p>
+<p><strong>Os territórios estão no passo 3.3 do método, na lista 2</strong>, com o que a especialista precisa ter para ocupar cada um. A lista pode crescer ou encolher lá, e este bloco não repete a contagem de propósito. Aqui ficam só as perguntas que se fazem na sala. A lista mora lá e as perguntas moram aqui, para as duas não divergirem.</p>
+<p><strong>Desfecho funcional:</strong></p>
+<ul><li>&quot;Você atende DTM, bruxismo, dor de cabeça? Quanto do seu faturamento vem daí?&quot;</li><li>&quot;Você mede alguma coisa antes e depois, além da foto?&quot;</li><li>&quot;Já teve caso em que a paciente melhorou de dor e nem era esse o motivo dela vir?&quot;</li></ul>
+<p><strong>Risco declarado:</strong></p>
+<ul><li>&quot;Você tem hialuronidase na clínica agora?&quot;</li><li>&quot;Se der uma intercorrência vascular hoje às sete da noite, o que acontece, passo a passo?&quot;</li><li>&quot;Você fala de risco na avaliação? Em que momento?&quot;</li></ul>
+<p><strong>Fototipo:</strong></p>
+<ul><li>&quot;Você tem formação específica em queloide e discromia pós-inflamatória?&quot;</li><li>&quot;O que muda no seu protocolo, no risco e no resultado quando a paciente é de fototipo alto?&quot;</li><li>&quot;Que proporção das suas pacientes tem pele negra ou parda?&quot;</li></ul>
+<p><strong>A primeira pergunta é a que filtra</strong>, e a ordem é essa de propósito: este território é clínico antes de ser demográfico. Sem a formação e sem saber o que muda no protocolo, ele está fechado, mesmo que a proporção de pacientes seja alta.</p>
+<p><strong>Recusa publicada:</strong></p>
+<ul><li>&quot;Sua agenda de avaliação está cheia? Com quanto tempo de espera?&quot;</li><li>&quot;Você recusaria uma paciente que insistisse depois de você dizer não?&quot;</li></ul>
+<p><strong>Se ela não souber responder o passo a passo da intercorrência às sete da noite, o território de risco declarado está fechado, e a Revon acabou de descobrir um risco clínico que não era o assunto da reunião. Registrar e comunicar, sem transformar em pauta desta conversa.</strong></p>
+<p><strong>Fechamento do bloco, a viabilidade clínica:</strong> para cada território que passou no filtro, confirmar em voz alta: <em>&quot;Se a gente comunicar [x], a clínica consegue entregar [x] em toda paciente que chegar por causa disso?&quot;</em> É o único ponto da conversa em que a resposta dela tem poder de veto, porque promessa que a clínica não entrega vira processo, não vira paciente.</p>
+<h2 id="e5-a-fraqueza-estrutural-da-concorrente-e-da-pratica-8-min">E5 · A fraqueza estrutural, da concorrente e da prática · 8 min</h2>
+<p><strong>Duas coisas se procuram aqui, e elas não são a mesma.</strong> A fraqueza da <strong>concorrente</strong> é de uma pessoa ou de uma clínica. A fraqueza da <strong>prática dominante</strong> é de todo mundo na cidade, e é ela que alimenta o caminho B do passo 3 do método. As perguntas da prática vêm primeiro, porque a resposta delas costuma sair mais fácil e destrava as outras.</p>
+<p><strong>A prática dominante:</strong></p>
+<ul><li>&quot;O que praticamente toda clínica daqui faz igual, e que a paciente já chega esperando que aconteça?&quot;</li><li>&quot;Na primeira consulta, como é que se costuma falar de preço nesta cidade?&quot;</li><li>&quot;Tem alguma coisa que todo mundo faz assim e que você acha que está errada, mas ninguém questiona?&quot;</li></ul>
+<p><strong>A fraqueza da concorrente:</strong></p>
+<ul><li>&quot;Quando uma paciente sai de lá e vem para você, o que ela reclama de lá?&quot;</li><li>&quot;O que aquela clínica não consegue fazer, por causa do tamanho dela ou do jeito que ela funciona?&quot;</li><li>&quot;Lá, quem atende a paciente na avaliação? A dona, ou a equipe?&quot;</li><li>&quot;Quanto tempo dura uma avaliação lá? E aqui?&quot;</li><li>&quot;O que acontece lá quando o resultado não agrada? E aqui?&quot;</li></ul>
+<p><strong>Critério de aceite:</strong> a resposta sobrevive à pergunta &quot;e se ela resolver isso mês que vem?&quot;. Se sobrevive porque ela não consegue, achou. Serve o que a concorrente não consegue mudar sem virar outra empresa, não o que faz mal por descuido. Vale igual para a prática: serve o que a cidade inteira faz por hábito estabelecido, e não o que uma clínica faz mal num dia ruim.</p>
+<p><strong>As perguntas da prática também resolvem a restrição do Código de Ética, porque a resposta é sobre prática e não sobre colega.</strong> O Código veda concorrência desleal, e numa cidade média atacar uma colega pelo nome custa caro socialmente. Fraqueza de prática não tem dono: dizer que orçar por seringa na primeira consulta é o jeito errado de fazer não acusa ninguém. É por isso que o caminho B do método reposiciona a prática e nunca a pessoa.</p>
+<p><strong>Se este bloco cair por falta de tempo:</strong> salvam-se duas perguntas, uma de cada metade. Da prática, a primeira, sobre o que todo mundo faz igual. Da concorrente, a primeira, sobre o que a paciente reclama, porque é a única que só ela ouve. Fazer as duas em um minuto é melhor que sacrificar o bloco inteiro.</p>
+<h2 id="e6-os-insumos-da-conta-5-min">E6 · Os insumos da conta · 5 min</h2>
+<p><strong>Este bloco coleta, não calcula.</strong> A conta acontece depois, no passo 3.5 do método, com a Revon. Pedir à doutora que faça conta na sala gasta o tempo dela e produz número de cabeça no lugar de número apurado.</p>
+<p><strong>Os quatro insumos que o 3.5 usa.</strong> O quinto número da conta, quantas avaliações a clínica realiza hoje por mês, <strong>não se pergunta aqui</strong>: ele foi apurado no passo 1.10, no dia 1, e é contra ele que o corte compara.</p>
+<ul><li>&quot;Quanto a clínica precisa faturar por mês para o mês fechar?&quot;</li><li>&quot;Qual é o ticket de um protocolo completo, do começo ao fim?&quot;</li><li>&quot;De cada dez avaliações agendadas, quantas comparecem?&quot;</li><li>&quot;E de cada dez que comparecem, quantas fecham?&quot;</li></ul>
+<p><strong>Não se pergunta nada sobre tamanho de cidade ou de público.</strong> O território saiu da conta em 20/08/2026, por decisão registrada no <code>decisoes.md</code>: o corte agora é contra a linha de base da própria clínica, que já vem do passo 1.10 da diagnóstica. São quatro insumos e nenhum estimado.</p>
+<p><strong>A pergunta de verificação, e ela continua no bloco com outra função:</strong></p>
+<ul><li>&quot;Quantas pacientes por mês você precisa fechar para o mês fechar?&quot;</li></ul>
+<p>Ela não entra na conta. Serve para conferir: divergindo muito do que a conta do 3.5 produzir, <strong>um dos quatro insumos está errado</strong>. Isso é achado para registrar e apurar depois, e não assunto para discutir na sala. Número de cabeça e número de conta divergirem é o normal, e o que importa é o tamanho da divergência.</p>
+<p><code>[LEITURA]</code> A pergunta da agenda, sobre quantas avaliações por semana cabem, saiu deste bloco: ela é de capacidade operacional e já é levantada no dia 1, no passo 1.10.</p>
+<h2 id="fechamento">Fechamento</h2>
+<p>O Bloco 8 do roteiro da diagnóstica já existe e já fecha sessão. Aqui ele ganha três itens, e nada mais:</p>
+<ul><li>Confirmar a tarefa dos dez áudios, com data.</li><li>Repetir que a Revon apresenta a decisão no dia 3, e que ela não precisa decidir nada até lá.</li><li>Se algum bloco E caiu por falta de tempo, marcar a segunda chamada de vinte minutos ali mesmo, com dia e hora, até a manhã do dia 2.</li></ul>
+<p>Regra de prazo, a mesma dos outros passos: dizer a data, nunca o número de dias.</p>
+<hr>
+<h2 id="se-ela-for-interrompida">Se ela for interrompida</h2>
+<p>A premissa é que vai acontecer.</p>
+<ol><li><strong>A ordem dos blocos é ordem de criticidade, não ordem lógica.</strong> E5 e E6 vêm por último porque são os dois que a Revon mais consegue reconstituir sozinha se a sessão morrer.</li><li><strong>Cada bloco fecha sozinho, em voz alta.</strong> Enquanto a frase de fechamento não foi dita, o bloco não aconteceu, mesmo que todas as perguntas tenham sido feitas.</li><li><strong>Nunca deixar um bloco aberto para atender a interrupção.</strong> Terminar a resposta em curso, dizer a frase de fechamento com o que já se tem, e só então liberar.</li><li><strong>Um conduz, outro registra</strong>, sem trocar de papel no meio.</li><li><strong>Retomada em uma frase, nunca do começo:</strong> <em>&quot;A gente tinha fechado que [último fechamento]. Estávamos na pergunta sobre [próxima].&quot;</em> Recomeçar o bloco é o erro mais caro, porque ela responde diferente da segunda vez e a Revon fica com dois dados conflitantes.</li><li><strong>Sessão que morre antes do E3 não é sessão perdida, é segunda chamada</strong>, no mesmo dia 2, antes de o passo 2.1 decidir. Marcar a hora antes de encerrar, com horário, nunca &quot;a gente se fala&quot;.</li></ol>
+<h2 id="o-nucleo-minimo-se-tudo-desabar">O núcleo mínimo, se tudo desabar</h2>
+<p>Sobrando quinze minutos, são estas seis perguntas, nesta ordem:</p>
+<ol><li>&quot;Qual é o elogio que você mais ouve, e que você já nem escuta mais de tanto ouvir?&quot; (E1)</li><li>&quot;Tem alguma coisa pela qual você é conhecida e da qual você não gosta?&quot; (E1)</li><li>&quot;Se eu parar dez mulheres na rua desta cidade e perguntar quem faz harmonização aqui, que nome sai primeiro?&quot; (E2)</li><li>&quot;Se eu te dissesse que para ser conhecida por uma coisa você precisa parar de anunciar três, quais três você tiraria?&quot; (E3)</li><li>&quot;Sua especialidade em harmonização está registrada no CRO?&quot; (E4)</li><li>&quot;Você tem hialuronidase na clínica agora?&quot; (E4)</li></ol>
+<hr>
+<h2 id="o-que-a-conversa-produz">O que a conversa produz</h2>
+<p>Alimenta o entregável do passo 2.1: o posicionamento em uma frase, a promessa central, o perfil incluído e o excluído, e o que fica de fora.</p>
+<table><thead><tr><th>Campo</th><th>Vem do bloco</th></tr></thead><tbody><tr><td>A posição atual, com as palavras da cidade</td><td>E1, mais a devolutiva da abertura</td></tr><tr><td>A grade de atributos preenchida, com a evidência de cada nota</td><td>Dever de casa, apresentada na abertura</td></tr><tr><td>A autoridade externa disponível, e o número que só ela tem</td><td>E1, duas últimas perguntas</td></tr><tr><td>O primeiro degrau da escada local, com nome</td><td>E2</td></tr><tr><td>O que sai da comunicação, listado</td><td>E3</td></tr><tr><td>Os casos disponíveis para virar peça</td><td>E3, pergunta de fechamento</td></tr><tr><td>O território viável, com o filtro que passou</td><td>E4</td></tr><tr><td>A promessa que a clínica consegue cumprir</td><td>E4, fechamento de viabilidade</td></tr><tr><td>A fraqueza estrutural da concorrente</td><td>E5</td></tr><tr><td>Os quatro insumos da conta de viabilidade, para o passo 3.5 rodar depois</td><td>E6</td></tr></tbody></table>
+</main>
+</body>
+</html>

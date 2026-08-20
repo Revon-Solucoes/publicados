@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundação de perfil e social selling, dia 3</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Fundação de perfil e social selling, dia 3</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-18</p>
+<p>Artefato citado pelo playbook <a href="1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a>, passos 3.1 e 3.2. Tom de voz segue o passo T.6.</p>
+<h2 id="de-onde-vem-o-que-esta-escrito-aqui-e-o-que-nao-tem-fonte">De onde vem o que está escrito aqui, e o que não tem fonte</h2>
+<p><strong>A bio carrega o posicionamento, e isso é o método.</strong> Al Ries e Jack Trout, <em>Posicionamento</em>, capítulo 4: a mente organiza cada categoria como uma escada, e quem não ocupa um degrau nomeável não é lembrado. Bio que lista tudo que a clínica faz não ocupa degrau nenhum, e é por isso que a regra de conferência abaixo é binária.</p>
+<p><strong>Credencial traduzida é autoridade externa.</strong> Capítulo 21, páginas 197 e 198: a credibilidade sobe quando vem de terceiro reconhecido, porque é seguro para quem decide não precisar confiar no próprio julgamento. Título, formação e sociedade são esse terceiro. <strong>Traduzir não é enfeitar:</strong> é dizer o que aquilo garante para quem senta na cadeira, que é o que a paciente consegue avaliar.</p>
+<p><strong>O que o corpus de Reels sustenta, e o que ele não sustenta.</strong> O corpus de 340 Reels em <code>operacao/fontes/harmonizapro-reels/</code> é de duas contas que falam <strong>com a dona de clínica</strong>, e boa parte do conteúdo é prescrição sobre a operação da clínica: o papel da secretária, o que ela faz errado com lead de internet, a janela de resposta, a consulta paga. <strong>Essa parte é fonte legítima</strong>, e está usada aqui e no treinamento da secretária.</p>
+<p>O que ele <strong>não</strong> sustenta é o texto de mensagem dirigida à paciente, porque nenhuma daquelas peças fala com paciente. Prescrição de um player do nicho sobre como operar é uma coisa; evidência de o que converte na conversa com a paciente é outra, e o corpus só tem a primeira.</p>
+<p><strong>O que ele sustenta aqui:</strong> a distinção entre quem demonstra interesse e quem está comparando preço, que é a mesma regra abaixo de que interação não é intenção de compra.</p>
+<p><strong>A fonte sobre a paciente está no repositório, e é ela que decide o texto.</strong> A PARTE 3 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code> apurou a voz da paciente de HOF em reclamação, fórum em português e estudo brasileiro, que é onde ela escreve por conta própria. Dela saem sete das nove regras da seção 2, e as outras duas saem de apuração própria de 19/08. É contra elas que cada mensagem foi escrita.</p>
+<p><strong>O que continua sem fonte é a redação, e não o critério.</strong> Nenhuma dessas frases foi testada com paciente. Quem valida é a auditoria semanal do passo A.4, lendo conversa real desta clínica.</p>
+<hr>
+<h2 id="1-modelo-de-bio-tres-fixados-e-seis-destaques">1 · Modelo de bio, três fixados e seis destaques</h2>
+<p><strong>Passo:</strong> 3.1. Template, não conteúdo preenchido: cada clínica recebe o seu, a partir do posicionamento fechado no passo 2.1.</p>
+<p><strong>Bio, cinco elementos, nesta ordem</strong></p>
+<ol><li>Especialidade, em poucas palavras</li><li>Diferenciação, o que a torna reconhecível na cidade dela</li><li>Localização</li><li>Registro profissional (CRM ou CRO)</li><li>Chamada para ação, apontando para o link</li></ol>
+<p><strong>Regra de conferência:</strong> a frase do posicionamento do passo 2.1 tem que estar reconhecível na bio. Se não estiver, uma das duas está errada, não as duas ao mesmo tempo.</p>
+<p><strong>Três fixados</strong></p>
+<ol><li>Filosofia clínica: como ela pensa harmonização, em uma peça</li><li>Como funciona a avaliação: o que a paciente encontra ao marcar</li><li>Credenciais traduzidas em segurança: nunca listadas soltas, sempre ligadas ao que garantem para quem senta na cadeira. <strong>A tradução preserva o nome de quem certificou</strong>, porque é dele que vem a credibilidade, e não da clínica afirmando sobre si mesma</li></ol>
+<p><strong>Seis destaques</strong></p>
+<ol><li>Especialista, quem é ela</li><li>Avaliação, o que esperar</li><li>Dúvidas frequentes</li><li>Cuidados pós-procedimento</li><li>Localização</li><li>Contato</li></ol>
+<hr>
+<h2 id="2-mensagens-dos-oito-gatilhos-de-social-selling">2 · Mensagens dos oito gatilhos de social selling</h2>
+<p><strong>Passo:</strong> 3.2.</p>
+<h3 id="as-nove-regras-que-decidem-o-texto-e-de-onde-cada-uma-vem">As nove regras que decidem o texto, e de onde cada uma vem</h3>
+<p>Fonte: <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>, PARTE 3, a paciente de HOF. Apurada em reclamação, fórum em português e estudo brasileiro, que é onde a paciente escreve por conta própria e sem ser perguntada. <strong>O viés está declarado lá dentro</strong> e continua valendo aqui.</p>
+<ol><li><strong>Falar a queixa pelo nome popular, nunca pelo nome da categoria.</strong> Ela diz &quot;cara de cansada&quot;, &quot;papada&quot;, &quot;olheira&quot;, &quot;bigode chinês&quot;, &quot;linhas de expressão&quot;. Ela <strong>nunca</strong> diz harmonização orofacial, terço inferior, sulco nasogeniano, full face, protocolo ou planejamento facial. Abertura com vocabulário de categoria ganha uma colega e perde a paciente.</li><li><strong>Não despertar desejo.</strong> O que a segurava era dinheiro, não falta de vontade: <em>&quot;não sei como vivi tanto tempo sem fazer (na real eu sei, não tinha dinheiro)&quot;</em>. Mensagem que tenta convencê-la de que ela quer está resolvendo um problema que ela não tem.</li><li><strong>Quem nomeia a queixa é ela, e nunca a clínica.</strong> A reclamação mais fina da apuração é de uma paciente que chegou com uma queixa e saiu com três, todas verdadeiras, e sentiu que foi vendida. <strong>Nenhuma das oito mensagens sugere o que ela deveria tratar.</strong></li><li><strong>Não mandar antes e depois na abertura.</strong> Para ela, foto de outra pessoa é sinal de alerta e não de prova: <em>&quot;eles mostram pra vc antes e depois ao qual o seu n passa nem perto&quot;</em>. O formato mais usado do nicho é, na voz dela, motivo de desconfiança.</li><li><strong>Nada de desconto, promoção ou preço abaixo do mercado.</strong> Ela associa preço baixo a resultado ruim, e diz isso com todas as letras. Desconto na abertura tira credibilidade em vez de aproximar.</li><li><strong>O tom é de sinceridade, não de venda.</strong> O único elogio espontâneo que a apuração encontrou não era sobre resultado: era sobre a clínica ter alinhado expectativa e sido sincera na avaliação.</li><li><strong>Interação não é intenção de compra.</strong> Confirmação pequena de interesse antes do botão de WhatsApp, nunca a passagem direta.</li><li><strong>Recusa clara para a conversa na hora.</strong> Silêncio não é recusa, e a régua segue; recusa dita é fim, e a régua para. Fonte: apuração de 19/08 no Reclame Aqui, uma reclamação intitulada <em>&quot;Empresa insiste em mensagens mesmo após recusa e reclamação anterior&quot;</em>, marcada como <strong>não resolvida</strong>, de paciente que já tinha reclamado uma vez pelo mesmo motivo. É o único caso da amostra em que a clínica não conseguiu resolver.</li><li><strong>Resposta incompleta é falha própria, e não versão menor da demora.</strong> Na mesma apuração, uma reclamação separada diz que a paciente entrou em contato para esclarecer dúvidas e <em>&quot;senti que as informações poderiam ser mais completas&quot;</em>. Responder rápido e pela metade conta como não ter respondido.</li></ol>
+<p><code>[LEITURA]</code> As regras 1 e 3 são as que mais mudam o texto, e são as duas que o material do nicho não ensina, porque o material do nicho fala com a doutora e usa o vocabulário dela.</p>
+<h3 id="2-1-dm-recebida">2.1 · DM recebida</h3>
+<blockquote><p>Oi! Que bom que você chamou 🙂 Me conta o que te fez pensar nisso, com as suas palavras mesmo. É o que eu preciso saber para te responder direito.</p></blockquote>
+<p>Esperar ela nomear a queixa. <strong>Não sugerir nenhuma</strong>, e não oferecer o WhatsApp antes da resposta.</p>
+<h3 id="2-2-dm-com-palavra-chave">2.2 · DM com palavra-chave</h3>
+<blockquote><p>Oi! Vi que você mandou &quot;[palavra-chave]&quot; 🙂 Isso é sobre [assunto da peça, na palavra que a peça usou]. Quer que eu te explique como funciona por aqui?</p></blockquote>
+<p>A palavra da peça é a que a paciente usa, e a resposta repete a mesma palavra. Trocar por termo técnico aqui desfaz o que a peça construiu.</p>
+<h3 id="2-3-comentario-em-post-ou-reel">2.3 · Comentário em post ou Reel</h3>
+<p><strong>Resposta pública, no próprio comentário:</strong></p>
+<blockquote><p>Oi! Te mandei uma mensagem, dá uma olhadinha nas solicitações 🙂</p></blockquote>
+<p><strong>DM de acompanhamento</strong>, mesma abertura do item 2.1, citando o assunto do post comentado com a palavra que o post usou.</p>
+<h3 id="2-4-resposta-a-story">2.4 · Resposta a Story</h3>
+<blockquote><p>Oi! Obrigada por responder 🙂 Você está pesquisando sobre isso agora, ou já é uma coisa que te incomoda faz tempo?</p></blockquote>
+<p>Pergunta sobre ela, e não sobre a clínica. A resposta separa quem está começando a olhar de quem já decidiu e está escolhendo onde.</p>
+<h3 id="2-5-reacao-a-story">2.5 · Reação a Story</h3>
+<blockquote><p>Oi! Vi que você reagiu ali 🙂 Se quiser, eu te explico melhor o que a gente mostrou. Sem compromisso nenhum.</p></blockquote>
+<p>Toque mais leve que os outros. Reação não é engajamento verbal, e a mensagem respeita isso: não pressiona resposta e não pergunta nada que obrigue a responder.</p>
+<h3 id="2-6-compartilhamento-no-story">2.6 · Compartilhamento no Story</h3>
+<blockquote><p>Oi! Vi que você compartilhou, obrigada mesmo 🙂 Se quiser entender como funciona, é só me chamar por aqui.</p></blockquote>
+<h3 id="2-7-mencao-em-story">2.7 · Menção em Story</h3>
+<blockquote><p>Oi! Vi que você me marcou, que bom 🙂 Fico à disposição se quiser saber alguma coisa.</p></blockquote>
+<h3 id="2-8-novo-seguidor">2.8 · Novo seguidor</h3>
+<blockquote><p>Oi! Seja bem-vinda 🙂 Se em algum momento tiver dúvida sobre o que incomoda você, ou sobre como funciona a avaliação com a [nome da doutora], é só me chamar. A gente costuma ser bem sincera sobre o que dá e o que não dá para fazer.</p></blockquote>
+<p>A última frase é a única das oito que promete algo, e o que ela promete é sinceridade, que é o único elogio espontâneo que a apuração encontrou na voz da paciente.</p>
+<h3 id="o-que-ainda-nao-tem-fonte-e-como-vai-ter">O que ainda não tem fonte, e como vai ter</h3>
+<p>O texto exato acima é escrita da Revon aplicando as nove regras. <strong>As regras têm fonte; a redação não.</strong> Nenhuma dessas frases foi testada com paciente, e não existe material no nicho que teste, porque o material do nicho fala com a doutora.</p>
+<p><strong>Quem valida é a auditoria semanal do passo A.4.</strong> A partir da segunda semana, cada conversa que morreu depois da triagem e antes do agendamento é lida, e a mensagem de abertura entra na leitura. Duas coisas para observar desde a primeira semana: se a paciente nomeia a queixa sozinha na resposta ao item 2.1, e se ela responde ao item 2.5, que é o toque mais leve e o mais fácil de ignorar.</p>
+<h2 id="origem-das-afirmacoes">Origem das afirmações</h2>
+<ul><li><code>[FATO, PRÓPRIO]</code>: 9, sendo 7 da PARTE 3 de <code>pesquisa-posicionamento-e-conteudo.md</code> e 2 da apuração de 19/08 no Reclame Aqui</li><li><code>[FATO, EXTERNO]</code>: 0</li><li><code>[LEITURA]</code>: 2</li><li><code>[NÃO ENCONTRADO]</code>: 1</li></ul>
+<p><strong>Base própria consultada:</strong> PARTE 3 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>, corpus de 340 Reels em <code>operacao/fontes/harmonizapro-reels/</code>, e os dois podcasts de <code>operacao/fontes/</code>.</p>
+<p><strong>Base própria que existia e não foi usada, com o motivo:</strong> o corpus de Reels entrou só na regra 7, porque nenhuma daquelas peças fala com paciente. Os dois podcasts não entraram: o da Isabela Matiz trata de conteúdo para geração de lead e menciona &quot;mensagem&quot; três vezes em 1.482 linhas, nenhuma sobre primeiro contato; o da Luana Carolina trata de posicionamento.</p>
+<p><strong>Busca externa, e o resultado dela.</strong> Quatro buscas em 19/08, com pergunta específica do nicho. <strong>Nenhuma devolveu fonte primária</strong>, e o que voltou foram blogs de clínica e de marketing para clínica falando sobre a paciente, que é a mesma &quot;camada da voz de quem vende&quot; que a PARTE 3 já tinha identificado. O que rendeu foi ir onde a paciente escreve: dez títulos de reclamação lidos no Reclame Aqui, dos quais quatro tratam de contato e mensagem, e é de dois deles que saem as regras 8 e 9.</p>
+<p><code>[NÃO ENCONTRADO]</code> Continua sem apurar o que a PARTE 3 já pedia como segunda rodada: comentários de YouTube, TikTok e Instagram, e avaliações do Google e do Doctoralia. <strong>Doctoralia e Reclame Aqui abrem com o navegador</strong>, e o Reclame Aqui já foi; os outros ficam para uma rodada própria.</p>
+<h2 id="o-que-a-automacao-nao-cobre">O que a automação não cobre</h2>
+<p><strong>Com nome, não com cargo, definido no passo 3.2 item 6:</strong> curtida manual e varredura das solicitações do Instagram, porque nenhuma ferramenta garante em qual caixa a mensagem cai. Quem faz isso na clínica fica registrado no documento interno, não aqui.</p>
+</main>
+</body>
+</html>

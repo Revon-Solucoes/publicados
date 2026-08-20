@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estratégia de campanhas, oferta e criativo · HOF</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Estratégia de campanhas, oferta e criativo · HOF</h1><p class="meta">v1 · 2026-08-08</p></header>
+<p>STATUS: VIGENTE</p>
+<p>v1 · 2026-08-08</p>
+<p>Modelo aplicável a qualquer cliente de HOF. O que depende da clínica está marcado como decisão dela.</p>
+<p><strong>Origem de cada afirmação:</strong> <code>[PRODUTO]</code> vinha de <code>produto/produto-revon-hof.md</code>, com o capítulo. Aquele documento foi superado e está em <code>produto/fontes/superado/</code>: o que vale hoje é <a href="../produto/definicao-produto-assessoria.html"><code>produto/definicao-produto-assessoria.md</code></a>. <code>[PESQUISA]</code> foi observado na HarmonizaPRO, em <code>operacao/pesquisa-harmonizapro.md</code>. <code>[SUG]</code> é proposta desta v1, ainda não confirmada. <code>[SEM LASTRO]</code> é proposta sem apoio em nenhuma das duas fontes, e precisa de quem opera antes de virar padrão.</p>
+<h2 id="1-a-oferta">1 · A oferta</h2>
+<h3 id="o-que-a-oferta-vende">O que a oferta vende</h3>
+<p>Resultado, não procedimento. <code>[PRODUTO cap. 5.1]</code> Anunciar procedimento coloca a clínica numa disputa de tabela. Anunciar resultado coloca numa conversa sobre transformação, onde um plano completo faz sentido.</p>
+<h3 id="os-sete-elementos-da-oferta">Os sete elementos da oferta</h3>
+<p><code>[PRODUTO cap. 5.1]</code> Toda oferta precisa dizer:</p>
+<ol><li><strong>Queixa</strong>, o que incomoda a paciente hoje</li><li><strong>Desejo</strong>, o que ela quer ver no espelho</li><li><strong>Resultado</strong>, o antes e o depois na linguagem dela</li><li><strong>Como se chega lá</strong>, o plano de procedimentos que entrega isso</li><li><strong>Por que aqui</strong>, a clínica e quem executa</li><li><strong>Por que agora</strong>, a razão para não deixar para depois</li><li><strong>Próximo passo</strong>, como funciona a avaliação e o que esperar dela</li></ol>
+<p>Sempre dentro das regras de publicidade para profissionais de saúde.</p>
+<h3 id="a-porta-de-entrada-e-a-avaliacao-e-ela-e-paga">A porta de entrada é a avaliação, e ela é paga</h3>
+<p><code>[PRODUTO cap. 3]</code> A avaliação é o principal momento de decisão da paciente, e o produto já prevê que em muitos casos ela seja cobrada.</p>
+<p><strong>A Revon sempre recomenda cobrar a avaliação.</strong> É decisão estratégica, não administrativa: avaliação paga filtra curioso antes de ocupar a agenda da especialista, e transforma o primeiro contato comercial em algo que a paciente já investiu. O valor continua sendo da clínica <code>[PRODUTO cap. 10.2]</code>, e a recomendação é que seja baixo em relação ao protocolo.</p>
+<h3 id="a-escada-de-valor">A escada de valor</h3>
+<p><code>[PESQUISA]</code> A tática mais concreta que a concorrência publica é a entrada barata que vira protocolo no retorno: uma paciente entrou por uma oferta de R$2.100 e fechou mais R$11.700 no retorno, com a condução feita na consulta.</p>
+<p><code>[SUG]</code> Desenhar a mesma escada, com três degraus:</p>
+<table><thead><tr><th>Degrau</th><th>O que é</th><th>Função</th></tr></thead><tbody><tr><td>Entrada</td><td>Avaliação Full Face paga</td><td>Filtrar e colocar a paciente na cadeira</td></tr><tr><td>Protocolo</td><td>O plano completo, apresentado na avaliação</td><td>O faturamento de verdade</td></tr><tr><td>Retorno</td><td>Manutenção e novas necessidades</td><td>Receita recorrente <code>[PRODUTO cap. 3, pilar E]</code></td></tr></tbody></table>
+<p>A escada resolve a objeção de volume: <strong>a clínica não precisa de paciente nova para crescer no primeiro mês</strong>, precisa converter melhor quem já está entrando.</p>
+<h3 id="o-que-a-clinica-decide">O que a clínica decide</h3>
+<p>Política de preço, valor da avaliação, e o que a oferta pode prometer dentro do que ela entrega <code>[PRODUTO cap. 10.1 e 10.2]</code>.</p>
+<h2 id="2-impulsionamento">2 · Impulsionamento</h2>
+<h3 id="o-que-a-revon-faz-e-o-que-ela-nao-faz">O que a Revon faz, e o que ela não faz</h3>
+<p>A Revon impulsiona peça já publicada no perfil da clínica. Não monta campanha no Gerenciador de Anúncios, não cria criativo só para anúncio e não faz tráfego para página fora do Instagram.</p>
+<p><strong>Quem aperta é a Revon enquanto o teste dos 90 dias roda</strong>, pela conta de anúncios da clínica. É combinado no Portão 1, e a razão é a leitura: duas mãos no mesmo botão tornam impossível saber o que funcionou.</p>
+<p><strong>Não é proibição, e a diferença importa.</strong> A doutora pode apertar aquele botão, e o que a assessoria entrega é ela saber o que valeria a pena apertar. Dito de outro jeito, a instrução vira o que a agência de tráfego que ela quer largar já dizia.</p>
+<h3 id="as-duas-condicoes-para-subir">As duas condições para subir</h3>
+<p>Portão 2 aberto <strong>e</strong> peça com resposta orgânica. As duas, não uma.</p>
+<p>O portão diz que a corrente fechou: primeira leva gravada e base da Meta pronta. A resposta orgânica diz que existe peça que merece verba. <strong>Portão aberto não significa que sobe amanhã.</strong></p>
+<p><code>[LEITURA]</code> A ordem importa e é o oposto do que o mercado faz. Impulsionar peça que ninguém assistiu organicamente é pagar para descobrir o que o orgânico responderia de graça, e o resultado chega junto com a conta.</p>
+<h3 id="a-escolha-da-peca">A escolha da peça</h3>
+<p>Sai da lista de candidatas marcada no fechamento da pauta, e não do pedido do cliente. A marcação acontece <strong>antes da edição</strong>, na própria pauta, e não depois que a peça ficou pronta: peça escolhida depois de publicada é escolhida por gosto, e a marcação antes obriga a dizer por que aquela tem função de conversão.</p>
+<h3 id="a-verba">A verba</h3>
+<p><strong>R$ 1.500 mensais, total e não por peça.</strong> É verba da clínica, paga diretamente por ela.</p>
+<p>Com uma peça só, ela recebe o mês inteiro. Com mais de uma peça ativa, o mesmo total se divide entre elas.</p>
+<p><strong>Abaixo desse total a entrega não sai do ruído</strong>, o teste não conclui nada, e o que a clínica compra é a sensação de estar impulsionando. Sem a verba o impulsionamento não sobe, e vira pendência com dono cliente.</p>
+<h3 id="o-ciclo-de-renovacao">O ciclo de renovação</h3>
+<table><thead><tr><th>Quando</th><th>O que acontece</th></tr></thead><tbody><tr><td>Semana 6</td><td>Trocar a peça antes da saturação, e não depois que o resultado cair</td></tr><tr><td>Semana 10</td><td>Redistribuir o mesmo total entre as peças de melhor resposta relativa</td></tr><tr><td>Todo ciclo</td><td>Peça que não sustenta resposta suficiente sai da rotação e devolve a fatia às demais</td></tr></tbody></table>
+<p>Peça que recebe fatia e não informa nada não é investimento, é ruído pago.</p>
+<h3 id="o-que-se-mede">O que se mede</h3>
+<p><strong>Custo por paciente que fecha</strong>, e não custo por contato. Aceitar custo por contato mais alto é parte da estratégia, porque o objetivo é a proporção de pacientes com perfil para protocolo completo, e não volume.</p>
+<p><code>[LEITURA]</code> Volume barato sem perfil é custo, não resultado: cada conversa sem perfil ocupa o tempo da secretária, que é recurso finito, e empurra para trás a conversa que fecharia.</p>
+<h3 id="onde-isto-pode-deixar-de-bastar">Onde isto pode deixar de bastar</h3>
+<p><code>[DECIDIR]</code> Impulsionamento não permite a escada de otimização por evento que uma campanha permite. Se em algum momento a operação precisar otimizar para &quot;avaliação agendada&quot; ou &quot;protocolo fechado&quot;, isso exige campanha, e campanha não está na oferta. É decisão de produto, não de mídia, e mora em <code>decisoes.md</code> quando for tomada.</p>
+<h2 id="3-criativos-e-videos">3 · Criativos e vídeos</h2>
+<h3 id="formato">Formato</h3>
+<p><code>[PESQUISA]</code> Reel domina, com carrossel em apoio. Nenhuma foto isolada.</p>
+<p><code>[PESQUISA]</code> O alcance é brutalmente concentrado: no maior concorrente do nicho, 5 Reels concentram metade de tudo, e 221 de 340 não passaram de 2.000 visualizações.</p>
+<p><code>[SUG]</code> A consequência estratégica é direta: <strong>produzir para encontrar o acerto, não esperar que cada peça funcione.</strong> Volume constante, e quando um vídeo estourar, ele vira campanha e ganha verba.</p>
+<h3 id="quem-aparece">Quem aparece</h3>
+<p><code>[PRODUTO cap. 10.1]</code> A especialista. Não é delegável, e a Revon escreve o roteiro e edita.</p>
+<h3 id="os-quatro-tipos-de-peca">Os quatro tipos de peça</h3>
+<p><code>[SUG]</code> A linha editorial se sustenta em quatro tipos, nesta proporção como ponto de partida:</p>
+<p><strong>1. Estudo de caso, o carro-chefe.</strong> <code>[PESQUISA]</code> Substitui o antes e depois. A estrutura em cinco partes, que é a peça mais copiável que a pesquisa encontrou:</p>
+<ol><li>Quem é a pessoa: &quot;hoje eu atendi a Maria, uma mulher de 40 anos&quot;</li><li>A dor: &quot;ela chegou reclamando da flacidez&quot;</li><li>O medo: &quot;ela tinha medo de que, com a idade, piorasse ainda mais&quot;</li><li>O desejo: &quot;mas ela queria rejuvenescer&quot;</li><li>O que foi feito e o resultado</li></ol>
+<p>O motivo de funcionar: quem se parece com a Maria se reconhece, e chega qualificada.</p>
+<p><strong>2. Tese, para autoridade.</strong> Uma afirmação que contraria o senso comum do mercado e mostra critério. <code>[PESQUISA]</code> O segundo Reel de maior alcance da concorrência é uma tese contra o próprio serviço deles, do tipo &quot;investir mais em tráfego não vai te fazer vender mais&quot;.</p>
+<p><strong>3. Condução da pergunta de preço.</strong> <code>[PRODUTO cap. 6.4]</code> É o ponto onde mais pacientes com perfil são perdidas. Vale virar conteúdo, porque educa a paciente antes de ela escrever.</p>
+<p><strong>4. Prova.</strong> Depoimento em vídeo da paciente, e registro de resultado.</p>
+<h3 id="ganchos">Ganchos</h3>
+<p><code>[PESQUISA]</code> Nenhum gancho que funcionou abre falando da empresa. Os três padrões que apareceram:</p>
+<ul><li><strong>Provocação</strong>, que quase ofende</li><li><strong>Curiosidade com dor operacional</strong>, do tipo &quot;descobrimos por que acontece X&quot;</li><li><strong>Afirmação de autoridade</strong>, do tipo &quot;é assim que deveria ser&quot;</li></ul>
+<h3 id="cadencia-de-gravacao">Cadência de gravação</h3>
+<p><code>[PRODUTO cap. 10.1]</code> É responsabilidade compartilhada, e sem material novo o criativo satura.</p>
+<p><code>[SUG]</code> Marcar a data da próxima gravação <strong>na gravação anterior</strong>, para a cadência não depender de cobrança. Roteiros entregues antes.</p>
+<h2 id="4-canais-alem-do-trafego-pago">4 · Canais além do tráfego pago</h2>
+<p><code>[PESQUISA]</code> A concorrência afirma operar dez canais de aquisição, e o tráfego é só um deles. Dois valem adoção imediata porque custam zero.</p>
+<h3 id="revitalizacao-da-base">Revitalização da base</h3>
+<p><code>[PESQUISA]</code> Passo a passo publicado por eles, com taxa declarada:</p>
+<ol><li>Selecionar pacientes que fizeram procedimento nos últimos seis meses</li><li>Separar a lista por procedimento</li><li>Enviar mensagem para todas</li><li>Não cobrar a avaliação dessa paciente</li><li>Aproveitar para oferecer o protocolo completo</li></ol>
+<p>A taxa que eles declaram é de 5 a 10% de fechamento.</p>
+<p>Na v1, a clínica trabalha a base com o script que a Revon entrega, e a coordenação acompanha. <strong>Transformar isso em uma sexta régua do Copiloto</strong> está no backlog de produto, e é para onde deve caminhar, mas não entra nesta versão.</p>
+<h3 id="a-paciente-como-criadora-de-conteudo">A paciente como criadora de conteúdo</h3>
+<p><code>[PESQUISA]</code> As táticas que eles publicam: um cantinho com luz boa e espelho, incentivar a paciente a postar e marcar a clínica, uma hashtag própria, e recompensar quem posta.</p>
+<p><code>[SUG]</code> Entra na linha editorial como orientação para a clínica <code>[PRODUTO cap. 5.1]</code>, que é quem produz o orgânico. Custo próximo de zero e alimenta o perfil, que é a página de destino do anúncio.</p>
+<h2 id="5-o-que-medir">5 · O que medir</h2>
+<p><code>[PRODUTO cap. 7.3]</code> O Copiloto já entrega os indicadores. A leitura estratégica é esta:</p>
+<table><thead><tr><th>Pergunta</th><th>Onde olhar</th></tr></thead><tbody><tr><td>A entrada está com perfil?</td><td>Proporção de qualificadas sobre novos contatos</td></tr><tr><td>O criativo está saturando?</td><td>Custo por conversa subindo com o mesmo público</td></tr><tr><td>O gargalo é a mídia ou o comercial?</td><td>Se qualifica e não agenda, é comercial</td></tr><tr><td>Qual peça impulsionada traz quem fecha?</td><td>Consultas fechadas cruzadas com a peça no ar no período</td></tr><tr><td>A verba está concentrada onde responde?</td><td>Resposta relativa entre as peças ativas, na revisão da semana 10</td></tr></tbody></table>
+<p>A pergunta que a reunião mensal responde <code>[PRODUTO cap. 9.3]</code>: onde estamos perdendo, e o que muda no próximo ciclo.</p>
+<h2 id="6-o-que-esta-v1-nao-resolve">6 · O que esta v1 não resolve</h2>
+<p>Está em <code>backlog.md</code>, para não travar a entrega:</p>
+<ul><li>O valor de referência da avaliação paga</li><li>A proporção entre os quatro tipos de peça</li><li>Os outros oito canais de aquisição que a concorrência cita e não nomeia</li></ul>
+</main>
+</body>
+</html>

@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O método de posicionamento</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>O método de posicionamento</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-19</p>
+<p>Como a Revon define a posição de uma clínica de HOF na cidade dela. Sete passos, com critério de aceite em cada um.</p>
+<p>**A fonte é Al Ries e Jack Trout, <em>Posicionamento</em>, edição brasileira em <code>00_FONTE/</code>, lida inteira.** As páginas citadas são as do PDF, de 1 a 236. O arquivo é OCR sujo e tem erro de reconhecimento no próprio original, como &quot;Dailas&quot; por &quot;Dallas&quot;; onde a citação sai torta, é do arquivo.</p>
+<p><strong>Onde este método é executado:</strong> o passo 2.0 do playbook conduz a conversa de extração, pelo roteiro de <a href="10-roteiro-posicionamento.html"><code>operacao/10-roteiro-posicionamento.md</code></a>, e o passo 2.1 decide. O que do livro não se transfere para HOF está na seção do fim, e também no roteiro, porque é lá que se erra.</p>
+<p><strong>O que sustenta o resto</strong>, a paciente de HOF, o mercado, a cliente da Revon e a geração de conteúdo, continua em <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>, que é pesquisa. Este arquivo é processo.</p>
+<p>Convenção de marcação: <code>[FATO]</code> é verificável na fonte citada, com página ou URL. <code>[LEITURA]</code> é inferência de quem escreveu. <code>[DECIDIR]</code> é decisão que cabe à Ellen. <code>[NÃO ENCONTRADO]</code> é buraco declarado.</p>
+<hr>
+<p>O livro do Ries e Trout é de 1981, sobre marcas nacionais americanas com verba de mídia de massa. Duas coisas nele, porém, são exatamente o problema de uma clínica numa cidade brasileira, e uma terceira é o problema de uma pessoa que é a própria marca.</p>
+<p><code>[FATO]</code> Os capítulos 19 (um banco em Long Island), 20 (um banco em Nova Jersey) e 21 (a estação de esqui de Stowe) são casos de <strong>mercado geograficamente delimitado</strong>. O capítulo 23 é sobre <strong>posicionar uma pessoa</strong>, e o exemplo de abertura é um profissional liberal declarando ser o melhor da própria cidade (p. 206). O capítulo 18 é sobre <strong>serviço</strong>, e não produto. O capítulo 2 cita dentista pelo nome (p. 28).</p>
+<p><code>[LEITURA]</code> Ou seja: a adaptação para o caso da Revon é menor do que parece. A maior parte já está no livro. O que precisa de tradução é o canal, porque o livro só conhece TV, rádio, jornal e outdoor.</p>
+<p>O que segue é escrito como método, com passos numerados e um critério de aceite em cada um. Não é resumo do livro.</p>
+<p><strong>Existe uma versão de uma página deste método</strong>, em <a href="metodo-posicionamento-resumo.html"><code>operacao/metodo-posicionamento-resumo.md</code></a>, para quem precisa entender o que a Revon faz sem executar. Ela aponta para cá pela seção &quot;Os sete passos&quot;. Este documento é a fonte; o resumo não decide nada sozinho.</p>
+<h2 id="a-premissa-em-uma-frase">A premissa, em uma frase</h2>
+<p><code>[FATO]</code> p. 18: a solução não está no produto nem na cabeça de quem o vende, está na mente do potencial cliente.</p>
+<p><code>[FATO]</code> p. 216: posicionar é pensar ao contrário, começando pelo que os outros pensam e não por si mesmo.</p>
+<p>Isso derruba de saída o método que a doutora vai propor sozinha, que é listar o que ela sabe fazer e escolher o que mais gosta. Posicionamento não é escolha sobre ela. É escolha sobre o que já existe na cabeça da paciente.</p>
+<p><code>[FATO]</code> p. 174, e é o trecho mais útil do livro para uma especialista: quanto mais interessante e complexo o serviço, maior a chance de quem o lança empacotar tudo dentro dele e esquecer o cliente.</p>
+<p><code>[LEITURA]</code> Traduzido: quanto mais sofisticada a técnica que ela domina, maior a chance de ela comunicar a técnica e esquecer a paciente. Isso explica, sem precisar de mais nada, por que o feed de especialista de HOF costuma atrair colega e não paciente.</p>
+<h2 id="passo-1-descobrir-que-posicao-ela-ja-ocupa">Passo 1 · Descobrir que posição ela JÁ ocupa</h2>
+<p><code>[FATO]</code> p. 216: a pergunta não é o que você é, e sim que posição você já ocupa na mente do potencial cliente. E p. 217: quem responde essa pergunta é o mercado, não quem cuida do marketing.</p>
+<p><code>[FATO]</code> p. 187: começa-se pelo que o potencial cliente já está disposto a conceder, e não pelo que se gostaria de ter.</p>
+<p><strong>O que muda quando o mercado é local.</strong> <code>[LEITURA]</code> Numa marca nacional, descobrir a posição atual exige pesquisa cara. Numa cidade, é barato e a doutora pode executar sozinha em uma semana. O livro chega a formular a pergunta verificadora, quantas vezes o nome de alguém apareceria numa pesquisa com a comunidade profissional da cidade dele, e não percebe que numa praça pequena ela é executável de verdade (p. 206).</p>
+<p><strong>Como fazer, na prática:</strong></p>
+<ol><li>Pergunte a dez pacientes antigas, por áudio de WhatsApp, sem contexto e sem alternativa: <em>&quot;quando você pensa em mim, o que vem à cabeça primeiro?&quot;</em>. Não é enquete e não é múltipla escolha. Resposta aberta e curta.</li><li>Pergunte a cinco pessoas que NÃO são pacientes dela, na cidade, <strong>duas perguntas, e não uma</strong>:</li></ol>
+<p>a. Que <strong>nomes</strong> vêm à cabeça quando pensam em harmonização facial. Anote a ordem em que saem. A ordem é a escada, e alimenta o passo 2.</p>
+<p>b. O que elas costumam <strong>ouvir ou dizer</strong> sobre harmonização facial. Frases, não nomes, transcritas como saíram. Isto alimenta o caminho A do passo 3, e é de onde sai a cola da categoria.</p>
+<p><code>[FATO]</code> As duas perguntas são as do capítulo 17: p. 169, olhar o que existe na mente do potencial cliente, e p. 170, o que vem à cabeça dele quando surge o assunto da categoria. Colher só os nomes dá a escada e deixa o caminho A sem entrada.</p>
+<ol><li>Leia os últimos trinta comentários e directs do perfil dela. O que a audiência pergunta é o que ela acha que a doutora é.</li><li>Leia as avaliações do Google da clínica. O adjetivo que se repete é a posição atual, mesmo que ela odeie o adjetivo.</li></ol>
+<p><strong>Critério de aceite:</strong> as quatro fontes foram colhidas. Elas convergindo para uma palavra, essa é a posição atual. Convergindo para o mesmo silêncio, ou para respostas como &quot;ela é muito boa&quot; e &quot;ela é muito querida&quot;, a posição atual é <strong>nenhuma</strong>, e isso é resultado válido: posição vaga é o estado normal.</p>
+<p><strong>Nenhuma resposta reprova este passo.</strong> O que reprova é a coleta não ter sido feita, e é só isso que se confere aqui.</p>
+<p><strong>A armadilha deste passo.</strong> <code>[FATO]</code> <code>referencia-conteudo-e-leads.md</code>, seção &quot;Onde discordam&quot;, registra a objeção de uma das fontes de podcast: perguntado diretamente, o cliente tende a responder o que acha que se espera dele. <code>[LEITURA]</code> Por isso as fontes 3 e 4 acima (comentário e avaliação, que são dado não solicitado) valem mais que a 1 e a 2, e a Revon deveria colher as duas antes da conversa, não durante.</p>
+<h2 id="passo-2-mapear-a-escada-da-cidade-e-contar-os-degraus">Passo 2 · Mapear a escada da cidade, e contar os degraus</h2>
+<p><code>[FATO]</code> p. 42: a mente guarda uma escada por categoria, com o nome de uma marca em cada degrau.</p>
+<p><code>[FATO]</code> p. 40, citando o psicólogo George A. Miller: a mente comum não lida com mais de sete coisas ao mesmo tempo. E p. 41, que é a linha que importa mais aqui: em categoria de pouco interesse, a pessoa comum não nomeia mais que uma ou duas marcas.</p>
+<p><code>[LEITURA]</code> Harmonização facial é, para a paciente típica, categoria de pouco interesse no sentido exato do livro: ela não acompanha o mercado e decide uma ou duas vezes na vida. Logo <strong>a escada tem um ou dois degraus, não sete</strong>. Três consequências, e nenhuma é óbvia:</p>
+<ul><li>O segundo lugar vale muito mais aqui do que numa categoria nacional.</li><li>O terceiro lugar é igual a lugar nenhum.</li><li>Como quase ninguém ocupa degrau nomeado numa cidade média, a escada costuma estar <strong>vazia</strong>, e ser a primeira é barato.</li></ul>
+<p><code>[FATO]</code> p. 32: é melhor ser peixe grande em lagoa pequena, e depois aumentar a lagoa, do que peixe pequeno em lagoa grande.</p>
+<p><strong>Como fazer:</strong> listar, com nome, quem ocupa hoje o degrau 1 na cidade. Não é quem tem mais seguidor: é o nome que sai primeiro na pergunta do passo 1, item 2. Depois, listar o que essa pessoa <strong>é</strong> em uma palavra. Se ninguém sair primeiro em cinco perguntas seguidas, a escada está vazia e o passo 3 fica muito mais fácil.</p>
+<p><strong>Critério de aceite:</strong> um nome, ou a constatação explícita de que não há nome. Meio termo não serve.</p>
+<h2 id="passo-3-gerar-as-candidatas-e-depois-eliminar">Passo 3 · Gerar as candidatas, e depois eliminar</h2>
+<p><strong>Este passo tem duas metades, e a ordem importa.</strong> Primeiro se geram candidatas, por dois caminhos que rodam juntos. Depois se elimina, com quatro cortes que têm origem declarada. Quem elimina antes de gerar escolhe entre o que já lhe ocorreu, que é sempre pouco.</p>
+<p><code>[FATO]</code> p. 233, e é a frase que dá sentido ao passo inteiro: <strong>&quot;A essência do posicionamento é o sacrifício.&quot;</strong> Fica literal porque é o que a doutora ouve na sala, no bloco E3 do roteiro, e parafrasear tira o peso.</p>
+<p><code>[CONSTRUÇÃO DA REVON]</code> A sequência gerar e depois eliminar não está no livro. Os dois caminhos de geração e os quatro cortes estão, com página. O que a Revon acrescenta é a ordem e o fato de serem executados como procedimento, e não como leitura.</p>
+<p><strong>Por que o livro parece não ter gerador, e onde ele está.</strong> <code>[FATO]</code> p. 217, na pergunta sobre que posição se quer ocupar, os autores dizem que é ali que se recorre à bola de cristal para descobrir a melhor posição de longo prazo. Nos capítulos de princípio e nas seis perguntas, o gerador de fato não existe. Ele está nos capítulos de caso, e o capítulo 17 o enuncia com todas as letras.</p>
+<h3 id="3-1-caminho-a-olhar-o-que-ja-ocupa-a-cabeca-e-se-definir-contra-aquilo">3.1 · Caminho A: olhar o que já ocupa a cabeça, e se definir contra aquilo</h3>
+<p><code>[FATO]</code> p. 169, primeira frase do capítulo 17: o primeiro passo de qualquer programa de posicionamento é olhar o que já existe na mente do potencial cliente.</p>
+<p><code>[FATO]</code> p. 170, e é o aviso que explica por que quase todo mundo erra este passo: posicionar é procurar o óbvio, e erra-se o óbvio justamente por mirar rápido demais no próprio produto.</p>
+<p><strong>A sequência que o capítulo 17 executa</strong>, com a página de cada movimento:</p>
+<table><thead><tr><th>#</th><th>O movimento</th><th>Onde está</th><th>No Milk Duds</th></tr></thead><tbody><tr><td>1</td><td>Olhar o que existe na mente, antes de olhar o produto</td><td>p. 169</td><td>não olharam o caramelo</td></tr><tr><td>2</td><td>Definir quem é o potencial cliente</td><td>p. 169</td><td>dez anos de idade, comprador cauteloso e econômico</td></tr><tr><td>3</td><td>Perguntar o que vem à cabeça dele quando o assunto é a categoria</td><td>p. 170</td><td>não é Milk Duds, é barra de chocolate</td></tr><tr><td>4</td><td>Achar o ponto fraco estrutural da alternativa dominante</td><td>p. 170 e 171</td><td>a barra acaba em 2,3 segundos</td></tr><tr><td>5</td><td>Derivar a posição de um atributo real que responda àquele ponto fraco</td><td>p. 171</td><td>a alternativa de longa duração</td></tr></tbody></table>
+<p><code>[FATO]</code> p. 171, o ponto fraco dito por extenso: a barra de caramelo não dura, e uma criança acaba com uma em pouco mais de dois segundos. O atributo real que responde a isso é a caixa com quinze caramelos de consumo lento, que dura muito mais que a barra.</p>
+<p><strong>O capítulo 20 repete a mesma sequência com serviço</strong>, que é o caso análogo ao de uma clínica. <code>[FATO]</code> p. 193: a solução para posicionar um banco não sai de estudar o banco, sai de estudar a concorrência. O ponto fraco estrutural era a lentidão dos bancos grandes, e a posição virou o banco que anda depressa.</p>
+<p><strong>E o capítulo 20 responde à objeção que sempre aparece aqui</strong>, que é por que não escolher um espaço vazio em vez de se definir contra alguém. <code>[FATO]</code> p. 193: os autores consideram assumir a categoria das pequenas instituições financeiras e descartam, porque quem está na mente do cliente são os bancos grandes, e posicionamento é sempre lidar com o que já está na mente. Espaço vazio na cidade costuma estar vazio porque ninguém pensa nele.</p>
+<p><strong>Traduzido para HOF.</strong> <code>[CONSTRUÇÃO DA REVON]</code>, e é tradução, não citação: a alternativa dominante na cabeça da paciente quase nunca é uma clínica. É o que ocupa a categoria. Se a cidade inteira comunica naturalidade, então <strong>&quot;naturalidade&quot; é a cola dessa categoria</strong>, e a posição nasce de nomear o que ela não entrega.</p>
+<p>Isso conecta com o achado já registrado na pesquisa: <strong>o medo real da paciente não é ficar artificial, é ficar igual às outras.</strong> Quem promete naturalidade responde ao medo declarado e não toca no medo real, e é aí que a brecha está aberta.</p>
+<p><strong>Como se executa, com o material dos passos 1 e 2:</strong></p>
+<ol><li>Escrever a frase que a paciente da cidade diria se alguém perguntasse o que é harmonização facial ali. Sai do passo 1 item 2 e do passo 2.</li><li>Nomear o que essa frase promete, que é a cola da categoria.</li><li>Nomear o que ela <strong>não</strong> entrega, e é aqui que a candidata nasce.</li><li>Repetir para a segunda e a terceira coisa mais dita na cidade.</li></ol>
+<h3 id="3-2-caminho-b-reposicionar-a-pratica-dominante-da-categoria">3.2 · Caminho B: reposicionar a prática dominante da categoria</h3>
+<p><code>[FATO]</code> p. 75, capítulo 8: com poucas brechas livres, cria-se uma reposicionando quem já ocupa posição na cabeça das pessoas. Para pôr uma ideia nova na mente, é preciso antes tirar uma que já está lá.</p>
+<p><code>[FATO]</code> p. 74, o aviso que abre o capítulo e que descreve a clínica comum: querer ser tudo para todo mundo. Quem já está bem estabelecido sobrevive a isso; quem está construindo posição do zero, não.</p>
+<p><code>[LEITURA]</code> Este caminho não é caso especial de clínica nova. É o segundo motor, e ele é o que sobra quando a cidade está saturada e nenhuma brecha do cardápio abaixo está livre. O que se reposiciona é <strong>a prática dominante</strong>, e nunca uma colega pelo nome, pela restrição ética que o passo 4 detalha.</p>
+<h3 id="3-3-caminho-c-o-cardapio-das-brechas">3.3 · Caminho C: o cardápio das brechas</h3>
+<p><strong>São duas listas, e elas não se substituem.</strong> A primeira é a do livro, genérica e aplicável a qualquer categoria. A segunda é dos territórios de harmonização facial, construída pela Revon a partir do que a paciente deste nicho de fato traz na cabeça. Rode as duas.</p>
+<p><strong>Lista 1, as brechas que o livro nomeia</strong> (cap. 7, p. 66 a 71), traduzidas para HOF. <code>[FATO]</code> na coluna do livro, <code>[LEITURA]</code> na coluna da tradução:</p>
+<table><thead><tr><th>Brecha no livro</th><th>Página</th><th>Em HOF, vira</th></tr></thead><tbody><tr><td>Tamanho</td><td>66</td><td>Atender pouca gente. Agenda curta declarada, não escondida</td></tr><tr><td>Preço alto</td><td>67</td><td>Protocolo, e não procedimento. Ver a regra abaixo</td></tr><tr><td>Preço baixo</td><td>69</td><td>Perigoso em saúde. Ver 1.4 da PARTE 2 da pesquisa citada acima</td></tr><tr><td>Sexo</td><td>70</td><td>O homem, público quase intocado em HOF</td></tr><tr><td>Idade</td><td>71</td><td>50+, ou a paciente de 30 que quer prevenir</td></tr><tr><td>Momento do dia</td><td>71</td><td>Ocasião e fase de vida: pós-parto, pré-casamento, recomeço</td></tr><tr><td>Grande consumidor</td><td>71</td><td>A paciente de manutenção, que volta todo ano</td></tr></tbody></table>
+<p><code>[FATO]</code> p. 68, e esta é a regra mais mal executada de todas: preço alto funciona com três condições juntas, ser o primeiro a ocupar essa posição, ter uma história que sustente o preço, e estar numa categoria em que o público aceita pagar caro. Faltando alguma, o preço alto só afasta. E o lugar de estabelecer o preço alto é no anúncio, não na hora da compra.</p>
+<p><code>[LEITURA]</code> Tradução direta e dura: <strong>o preço premium precisa estar dito no conteúdo, antes da consulta.</strong> A clínica que comunica genericamente e revela o preço alto só no orçamento está fazendo exatamente o que o livro proíbe, e a objeção &quot;está caro&quot; que ela ouve todo dia é consequência disso, não da paciente.</p>
+<p><strong>Lista 2, os territórios de harmonização facial.</strong> <code>[CONSTRUÇÃO DA REVON]</code>, e ela não sai do livro: sai do nicho e da prática clínica. Vale para o ICP inteiro, que é dentista, biomédico esteta e médico, e não para uma só dessas formações.</p>
+<table><thead><tr><th>Território</th><th>O que a especialista precisa ter para ocupá-lo</th></tr></thead><tbody><tr><td><strong>Desfecho funcional</strong></td><td>atender DTM, bruxismo ou dor, e medir alguma coisa além da foto</td></tr><tr><td><strong>Risco declarado</strong></td><td>hialuronidase na clínica, protocolo de intercorrência escrito, e falar de risco na avaliação</td></tr><tr><td><strong>Fototipo</strong></td><td>formação específica em queloide e discromia pós-inflamatória, e casos próprios</td></tr><tr><td><strong>Recusa publicada</strong></td><td>agenda de avaliação com espera real, e disposição de recusar quem insiste</td></tr></tbody></table>
+<p><code>[LEITURA]</code> <strong>O território do fototipo é clínico antes de ser demográfico</strong>, e é assim que ele se sustenta. Fototipo muda protocolo, muda risco e muda resultado, e é por isso que a formação específica está na coluna do que se exige. Escrito só como recorte de público, ele vira promessa de representatividade que qualquer clínica copia numa semana. Escrito pelo lado clínico, ele é o que a maioria não consegue dizer.</p>
+<p><strong>Parte destes territórios se encontra com a lista 1, e parte não existe no livro.</strong> Recusa publicada é a brecha de <strong>tamanho</strong>, que é atender pouca gente com agenda declarada. Fototipo é parente da segmentação por <strong>sexo e idade</strong>, sem ser a mesma coisa. Desfecho funcional e risco declarado não têm correspondente: saem da regulação profissional e da prática clínica, que o livro não conhece.</p>
+<p><strong>O filtro binário destes quatro está no E4 do roteiro</strong>, com as perguntas que se fazem na sala. As perguntas moram lá e a lista mora aqui, para as duas não divergirem.</p>
+<h3 id="3-4-eliminar-e-cada-corte-tem-origem">3.4 · Eliminar, e cada corte tem origem</h3>
+<p>Rode os quatro na ordem. Candidata que morre num corte não volta.</p>
+<table><thead><tr><th>#</th><th>O corte</th><th>De onde vem</th></tr></thead><tbody><tr><td>1</td><td>Corta o que a concorrente do degrau 1 já ocupa</td><td>passo 2, e o filtro &quot;possuir&quot; da p. 217</td></tr><tr><td>2</td><td>Corta o que a clínica não entrega hoje nem em trinta dias</td><td>passo 6, puxado para antes da escolha</td></tr><tr><td>3</td><td>Corta recorte estreito quando a clínica não sustenta o volume</td><td>a conta de 3.5, abaixo</td></tr><tr><td>4</td><td>Corta o que enfrenta o líder no mesmo atributo</td><td>p. 235</td></tr></tbody></table>
+<p><code>[FATO]</code> p. 217, o corte 1: &quot;&#x27;Possuir&#x27; é a palavra-chave. Criam-se muitos programas para comunicar uma posição que é impossível de se obter simplesmente porque alguém já a possui.&quot;</p>
+<p><code>[FATO]</code> p. 235, o corte 4: &quot;para vencer a batalha pela mente do consumidor, você não pode competir diretamente com uma empresa que tem uma posição forte e bem estabelecida. Você pode dar-lhe a volta, passar por cima ou por baixo dela, mas nunca pôr-se de frente.&quot;</p>
+<p><code>[LEITURA]</code> Numa cidade, o líder quase nunca é uma clínica. É <strong>um nome pessoal com quinze anos de praça</strong>. Atacar de frente significa disputar o mesmo atributo, que é sempre &quot;a mais experiente&quot; ou &quot;a melhor técnica&quot;. Está proibido. Se a concorrente dominante é a mais experiente, a posição da nossa cliente não pode ser experiência.</p>
+<p><strong>O corte 3 funciona diferente dos outros três, e é preciso saber disso.</strong> <code>[CONSTRUÇÃO DA REVON]</code> Ele não julga candidata uma a uma: a conta de 3.5 produz um número só, que é o esforço que aquela clínica precisa sustentar. O que o corte decide é <strong>se candidata estreita é admissível ali</strong>. Pedindo perto do que a clínica já faz, sobra folga e o recorte pode apertar. Pedindo duas ou três vezes mais, nenhuma candidata estreita passa, porque a clínica teria que multiplicar a operação e ainda excluir gente.</p>
+<p><strong>O corte 2 é o que mais mata candidata boa, e é de propósito.</strong> Ele é o passo 6 antecipado. Posição que a operação não entrega hoje nem em trinta dias não é posição, é campanha, e a paciente descobre na primeira consulta.</p>
+<p><strong>Para as candidatas da lista 2, o corte 2 já foi aplicado na sala.</strong> O bloco E4 do roteiro roda o filtro binário território por território, e fecha confirmando em voz alta se a clínica entrega aquilo em toda paciente que chegar por causa da comunicação. Não aplicar de novo: candidata que passou no E4 já passou no corte 2, e reaplicar aqui corta por dúvida de quem lê a ficha, e não por fato apurado na conversa.</p>
+<p><strong>Sobrando mais de uma candidata</strong>, desempata a que a doutora aguenta martelar por doze meses sem odiar. É o passo 7 antecipado, e é critério de pessoa, não de mercado: posição que a dona não suporta repetir morre por abandono no mês quatro, e não por estar errada.</p>
+<p><strong>Não sobrando nenhuma</strong>, a saída é o caminho B de 3.2, reposicionar a prática dominante. Se o caminho B também não abrir, a clínica cai numa das duas situações da seção &quot;As duas clínicas que este método não atende de cara&quot;, e a decisão sobe para a coordenação.</p>
+<h3 id="3-5-a-conta-de-viabilidade">3.5 · A conta de viabilidade</h3>
+<p><strong>O limite de quanto estreitar.</strong> <code>[FATO]</code> p. 232: a posição precisa equilibrar duas coisas, ser exclusiva e ter apelo que não seja limitado demais. E o aviso, que os autores chamam de raciocínio Rolls-Royce: dá para acertar o posicionamento e mesmo assim fracassar em vendas.</p>
+<p><code>[LEITURA]</code> Numa clínica, esse aviso vira restrição de caixa. Posição exclusiva demais gera uma base de pacientes que não paga a folha. A marca nacional aceita 0,5% de um mercado gigante; a clínica não. <strong>Este é o risco mais sério de aplicar o livro sem juízo.</strong></p>
+<p><code>[CONSTRUÇÃO DA REVON]</code> A conta abaixo não está no livro. Ela existe porque o aviso da p. 232 não é executável sem número.</p>
+<p><strong>Os quatro insumos, e todos são apurados, nenhum estimado:</strong></p>
+<table><thead><tr><th>Insumo</th><th>Onde sai</th></tr></thead><tbody><tr><td>Faturamento mensal a bater</td><td>critério de qualificação, mínimo de 30 mil por mês, em <code>briefing-90-dias.md</code></td></tr><tr><td>Ticket do protocolo completo</td><td>passo 1.10 do playbook, que pergunta o ticket médio e o dos protocolos completos separados</td></tr><tr><td>Taxa de fechamento pós-avaliação</td><td>passo 1.10, se a clínica registra</td></tr><tr><td>Taxa de comparecimento</td><td>passo 1.10, idem</td></tr></tbody></table>
+<p><strong>A conta, na ordem:</strong></p>
+<ol><li>Faturamento a bater dividido pelo ticket do protocolo completo, o que dá <strong>protocolos fechados por mês</strong>.</li><li>Protocolos por mês dividido pela taxa de fechamento pós-avaliação, o que dá <strong>avaliações realizadas por mês</strong>.</li><li>Avaliações dividido pela taxa de comparecimento, o que dá <strong>agendamentos por mês</strong>, que é o esforço que a operação precisa sustentar.</li></ol>
+<p><strong>O corte é contra a linha de base, e não contra a cidade.</strong> <code>[CONSTRUÇÃO DA REVON]</code></p>
+<p>Compare as <strong>avaliações realizadas por mês</strong> do item 2 com quantas a clínica já realiza hoje, apurado no passo 1.10 da diagnóstica. Os dois números são reais e medem a mesma coisa.</p>
+<table><thead><tr><th>A posição exige</th><th>Leitura</th></tr></thead><tbody><tr><td>menos, ou perto do que a clínica já faz</td><td>sustentável, e o recorte pode ser estreito</td></tr><tr><td>duas ou três vezes mais</td><td><strong>o recorte não pode ser estreito</strong>: a clínica teria que multiplicar a operação e ainda excluir gente</td></tr></tbody></table>
+<p><code>[LEITURA]</code> Por que a comparação é em avaliação realizada e não em agendamento: é o número que a diagnóstica colhe. Comparar agendamento exigiria pedir um dado novo ao cliente, e a conta perderia a propriedade que a torna confiável, que é usar só o que já foi apurado.</p>
+<p><strong>Por que o tamanho da cidade saiu.</strong> A cidade quase nunca é a restrição. No exemplo abaixo, uma cidade de 240 mil habitantes contra uma exigência de pouco mais de 300 avaliações por ano: qualquer recorte plausível ali tem milhares de pessoas, e o corte contra a população nunca reprovaria por motivo real. O que aperta é se o recorte é plausível <strong>para aquela clínica</strong>. A decisão está no <code>decisoes.md</code> de 2026-08-20.</p>
+<p><strong>O Gerenciador de Anúncios não serve de fonte aqui</strong>, e é bom dizer por quê: a Revon não monta público, faz impulsionamento de peça publicada. Tamanho de público estimado da plataforma é métrica de um modelo que a Revon não opera.</p>
+<p><strong>O IBGE é conferência opcional, e não etapa.</strong> Ele serve só para recorte puramente demográfico, do tipo faixa etária, e serve para pegar absurdo, não para decidir. <strong>Não transforme isto em passo obrigatório:</strong> a conta fecha sem ele.</p>
+<h3 id="criterio-de-aceite-do-passo-3">Critério de aceite do passo 3</h3>
+<p>São quatro. Faltando um, a posição não fecha e o passo 4 não começa.</p>
+<ol><li><strong>A frase.</strong> A posição cabe em uma frase que uma criança de sete anos entende.</li><li><strong>A recusa.</strong> A doutora consegue dizer em voz alta o que ela vai <strong>deixar de fazer</strong> por causa dela. Se não houver recusa, não houve escolha.</li></ol>
+<p><strong>O perfil de paciente excluído sai daqui, e não de método próprio.</strong> Quem nomeia o que deixa de fazer está nomeando quem deixa de atender: recusar o orçamento por seringa exclui quem só quer preço por unidade, e recusar o resultado para sábado exclui quem procura isso. O incluído é o complemento, e é o que sobra depois da recusa. Não existe framework separado para perfil, e não precisa: ele é consequência deste item.</p>
+<ol><li><strong>A conta de viabilidade, escrita</strong>, com os quatro insumos de 3.5, os três números da conta, e a comparação contra a linha de base do passo 1.10. É o risco da p. 232, e o critério de aceite é onde ele deixa de ser aviso e vira trava: risco que fica só no texto explicativo não é executado por ninguém.</li><li><strong>A origem da candidata declarada</strong>, caminho A, B ou C. Serve para quando a posição precisar ser revista: quem sabe de onde ela veio sabe o que mudou.</li></ol>
+<h2 id="passo-4-testar-a-candidata-contra-a-concorrencia-e-so-testar">Passo 4 · Testar a candidata contra a concorrência, e só testar</h2>
+<p><strong>Este passo não gera posição, ele testa a que saiu do passo 3.</strong> A geração mora no 3.1, no 3.2 e no 3.3, e aqui a candidata já chegou escolhida. A distinção existe porque o material do capítulo 20 serve às duas coisas, e usá-lo como fonte da posição depois de o passo 3 já ter gerado produz duas posições concorrentes sem critério de desempate.</p>
+<p><code>[FATO]</code> p. 193, capítulo 20, sobre um banco cujos serviços eram iguais aos dos concorrentes por imposição do regulador: a abordagem que funciona é a do Tylenol, e a solução não sai de estudar o próprio banco, sai de estudar a concorrência.</p>
+<p><code>[LEITURA]</code> Este é o caso mais análogo do livro a uma clínica de HOF: serviço regulado, oferta legalmente padronizada entre concorrentes, mercado geograficamente limitado. A resposta do livro é que a posição não vem do serviço, vem da <strong>fraqueza estrutural do concorrente dominante</strong>. No caso do banco, foi lentidão, e a estratégia virou &quot;o banco que anda depressa&quot;.</p>
+<p><code>[LEITURA]</code> Numa clínica de HOF, os candidatos mais prováveis a fraqueza estrutural do concorrente grande são: tempo de consulta, quem de fato atende (a dona ou a equipe), continuidade do acompanhamento depois da aplicação, e o que acontece quando o resultado não agrada. <strong>Isto é hipótese, não achado.</strong> Precisa ser verificado contra a concorrência real da cidade dela, uma por uma, antes de virar posição.</p>
+<p><strong>Quando não existe concorrente dominante, e numa cidade média é o caso normal.</strong> O passo 2 registra que a escada costuma estar vazia, e sem concorrente dominante este passo ficaria sem entrada. <code>[LEITURA]</code> A saída é testar contra <strong>a prática dominante da categoria</strong>, e não contra uma pessoa: o que a cidade inteira faz, diz e promete. A pergunta muda de &quot;que fraqueza a líder tem&quot; para &quot;que fraqueza o jeito padrão de atender tem nesta cidade&quot;, e as candidatas de fraqueza continuam as mesmas: tempo de consulta, quem de fato atende, continuidade depois da aplicação, e o que acontece quando o resultado não agrada.</p>
+<p><code>[LEITURA]</code> Isso não é contorno, é o caso do capítulo 20 lido inteiro. O United Jersey não testou contra o líder do estado, testou contra a desvantagem estrutural de ser banco grande, que era um traço da categoria e não de uma instituição.</p>
+<p><code>[FATO]</code> p. 82, e é o erro que quase todo mundo comete neste passo: dizer que se é melhor que os concorrentes não é reposicionamento, é publicidade comparativa, e o consumidor detecta rápido a falha do raciocínio. A pergunta que ele faz fica literal porque é a voz dele: <strong>&quot;Se sua marca é tão boa assim, por que então não é a líder?&quot;</strong></p>
+<p><code>[LEITURA]</code> E aqui entra uma restrição que o livro não conhece porque não existe nos Estados Unidos de 1981: <strong>o Código de Ética Odontológica veda concorrência desleal</strong>, e numa cidade média o custo social de atacar uma colega pelo nome é alto e imediato. O que transfere do livro é reposicionar <strong>a prática dominante da categoria</strong>, nunca a pessoa. Ver a PARTE 5 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code> para o texto da norma.</p>
+<p><strong>Critério de aceite:</strong> a posição escolhida sobrevive à pergunta &quot;e se a concorrente número um disser a mesma coisa amanhã?&quot;. Se sobrevive porque ela não pode dizer (não é verdade dela, ou custa caro demais), a posição está de pé. Se sobrevive só porque ela ainda não pensou nisso, não está.</p>
+<p>Não havendo concorrente número um, a pergunta vira &quot;e se a cidade inteira passar a dizer isso no mês que vem?&quot;, e o teste é o mesmo: o que segura a posição é ela não ser copiável de graça.</p>
+<p><strong>Reprovando aqui, a candidata volta para o 3.4 como cortada</strong>, e entra a seguinte da lista. Não se conserta candidata reprovada neste passo, porque consertar aqui é gerar posição no passo de teste, que é exatamente a confusão que a abertura deste passo desfaz.</p>
+<h2 id="passo-5-nomear-e-derivar-a-promessa">Passo 5 · Nomear, e derivar a promessa</h2>
+<p><strong>Antes do nome, a promessa.</strong> <code>[CONSTRUÇÃO DA REVON]</code> Ela não vem do livro e não tem método próprio: <strong>é a frase da posição virada para o outro lado do balcão.</strong> A posição diz o que a clínica é, a promessa diz o que a paciente leva.</p>
+<table><thead><tr><th>Posição</th><th>Promessa</th></tr></thead><tbody><tr><td>a Dra. Helena desenha um plano que preserva o que é da paciente</td><td>você vai continuar parecendo você</td></tr></tbody></table>
+<p>Escreva a promessa na mesma sessão em que a posição fecha, e nunca depois: promessa escrita dias depois deixa de ser a mesma decisão e vira slogan novo. Não cabendo derivar, o problema é da posição, e volta para o passo 3.</p>
+<p><code>[FATO]</code> p. 85: o nome é o gancho que pendura a marca na escada mental do consumidor, e escolher o nome é a decisão de marketing mais importante.</p>
+<p><code>[FATO]</code> p. 87: nome forte, descritivo e quase genérico impede o concorrente imitador de se firmar dentro do território.</p>
+<p><code>[FATO]</code> p. 90: ficar com palavra descritiva comum e evitar palavra inventada. E p. 88, sobre sigla técnica: quem se apaixona pela própria criação produz nome do tipo XD-12.</p>
+<p><code>[FATO]</code> p. 105: a mente funciona pelo ouvido.</p>
+<p><code>[LEITURA]</code> Numa clínica local há <strong>três camadas de nome</strong>, e o livro não as separa porque não precisava:</p>
+<ol><li><strong>O nome da pessoa.</strong> Ela não escolhe e não deve trocar. O livro sugere trocar de nome (p. 207, o caso de Roy Rogers e John Wayne), o que não é opção para quem tem CRO.</li><li><strong>O nome da clínica.</strong> Aqui vale a regra do &quot;quase genérico&quot; e vale a proibição da sigla.</li><li><strong>O nome do método ou do protocolo.</strong> É a camada onde ela tem liberdade total, e é a única que ela costuma errar por excesso de criatividade.</li></ol>
+<p><code>[FATO]</code> p. 208, e o livro fala de pessoas e não só de empresas: muita gente de negócios vira vítima da inicialite, individualmente e como profissional. A razão estrutural está na p. 109: a IBM pôde virar sigla porque <strong>primeiro</strong> ficou famosa, e inverter essa ordem não funciona.</p>
+<p><code>[LEITURA]</code> Portanto: <code>IHOF</code>, <code>Clínica MB</code>, <code>@dra.m.b.odonto</code> e <code>Protocolo Lumina</code> são todos o mesmo erro em roupas diferentes. O nome do protocolo tem que dizer o benefício, não soar bonito.</p>
+<p><strong>Critério de aceite, e ele vale só para a camada 3</strong>, o nome do método ou do protocolo. As camadas 1 e 2, o nome da pessoa e o da clínica, não se trocam, então não há o que aceitar ou recusar nelas: o que se faz ali é registrar o que existe. Na camada 3, alguém que nunca ouviu o nome, ao ouvi-lo por telefone, escreve certo e adivinha o que é.</p>
+<h2 id="passo-6-fazer-a-operacao-entregar-a-posicao-antes-de-comunica-la">Passo 6 · Fazer a operação entregar a posição, antes de comunicá-la</h2>
+<p><code>[FATO]</code> p. 194 e 195, o caso do United Jersey. A estratégia era o banco que anda depressa, e a segunda metade da execução foi operacional: os gerentes foram cobrados a fazer o desempenho do banco alcançar a promessa do anúncio, o que virou sete compromissos internos. Os sete são de operação, não de publicidade.</p>
+<p><code>[FATO]</code> p. 195: a publicidade só passou a fazer as promessas depois que o desempenho do banco já dava conta de cumpri-las.</p>
+<p><code>[FATO]</code> p. 196: boa estratégia de posicionamento atravessa todos os aspectos da empresa, e não fica na comunicação.</p>
+<p><code>[LEITURA]</code> Este é o passo em que uma clínica pequena <strong>ganha</strong> de uma marca nacional, e é a maior vantagem estrutural que ela tem. A dona controla a operação inteira: quem atende o telefone, quanto dura a consulta, o que a secretária fala, o que acontece no retorno. Nenhuma marca nacional consegue mudar a experiência inteira em uma semana. Ela consegue.</p>
+<p><code>[LEITURA]</code> Consequência para o processo da Revon: a posição definida no dia 2 tem que virar mudança na operação antes de virar reel. Se a posição é &quot;a que explica de verdade&quot;, e a consulta continua durando vinte minutos, o conteúdo vira promessa falsa e a paciente descobre na primeira visita.</p>
+<p><strong>Critério de aceite:</strong> listar de três a sete compromissos operacionais que a posição obriga, com responsável e prazo. Se a posição não obriga a mudar nada na clínica, ela é slogan, não posição.</p>
+<h2 id="passo-7-sustentar-e-a-regra-de-nao-mexer">Passo 7 · Sustentar, e a regra de não mexer</h2>
+<p><code>[FATO]</code> p. 221: salvo exceção rara, não se muda a estratégia básica de posicionamento, muda-se a tática. E a imagem que o livro usa: posição na mente é como terreno valioso, quem abre mão descobre que não consegue recuperar.</p>
+<p><code>[FATO]</code> p. 45, a armadilha que o livro batiza: depois de acertar o posicionamento, a empresa esquece o que a tornou bem-sucedida.</p>
+<p><code>[FATO]</code> p. 179 e 180, a prova numérica: o volume do mailgrama da Western Union subiu de 6 para 41 milhões em dez anos com a mesma estratégia. A estratégia mudou em 1981, e o volume caiu para 41, 37, 30 e 22 milhões nos quatro anos seguintes. A conclusão do livro: o problema não é criar a boa estratégia, é ter coragem de martelar o mesmo tema ano após ano.</p>
+<p><code>[LEITURA]</code> Numa clínica, quem cansa primeiro é a dona, não a cidade. Ela troca de bio e de tema a cada seis meses porque &quot;já falei disso&quot;. A regra operacional que sai daqui, e que a Revon precisa impor: <strong>posição não se revisita antes de doze meses.</strong> Pauta muda toda semana. Posição não.</p>
+<p><code>[DECIDIR]</code> Se a posição definida no dia 2 pode ser revista dentro dos 90 dias, e sob que gatilho. A recomendação de quem escreve é: não, salvo se o passo 1 tiver sido feito errado.</p>
+<p>Uma segunda alternativa entra aqui para a decisão, e ela não é erro de apuração: <strong>o passo 6 provar que a operação não entrega a posição.</strong> É diferente do caso acima, em que a posição estava errada desde o começo. Aqui ela pode estar certa e a clínica não conseguir sustentá-la, o que é achado do passo 6 e não falha do passo 1. Tratar os dois pelo mesmo gatilho junta uma correção de método com uma constatação de capacidade.</p>
+<h2 id="um-exemplo-inteiro-do-passo-1-ao-7">Um exemplo inteiro, do passo 1 ao 7</h2>
+<p><code>[CONSTRUÇÃO DA REVON]</code> A clínica abaixo é fictícia e os números são inventados para a conta fechar. O exemplo existe porque o método vai rodar ao vivo em 75 minutos e ainda não rodou com ninguém: quem for conduzir vai olhar isto cinco minutos antes da conversa, e não os critérios de aceite.</p>
+<p><strong>A clínica.</strong> Dra. Helena, cidade de 240 mil habitantes no interior. Sete anos de formada, três de HOF. Fatura 34 mil por mês. Atende sozinha. Ticket médio de 1.900, e o dos protocolos completos, 6.400. <strong>Realiza hoje 20 avaliações por mês</strong>, cinco por semana, apurado no passo 1.10. Agenda com espaço. Instagram com 4.100 seguidores, publicando quando lembra.</p>
+<h3 id="passo-1-que-posicao-ela-ja-ocupa">Passo 1 · Que posição ela já ocupa</h3>
+<p>As quatro fontes foram colhidas.</p>
+<ul><li><strong>Como ela se descreve:</strong> &quot;harmonização natural, com técnica apurada&quot;.</li><li><strong>Como a equipe descreve:</strong> &quot;ela é muito caprichosa&quot;.</li><li><strong>Comentários no perfil:</strong> &quot;amei&quot;, &quot;ficou linda&quot;, &quot;quanto custa?&quot;.</li><li><strong>Avaliações no Google:</strong> &quot;atendimento ótimo&quot;, &quot;muito atenciosa&quot;.</li></ul>
+<p><strong>Resultado:</strong> posição atual nenhuma. As respostas convergem para o mesmo silêncio, que é elogio de pessoa e não atributo de categoria. Passo aceito, porque a coleta foi feita e resposta vaga é resultado válido.</p>
+<h3 id="passo-2-a-escada-da-cidade">Passo 2 · A escada da cidade</h3>
+<p>Três clínicas visíveis, mais um nome pessoal com dezoito anos de praça, Dr. Márcio, que é quem a paciente cita primeiro quando o assunto é HOF.</p>
+<table><thead><tr><th>Degrau</th><th>Quem</th><th>Que atributo ocupa</th></tr></thead><tbody><tr><td>1</td><td>Dr. Márcio</td><td>experiência, &quot;faz há mais tempo&quot;</td></tr><tr><td>2</td><td>Clínica Belle</td><td>preço, pacote e parcelamento</td></tr><tr><td>3</td><td>vago</td><td>nenhuma das outras duas ocupa nada</td></tr></tbody></table>
+<p><strong>Resultado:</strong> só o degrau 1 está de fato ocupado. A escada é rasa, que é o normal numa cidade deste tamanho.</p>
+<h3 id="passo-3-gerar-e-eliminar">Passo 3 · Gerar e eliminar</h3>
+<p><strong>Caminho A.</strong> A frase que a paciente da cidade diria: &quot;harmonização é preencher e ficar natural, sem exagero&quot;. A cola da categoria é <strong>naturalidade</strong>: todas as quatro contas dizem a mesma coisa. O que a naturalidade não entrega: ela promete que ninguém vai notar, e o medo real da paciente é ficar <strong>igual às outras</strong>, não ficar artificial. Candidata A1: <strong>o rosto que continua sendo o dela.</strong></p>
+<p>Segunda coisa mais dita na cidade: &quot;resultado imediato&quot;. O que não entrega: nada sobre o que acontece em seis meses. Candidata A2: <strong>a harmonização que se planeja para três anos, e não para a foto de sábado.</strong></p>
+<p><strong>Caminho B.</strong> A prática dominante da categoria é orçar por procedimento na primeira consulta. Reposicionar isso: <strong>quem orça por seringa está vendendo produto, não desenhando rosto.</strong> Candidata B1.</p>
+<p><strong>Caminho C, cardápio.</strong> Brecha de idade, a paciente de 50+. Candidata C1. Brecha de grande consumidor, a paciente de manutenção anual. Candidata C2.</p>
+<p><strong>Eliminação, na ordem:</strong></p>
+<table><thead><tr><th>Candidata</th><th>Corte</th><th>Por quê</th></tr></thead><tbody><tr><td>A2, planejamento de três anos</td><td>2</td><td>a clínica não tem protocolo de acompanhamento hoje nem em trinta dias</td></tr><tr><td>C1, 50+</td><td><strong>passa</strong></td><td>o corte 3 não reprova recorte estreito nesta clínica, ver a conta abaixo</td></tr><tr><td>C2, manutenção anual</td><td>1</td><td>é o que o Dr. Márcio já ocupa de fato, pela base antiga dele</td></tr><tr><td>B1, contra o orçamento por seringa</td><td>passa</td><td></td></tr><tr><td>A1, o rosto que continua sendo o dela</td><td>passa</td><td></td></tr></tbody></table>
+<p>Nenhuma foi cortada pelo corte 4, porque nenhuma disputa experiência com o Dr. Márcio.</p>
+<p><strong>Desempate, sobraram três</strong>, porque o corte 3 não reprovou recorte estreito nesta clínica. A1 e B1 dizem quase a mesma coisa por ângulos diferentes. A Dra. Helena, perguntada qual ela aguenta repetir por doze meses sem odiar, escolhe A1: B1 exige atacar uma prática que metade das colegas da cidade usa, e ela não quer essa conversa toda semana; C1 restringe a idade e ela não quer recusar a paciente de 35 que já atende. B1 e C1 ficam registradas como segunda e terceira opção.</p>
+<p><strong>A conta de viabilidade, com os quatro insumos:</strong></p>
+<table><thead><tr><th>Insumo</th><th>Valor</th></tr></thead><tbody><tr><td>Faturamento a bater</td><td>34.000 por mês</td></tr><tr><td>Ticket do protocolo completo</td><td>6.400</td></tr><tr><td>Taxa de fechamento pós-avaliação</td><td>35%</td></tr><tr><td>Taxa de comparecimento</td><td>70%</td></tr></tbody></table>
+<ol><li>34.000 ÷ 6.400 = <strong>5,3 protocolos por mês</strong>, arredondando para 6.</li><li>6 ÷ 0,35 = <strong>18 avaliações realizadas por mês</strong>.</li><li>18 ÷ 0,70 = <strong>26 agendamentos por mês</strong>, que é o esforço da operação.</li></ol>
+<p><strong>O corte, contra a linha de base:</strong> a posição exige <strong>18 avaliações realizadas por mês</strong> e a Dra. Helena já realiza <strong>20</strong>. A posição pede menos do que a clínica faz hoje.</p>
+<p><strong>Leitura: sustentável, e o recorte pode ser estreito.</strong> Nenhuma candidata morre no corte 3, inclusive a C1, do público 50+. A clínica tem folga para apertar o recorte.</p>
+<p><code>[LEITURA]</code> <strong>Se a conta desse 45 avaliações contra as 20 de hoje</strong>, o corte 3 mataria C1 e qualquer outra candidata estreita de uma vez: mais que dobrar o volume e ainda excluir gente não acontece ao mesmo tempo. Nesse caso a saída seria posição ampla, ou rever o ticket com a doutora antes de escolher.</p>
+<p><code>[LEITURA]</code> Os quatro insumos e a linha de base saem todos do passo 1.10. <strong>Não há estimativa nesta conta</strong>, e é essa a propriedade que a torna confiável.</p>
+<h3 id="passo-4-testar">Passo 4 · Testar</h3>
+<p>Não existe concorrente dominante no atributo, então o teste é contra a prática dominante da categoria.</p>
+<p><strong>&quot;E se a cidade inteira passar a dizer isso no mês que vem?&quot;</strong> Dizer é barato. Entregar exige consulta longa, fotografia de acompanhamento e recusar o pedido que descaracteriza o rosto, e a clínica que orça por seringa não consegue fazer isso sem mudar como cobra. A posição está de pé porque copiar custa caro, e não porque ninguém pensou nisso.</p>
+<h3 id="passo-5-nomear">Passo 5 · Nomear</h3>
+<p>Camadas 1 e 2 não se trocam: Dra. Helena, e o nome da clínica fica. Camada 3, o nome do protocolo: <strong>Plano de Rosto</strong>. Ao telefone, quem nunca ouviu escreve certo e adivinha o que é.</p>
+<h3 id="passo-6-a-operacao-entrega-antes-de-comunicar">Passo 6 · A operação entrega antes de comunicar</h3>
+<p>Três compromissos operacionais, e são o que o corte 2 exigiu que existisse antes da escolha:</p>
+<ol><li>Consulta de avaliação passa de 30 para 60 minutos, com bloqueio na agenda.</li><li>Fotografia padronizada em toda primeira consulta, e comparação na consulta de retorno.</li><li>Orçamento apresentado como plano, com o que entra e o que fica de fora, e nunca por unidade de produto.</li></ol>
+<h3 id="passo-7-sustentar">Passo 7 · Sustentar</h3>
+<p>A posição não se mexe por doze meses. O que muda é o exemplo, nunca a frase.</p>
+<h3 id="o-que-sai-deste-metodo-por-extenso">O que sai deste método, por extenso</h3>
+<p><strong>A posição, em uma frase:</strong> para a mulher que quer harmonização mas tem medo de sair com o rosto de outra pessoa, a Dra. Helena desenha um plano que preserva o que é dela.</p>
+<p><strong>A promessa, derivada da posição:</strong> você vai continuar parecendo você.</p>
+<p><strong>O que fica de fora:</strong> o pedido de rosto copiado de referência, o orçamento por seringa, a paciente que quer resultado só para o fim de semana, e o público 50+ como foco declarado.</p>
+<p><strong>Os compromissos operacionais:</strong> os três do passo 6, todos com data.</p>
+<p><strong>A origem da candidata:</strong> caminho A, a cola da categoria. B1 fica registrada como segunda opção, com a data em que foi descartada e por quê.</p>
+<h2 id="as-seis-perguntas-na-integra">As seis perguntas, na íntegra</h2>
+<p><code>[FATO]</code> Capítulo 24, p. 216 a 222. O livro avisa (p. 216) que são perguntas simples de fazer e difíceis de responder, porque testam coragem e crença de quem responde.</p>
+<ol><li><strong>Que posição você ocupa?</strong> (p. 216)</li><li><strong>Que posição você quer ocupar?</strong> (p. 217)</li><li><strong>Quem é que você tem de enfrentar?</strong> (p. 219)</li><li><strong>Você tem dinheiro suficiente?</strong> (p. 220)</li><li><strong>Você aguenta firme?</strong> (p. 221)</li><li><strong>Você está à altura de sua posição?</strong> (p. 222)</li></ol>
+<p>A pergunta 4 contém o trecho mais importante do livro inteiro para o caso da Revon, <code>[FATO]</code> p. 220:</p>
+<blockquote><p>&quot;Um modo de dar conta do nível de ruído é reduzir a amplitude geográfica de seu problema. Lançar novos produtos ou novas ideias em um mercado de cada vez, em vez de fazer um lançamento nacional ou até mesmo internacional. Com determinada quantia, é melhor gastar demais em uma única cidade do que gastar de menos em várias cidades.&quot;</p></blockquote>
+<p><code>[LEITURA]</code> É o próprio livro dizendo que a resposta ao problema de verba pequena <strong>é o mercado local</strong>. Isso justifica, direto da fonte, a tese da Revon de que impulsionamento local concentrado vale mais que campanha ampla, e justifica por que o especialista não precisa de verba de agência para ocupar uma posição.</p>
+<p>A pergunta 6 é sobre coerência, e a formulação operacional dentro dela é, <code>[FATO]</code> p. 222: o que você comunica sobre si combina com a posição que ocupa? O livro chega a citar a roupa, que diz ao mundo qual é a profissão de quem a veste.</p>
+<p><code>[LEITURA]</code> Em HOF isso é literal e desconfortável: <strong>o rosto da própria doutora é publicidade da posição dela.</strong> Quem se posiciona por resultado natural e tem o próprio rosto visivelmente preenchido está falhando na pergunta 6, e a paciente lê isso em dois segundos. Ver a PARTE 3 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>.</p>
+<h2 id="os-erros-do-livro-traduzidos-para-clinica-de-hof">Os erros do livro, traduzidos para clínica de HOF</h2>
+<h3 id="erro-1-extensao-de-linha-que-aqui-vira-catalogo-de-servicos">Erro 1 · Extensão de linha, que aqui vira catálogo de serviços</h3>
+<p><code>[FATO]</code> p. 144: nome é como elástico, estica até certo ponto e enfraquece quanto mais se estica, que é o contrário do que se espera.</p>
+<p><code>[FATO]</code> p. 116, o princípio da gangorra: um nome não representa dois produtos diferentes, e quando um sobe o outro desce.</p>
+<p><code>[FATO]</code> p. 124, o caso Proteína 21: um xampu com 13% de mercado. A empresa lançou spray regular e extrafirme, com e sem perfume, condicionador em duas fórmulas, concentrado, e uma linha masculina. A participação caiu de 13% para 2%.</p>
+<p><code>[FATO]</code> p. 138: a extensão de linha é insidiosa porque a doença leva anos para aparecer. E o exemplo da Kraft: a marca virou tudo e ao mesmo tempo coisa nenhuma.</p>
+<p><code>[LEITURA]</code> <strong>Em clínica de HOF, a extensão de linha é a lista de serviços do site e dos destaques do perfil.</strong> A dentista conhecida por harmonização que acrescenta lente de contato, clareamento, implante, fio, bioestimulador, ortodontia, estética íntima e emagrecimento está executando o caso Proteína 21 passo a passo. Cada item novo dá dinheiro no primeiro semestre e desidrata o nome ao longo de anos.</p>
+<p><strong>Teste da lista de compras</strong>, <code>[LEITURA]</code> derivado de p. 137: pergunte a dez pacientes antigas o que vem à cabeça quando pensam nela. Se vierem três coisas, o nome já esticou. Se vier &quot;ela faz tudo&quot;, o nome já é Kraft.</p>
+<p><code>[LEITURA]</code> E há uma saída do livro que a clínica <strong>não</strong> tem. O livro oferece duas: sacrificar, ou lançar marcas separadas como a P&amp;G (p. 61 a 62). Uma clínica não sustenta duas marcas, dois perfis e duas audiências. Logo, para ela, a única saída é o sacrifício.</p>
+<h3 id="erro-2-o-eu-tambem-que-aqui-vira-o-feed-generico-da-categoria">Erro 2 · O &quot;eu também&quot;, que aqui vira o feed genérico da categoria</h3>
+<p><code>[FATO]</code> p. 65: seguidor que copia o líder não está confrontando, está apenas dizendo que também faz aquilo. E ser melhor que a concorrência não basta.</p>
+<p><code>[FATO]</code> p. 235: nove em cada dez vezes, quem imita e ataca o líder de frente caminha para o desastre.</p>
+<p><code>[LEITURA]</code> Em HOF o &quot;eu também&quot; tem forma reconhecível: antes e depois, paleta bege, foto de seringa, e o vocabulário compartilhado de &quot;naturalidade&quot;, &quot;leveza&quot;, &quot;harmonia&quot; e &quot;realçar sua beleza&quot;. Quem faz isso está dizendo implicitamente &quot;sou melhor que os outros na mesma dimensão&quot;, que é o que o livro mostra não funcionar. Ver a PARTE 2 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>, onde isso está quantificado.</p>
+<h3 id="erro-3-a-brecha-da-fabrica-que-aqui-vira-agenda-ociosa-e-curso-novo">Erro 3 · A brecha da fábrica, que aqui vira agenda ociosa e curso novo</h3>
+<p><code>[FATO]</code> p. 72: o erro comum é preencher a lacuna da fábrica em vez da lacuna da mente. E p. 73: mesmo a grande conquista técnica fracassa se não houver brecha para ela na cabeça das pessoas.</p>
+<p><code>[LEITURA]</code> Tradução: lançar um serviço porque a cadeira está vazia na terça, porque ela acabou de fazer um curso, ou porque comprou um aparelho. É posicionamento de dentro para fora, e é o mais comum de todos em clínica.</p>
+<h3 id="erro-4-ser-tudo-para-todos-que-aqui-vira-o-perfil-que-fala-com-todo-mundo">Erro 4 · Ser tudo para todos, que aqui vira o perfil que fala com todo mundo</h3>
+<p><code>[FATO]</code> p. 74: não se vence querendo ser tudo para todo mundo e sem fazer inimigo nenhum. E o caso Rheingold, <code>[FATO]</code> p. 218: a cervejaria fez comerciais mostrando cada grupo étnico de Nova York bebendo a cerveja, e em vez de apelar a todos acabou não apelando a ninguém.</p>
+<p><code>[LEITURA]</code> O perfil que alterna noiva, mulher de 50, homem, adolescente e paciente de convênio é o Rheingold. Cada público vê o conteúdo dos outros e conclui que a clínica não é para ele.</p>
+<h3 id="erro-5-nome-generico-e-sigla">Erro 5 · Nome genérico e sigla</h3>
+<p>Tratado no passo 5.</p>
+<h3 id="erro-6-o-raciocinio-rolls-royce">Erro 6 · O raciocínio Rolls-Royce</h3>
+<p>Tratado no passo 3. <code>[FATO]</code> p. 232: dá para acertar o posicionamento e mesmo assim fracassar em vendas.</p>
+<h2 id="as-duas-clinicas-que-este-metodo-nao-atende-de-cara">As duas clínicas que este método não atende de cara</h2>
+<p>Os sete passos pressupõem uma clínica que já opera e já ocupa alguma posição na cidade, mesmo que ela não saiba qual. Dois casos fogem disso, e quem conduzir a conversa vai encontrar os dois.</p>
+<h3 id="a-clinica-que-acabou-de-abrir">A clínica que acabou de abrir</h3>
+<p>O passo 1 pergunta que posição ela já ocupa, e o passo 2 pergunta que nome sai primeiro na cidade. <strong>Para quem abriu há dois meses, a resposta é nenhum, e isso não é falha de condução.</strong></p>
+<p><code>[LEITURA]</code> O que muda é de onde vem a matéria-prima. Sem histórico de paciente, os blocos E1 e E2 da conversa não têm o que extrair, e o peso migra para o dever de casa: a grade de atributos das concorrentes, que não depende dela, e a escada da cidade vista de fora.</p>
+<p><code>[FATO]</code> O livro tem uma vantagem para esse caso, na p. 118: quem é desconhecido, com produto desconhecido, tem mais a ganhar com comunicação do que quem já é famoso com produto conhecido. Não há posição velha para desmontar, e a primeira que ela ocupar é a que fica.</p>
+<p><code>[FATO]</code> E oferece uma saída quando não há brecha livre, na p. 75: para pôr uma ideia nova na mente das pessoas é preciso antes tirar uma que já está lá, que é reposicionar a concorrência.</p>
+<p><code>[FATO]</code> O caso do Milk Duds é outro, e está no capítulo 17, p. 169 a 172, não na p. 75. Lá o que se reposiciona é a <strong>categoria</strong>: p. 170, o único caminho para o Milk Duds entrar na mente das crianças era reposicionar a categoria das barras de caramelo. Os dois movimentos são o caminho A e o caminho B do passo 3. <code>[LEITURA]</code> Numa cidade em que todas as clínicas dizem a mesma coisa, essa é a jogada disponível para quem chega por último.</p>
+<p><strong>O que não muda:</strong> o E6, a conta de viabilidade. Clínica nova erra a conta com mais frequência, porque não tem histórico de agenda para ancorar.</p>
+<h3 id="a-clinica-que-ja-e-conhecida-por-algo-que-ela-nao-quer-mais">A clínica que já é conhecida por algo que ela não quer mais</h3>
+<p><code>[LEITURA]</code> Não é ausência de posição, é posição errada ocupada. É a clínica conhecida como a do preenchimento barato que quer virar a do protocolo completo, e o trabalho é desmontar antes de construir.</p>
+<p><strong>Aqui é preciso dizer o que o livro NÃO oferece.</strong> O capítulo de reposicionamento, p. 75 a 84, trata de reposicionar <strong>a concorrência</strong>, e a tática dele é atacar pelo nome, que não se transfere para saúde pelo Código de Ética. <strong>O livro não traz método para uma marca desmontar a própria posição.</strong></p>
+<p><code>[FATO]</code> O que ele traz é o veredito sobre tentar. Na p. 118 e seguintes, o capítulo da armadilha da extensão de linha mostra o que acontece com a marca que empresta o nome forte a outra coisa: a goma de mascar Life Savers morreu em silêncio, porque a marca significava a bala com o buraquinho e não sabor excelente. <strong>O nome carrega a posição antiga para dentro do produto novo.</strong></p>
+<p><code>[FATO]</code> E traz a saída que a Procter &amp; Gamble usou: em vez de tentar mudar a posição do Ivory na cabeça do consumidor, criou o Tide, um nome novo para o conceito novo. Quando lançou o detergente de lava-louças, não o chamou de Tide, chamou de Cascade.</p>
+<p><code>[LEITURA]</code> <strong>Traduzido para HOF, aqui o método bate num limite real:</strong> a marca de uma clínica é a doutora, e não dá para trocar o nome dela. A saída do Tide não existe nesse formato.</p>
+<p><code>[DECIDIR]</code> O que a Revon faz com essa clínica é decisão da Ellen, e as alternativas conhecidas são três: recusar o caso, aceitar o prazo mais longo que desmontar exige, ou usar a única coisa que o livro sustenta sem contradição, que é <strong>construir a posição nova sobre um nome novo dentro da própria clínica</strong>, como um protocolo ou um serviço com nome próprio, deixando a posição antiga morrer sem ser atacada.</p>
+<p><code>[NÃO ENCONTRADO]</code> Nenhum caso de reposicionamento de profissional de saúde no livro, e nenhuma medição do tempo que desmontar leva.</p>
+<h2 id="o-que-do-livro-nao-se-usa-e-por-que">O que do livro NÃO se usa, e por quê</h2>
+<p>Sendo honesto sobre a fonte, porque metade dela não serve:</p>
+<ol><li><strong>Metade do capítulo 23.</strong> <code>[FATO]</code> p. 209 a 215, a ideia de encontrar um cavalo para montar, e os seis cavalos são a empresa, o chefe, um amigo, uma ideia, a fé e você mesmo. <code>[FATO]</code> p. 210, invertendo a frase de Kennedy: pergunte o que a sua empresa pode fazer por você. Isso é conselho para executivo assalariado subir na hierarquia de uma corporação americana dos anos 70. A dona de clínica não tem chefe e é ela mesma o cavalo. O livro ainda diz, p. 215, que montar em si mesmo dá muito pouco resultado, o que inverteria o sentido se aplicado aqui. <strong>Não usar.</strong></li><li><strong>A aritmética de verba.</strong> <code>[FATO]</code> p. 220 fala em 200 mil mensagens publicitárias por ano e comercial de 500 mil dólares no Super Bowl. Folclore de mídia de massa. Sobra uma frase útil, a da concentração geográfica, já citada.</li><li><strong>Todas as táticas.</strong> O livro só conhece compra de espaço. O canal de uma clínica hoje é orgânico e algorítmico. A estratégia continua válida porque é sobre a mente e não sobre o canal; as táticas não.</li><li><strong>A posição de número dois declarada.</strong> <code>[FATO]</code> p. 43: quem não é o primeiro tem de ser o primeiro a ocupar a segunda posição. <code>[LEITURA]</code> A Avis pôde dizer isso porque locação de carro é commodity e o cliente não corre risco. Em saúde, admitir publicamente ser a segunda lê-se como inferioridade clínica. O que transfere é a <strong>estrutura</strong> (relacionar-se com o que já está na cabeça dela) sem a <strong>forma</strong> (dizer que é a segunda). Esta é a maior ressalva da lista.</li><li><strong>Reposicionar o concorrente pelo nome.</strong> O livro celebra o Tylenol atacando a aspirina (p. 77) e a Stolichnaya atacando a concorrente pelo nome (p. 78). Esbarra no Código de Ética Odontológica e no custo social de uma cidade pequena. Ver a PARTE 5 de <code>operacao/pesquisa-posicionamento-e-conteudo.md</code>.</li><li><strong>A ideia de que o que vale a pena fazer vale a pena ser malfeito</strong>, <code>[FATO]</code> p. 207. É conselho sobre reputação corporativa. Em procedimento no rosto de uma paciente, o custo do erro não é reputacional, é clínico e jurídico. Fora do domínio de comunicação, essa frase é irresponsável, e o livro não faz a ressalva porque não está falando de saúde.</li><li><strong>A perspectiva global</strong> (p. 234). Irrelevante.</li></ol>
+<p>E uma que morde a própria Revon, <code>[FATO]</code> p. 223: todos precisam de ajuda externa, mas só os ricos contratam agência, e o resto tem de aprender a fazer sozinho.</p>
+<p><code>[LEITURA]</code> O livro afirma que negócio pequeno tem que fazer sozinho. Quem vende posicionamento para clínica pequena vende contra essa frase. A resposta honesta da Revon não é ignorá-la: é o critério de qualificação dos 30 mil de faturamento mínimo, que existe justamente para não vender observador externo a quem não pode pagar por ele. Vale ter isso explícito, porque um cliente que leu o livro vai perguntar.</p>
+<p>Mas o mesmo capítulo dá o contra-argumento, <code>[FATO]</code> p. 223: o que o observador externo fornece é ignorância, que é outro nome para objetividade. Por não saber o que se passa dentro da empresa, ele enxerga melhor o que se passa fora dela, na mente do cliente.</p>
+<p><code>[LEITURA]</code> Esse parágrafo é, em quatro linhas, a justificativa da sessão diagnóstica do dia 1 e do dia 2. A doutora não consegue enxergar a própria posição porque está dentro da clínica. É exatamente o serviço que a Revon vende.</p>
+<h2 id="o-resumo-executavel">O resumo executável</h2>
+<p>Sete passos, em ordem, e nenhum pula:</p>
+<ol><li>Descobrir a posição atual, perguntando fora e lendo o que já foi dito sem ser perguntado.</li><li>Mapear a escada da cidade e contar os degraus, sabendo que são um ou dois.</li><li>Gerar candidatas por três caminhos, e depois eliminar com quatro cortes. Sobrando mais de uma, desempata a que a doutora aguenta repetir por doze meses. A conta de viabilidade entra aqui, e é o corte 3.</li><li>Testar a candidata contra a fraqueza estrutural da concorrente dominante, ou contra a prática dominante da categoria quando não houver concorrente dominante. Nunca contra o próprio serviço, e este passo testa, não gera.</li><li>Nomear com palavra comum e descritiva, nunca com sigla nem invenção.</li><li>Mudar a operação antes de comunicar.</li><li>Não mexer por doze meses.</li></ol>
+<hr>
+</main>
+</body>
+</html>

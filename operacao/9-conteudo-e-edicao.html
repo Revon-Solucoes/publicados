@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roteiro, gravação e edição de conteúdo</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Roteiro, gravação e edição de conteúdo</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-18</p>
+<p>Artefato citado pelo playbook <a href="1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a>, passos 2.3, 4.1 e 4.3.</p>
+<hr>
+<h2 id="1-guia-de-gravacao-para-o-especialista">1 · Guia de gravação para o especialista</h2>
+<p><strong>Passo:</strong> 2.3, item 9. Enviado no grupo junto com os roteiros da primeira leva, e reutilizado a cada ciclo de gravação em bloco (A.7, A.10).</p>
+<p><strong>Local:</strong> um cômodo silencioso, sem eco, com parede lisa ou estante organizada ao fundo. Nunca a recepção da clínica em horário de movimento.</p>
+<p><strong>Qualidade:</strong> a melhor resolução do aparelho, sempre 4K a 30fps.</p>
+<p><strong>Luz:</strong> de frente para o rosto, nunca contra a janela, a cerca de 45 graus da pessoa. Luz natural indireta é suficiente; se usar luz artificial, uma fonte principal e, se houver, uma segunda luz para compor o fundo, sem sombra dura no rosto.</p>
+<p><strong>Enquadramento:</strong> vertical, celular na altura dos olhos, não abaixo. Corpo enquadrado da linha do peito para cima. Câmera parada, sem segurar na mão durante a fala.</p>
+<p><strong>Gancho:</strong> os primeiros 3 segundos decidem se quem vê continua. Começar pela pergunta ou pelo problema, na mesma regra do campo Abertura do roteiro, nunca pela saudação ou pela apresentação da clínica.</p>
+<p><strong>Postura:</strong> alinhada, sorriso leve, falando como se a paciente estivesse ali na frente, ouvindo ao vivo.</p>
+<p><strong>Áudio:</strong> ambiente sem ruído de fundo (ventilador, ar-condicionado alto, música). Se disponível, microfone de lapela; se não, celular a menos de um metro de distância.</p>
+<p><strong>Se errar no meio:</strong> parar, respirar, recomeçar a frase do início. Nunca se desculpar gravando, porque isso vai para o corte. A edição resolve o erro, a especialista não precisa.</p>
+<p><strong>Antes de gravar:</strong> ler o roteiro em voz alta uma vez, sem câmera, para não soar decorado na gravação de verdade. Na gravação de verdade, gravar frase por frase, sem tentar decorar o roteiro inteiro: transmitir segurança pesa mais do que gravar de uma vez só.</p>
+<p><strong>Equipamento, quando a clínica tiver:</strong> tripé, uma luz principal e uma segunda para o fundo, microfone e um pano para limpar a lente antes de cada gravação. Nenhum é obrigatório para a primeira leva, e todos melhoram a entrega quando a clínica já tiver.</p>
+<p><strong>Fonte da qualidade, do ângulo de luz, do gancho em 3 segundos, da postura e do equipamento:</strong> guia de gravação postado pelo próprio HarmonizaPro, agência especializada em harmonização facial, <code>operacao/fontes/harmonizapro-reels/corpus-b.txt</code>, Reel <code>DSYYePviQr_</code>.</p>
+<hr>
+<h2 id="2-modelo-de-roteiro-de-reels">2 · Modelo de roteiro de reels</h2>
+<p><strong>Passo:</strong> 2.3, item 3. Estrutura fixa, um roteiro por peça.</p>
+<table><thead><tr><th>Campo</th><th>O que vai ali</th></tr></thead><tbody><tr><td>Tema</td><td>Um por roteiro, vindo dos prioritários do passo 2.2</td></tr><tr><td>Abertura</td><td>O problema ou a pergunta, nunca a clínica. Usar a palavra dela do dia 1 sempre que couber</td></tr><tr><td>Desenvolvimento</td><td>O que explica ou resolve o problema levantado na abertura</td></tr><tr><td>Fechamento</td><td>O que fazer a partir daquilo, sem promessa de resultado</td></tr><tr><td>Duração prevista</td><td>Em segundos</td></tr><tr><td>Enquadramento</td><td>Vertical, conforme o guia de gravação</td></tr><tr><td>O que evitar</td><td>Herdado dos limites do passo 1.5, específico daquela clínica</td></tr><tr><td>Candidata a impulsionamento</td><td>Sim ou não, marcado no fechamento do roteiro, nunca depois de editado</td></tr></tbody></table>
+<p><strong>Regra de conformidade, conferida antes de enviar:</strong> sem promessa de resultado, sem explorar insegurança corporal, sem diagnóstico, sem desconto ou linguagem de liquidação.</p>
+<hr>
+<h2 id="3-padrao-de-edicao-e-publicacao">3 · Padrão de edição e publicação</h2>
+<p><strong>Passos:</strong> 4.1 e 4.3. A gravação (item 1) já incorpora o que o HarmonizaPro posta sobre qualidade, luz, gancho e postura. <strong>O que segue em aberto é mais estreito:</strong> o ritmo de corte na pós-produção, quantos segundos por plano, não apareceu no material do HarmonizaPro nem do Pietro pesquisado até aqui, e fica marcado abaixo como pendência, não como decisão adiada por omissão.</p>
+<p><strong>O que já está fechado, direto do passo 4.1:</strong></p>
+<ul><li>Formato vertical, sempre</li><li>Legenda queimada na peça, porque a maior parte assiste sem som</li><li>Capa com o gancho em texto curto</li><li>Cortar silêncio e repetição do começo, porque os primeiros segundos decidem a retenção</li><li><strong>Básico bem feito.</strong> Sem efeito, transição ou trilha que a clínica não vá sustentar sozinha no mês seguinte, e nada que desvie o olho do rosto da especialista</li><li>Voz e rosto no centro do quadro, sempre. Quem constrói confiança é a especialista, não a edição</li><li>Gerar a versão adequada a impulsionamento nas peças candidatas</li></ul>
+<p><strong>Publicação, do passo 4.3:</strong></p>
+<ul><li>Publicar no perfil da especialista, com legenda, geolocalização e chamada para ação</li><li>Conferir, já no ar, se capa, legenda e corte ficaram como esperado</li><li>Registrar data e hora, marco zero contra a linha de base do passo 0.4</li></ul>
+<p><code>[Pendência de pesquisa externa: quantos segundos por plano sustenta retenção na pós-produção, para o público de harmonização facial no Instagram. Em 18/08 procurei isso no corpus de 340 Reels do HarmonizaPro e do Pietro, </code>operacao/fontes/harmonizapro-reels/<code>, por &quot;corte&quot;, &quot;ritmo&quot;, &quot;plano&quot;, &quot;transição&quot; e termos próximos. O guia de gravação achado ali já foi incorporado ao item 1. Sobre ritmo de corte na pós-produção, só apareceu um fragmento sobre tipos de plano de câmera, curto e mal transcrito demais para citar como fonte. Fica marcado aqui até essa pesquisa acontecer, por outra via]</code></p>
+<hr>
+<h2 id="4-o-que-a-base-propria-ja-responde-e-onde">4 · O que a base própria já responde, e onde</h2>
+<p>O repositório tem fonte primária do nicho que este guia ainda não usa. O que está abaixo é o mapa, não o conteúdo: cada item aponta onde a resposta já está medida.</p>
+<p><strong>A ressalva que decide como usar.</strong> O corpus de 340 Reels é de duas contas que falam com <strong>donos de clínica</strong>, e a clínica da cliente fala com <strong>paciente</strong>. Os exemplos de lá não se copiam como texto: o que se aproveita é a estrutura e o tipo, nunca a frase.</p>
+<table><thead><tr><th>O que falta aqui</th><th>Onde já está</th><th>O que dá para usar</th></tr></thead><tbody><tr><td>estrutura de roteiro testada</td><td><code>pesquisa-harmonizapro.md</code>, &quot;Estudo de caso&quot;</td><td>o formato em cinco partes: quem é a pessoa, a dor, o medo, o desejo, o resultado</td></tr><tr><td>tipos de gancho de abertura</td><td><code>pesquisa-harmonizapro.md</code>, &quot;Os ganchos de abertura&quot;</td><td>os cinco tipos, provocação, curiosidade com dor, pergunta direta, autoridade e mentalidade sem produto. <strong>Nenhum abre falando da empresa</strong></td></tr><tr><td>chamada para ação</td><td><code>pesquisa-harmonizapro.md</code>, &quot;Os CTA, um por objetivo&quot;</td><td>uma palavra por objetivo, e não CTA genérico</td></tr><tr><td>perfil da clínica ou do especialista</td><td><code>pesquisa-harmonizapro.md</code>, &quot;Os dois perfis&quot;</td><td>o perfil pessoal tem sete vezes a audiência do institucional, e as duas bios prometem coisas complementares</td></tr><tr><td>paciente como criadora</td><td><code>pesquisa-harmonizapro.md</code>, seção de UGC</td><td>a tática descrita passo a passo</td></tr></tbody></table>
+<p><strong>Uma tensão que precisa de decisão, e não de conserto.</strong> Este guia prescreve roteiro fixo por peça. No podcast da Isabela Matiz, <code>operacao/fontes/podcast-isabela-matiz-leads-conteudo.md</code>, ela afirma que o que mais performa é conteúdo menos roteirizado, e dá o caso de um especialista que funciona por não parecer roteirizado. As duas coisas não se resolvem sozinhas: ou o roteiro fixo vale e a fonte é descartada com motivo, ou o roteiro vira ponto de partida e não script.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mensagens da implantação, dias 0 a 7</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Mensagens da implantação, dias 0 a 7</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-18</p>
+<p>Artefato citado pelo playbook <a href="1-implantacao-90-dias.html"><code>operacao/1-implantacao-90-dias.md</code></a>, que não deve ter o texto solto dentro do passo. Cada mensagem aqui aponta para o passo que a produz, e o passo aponta de volta para cá.</p>
+<p>Tom de voz, postura e léxico seguem o passo T.6 do playbook: Sábio abre e Herói fecha, &quot;de gestor para dona de clínica&quot;, língua da clínica e não a de marketing. <code>[nome entre colchetes]</code> é campo a preencher por cliente.</p>
+<hr>
+<h2 id="1-roteiro-da-passagem-de-bastao-com-a-cliente">1 · Roteiro da passagem de bastão com a cliente</h2>
+<p><strong>Passo:</strong> 0.5. <strong>Quem fala:</strong> quem vendeu abre, a coordenação conduz do meio em diante, CS presente. <strong>Quando:</strong> dia 0, ao vivo, com câmera, de 30 a 45 minutos.</p>
+<p>Roteiro de fala, não texto para ler. <strong>Quem vendeu abre</strong>, e isso não é detalhe: é a pessoa em quem ela já confia, e a transferência só funciona se acontecer na frente dela.</p>
+<p><strong>Quem vendeu, nos primeiros minutos:</strong></p>
+<ol><li>Abrir cumprimentando e dizendo o que vai acontecer nesta conversa e quanto tempo ela dura.</li><li>Dizer o que foi comprado, em uma frase, do jeito que foi vendido.</li><li><strong>Passar o bastão em voz alta:</strong> apresentar a coordenação como quem conduz dali para a frente, dizer que sai da condução, e dizer que segue existindo se ela precisar. Sem essa frase, ela fica sem saber com quem fala, e volta a procurar quem vendeu por meses.</li></ol>
+<p><strong>A coordenação, do meio em diante:</strong></p>
+<ol><li>Se apresentar, e pedir que cada pessoa da clínica se apresente com a função. Confirmar quem a CS vai procurar todo dia.</li><li><strong>Abrir o plano de sucesso na tela e percorrer com ela</strong>, seção por seção. O que ela corrigir, corrigir na hora, com ela vendo.</li><li>Confirmar, nas palavras dela, o que ela quer resolver comprando isto.</li><li><strong>Dizer as lacunas e os riscos já conhecidos</strong>, e o que cada lado faz com cada um. É a parte que dá vontade de pular, e é a que decide.</li><li>Dizer quem entrega o quê, dos dois lados.</li><li>Explicar o que é a sessão diagnóstica, em uma frase: é a conversa em que a Revon aprende a fundo a clínica dela, antes de propor qualquer coisa. <strong>Agendar ali, na chamada</strong>, e não depois pelo grupo.</li><li>Combinar a cadência: contato diário com quem atende, telefonema semanal, reunião mensal com ela.</li><li>Avisar que o grupo vai ser criado agora, com quem participa e para que ele serve: é o canal oficial do projeto, tudo que precisa de registro passa por ali.</li></ol>
+<p><strong>O que não entra aqui:</strong> detalhe de implementação, configuração, cronograma de peça. Isso é o dia 1. Conversa que vira reunião técnica aqui rouba o tempo da diagnóstica e não entrega nem uma coisa nem outra.</p>
+<hr>
+<h2 id="2-texto-de-abertura-do-grupo">2 · Texto de abertura do grupo</h2>
+<p><strong>Passo:</strong> 0.5. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> dia 0, logo depois da ligação.</p>
+<blockquote><p>Oi, pessoal! Este é o grupo oficial da implantação do REVON HOF na [nome da clínica]. Por aqui a gente combina data, manda pendência e registra o que precisa ficar escrito, e é para cá que qualquer dúvida do processo deve vir.  Quem está no grupo: [nomes e papéis].  Próximo passo: a sessão diagnóstica, dia [data], às [horário]. A [nome da doutora] recebe o convite de agenda em seguida.</p></blockquote>
+<hr>
+<h2 id="3-texto-do-convite-de-agenda">3 · Texto do convite de agenda</h2>
+<p><strong>Passo:</strong> 0.7. <strong>Quem manda:</strong> CS. <strong>Quando:</strong> dia 0, logo depois da passagem de bastão, com o horário já combinado na chamada.</p>
+<p><strong>Anexar o plano de sucesso ao convite</strong>, para ela chegar no dia 1 tendo visto o documento de novo.</p>
+<p><strong>Título do convite:</strong> REVON HOF · Sessão diagnóstica, [nome da clínica]</p>
+<p><strong>Descrição:</strong></p>
+<blockquote><p>O kickoff da implantação. Cerca de 90 minutos, com a [nome da doutora] e a equipe da Revon. Não precisa preparar nada por escrito, a conversa é para a Revon aprender a fundo a clínica. O plano de sucesso que a gente revisou hoje vai anexado, é só dar uma olhada antes. Dúvida, é só chamar no grupo.</p></blockquote>
+<hr>
+<h2 id="4-texto-do-pedido-do-portao-1">4 · Texto do pedido do Portão 1</h2>
+<p><strong>Passo:</strong> 1.6. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> dia 1, no mesmo dia da sessão diagnóstica. <strong>Nunca leva data</strong>, a data nasce no passo 1.11.</p>
+<blockquote><p>[Nome da doutora], para a Revon começar a trabalhar, precisamos de nove itens, a maioria acesso que só a clínica pode dar. A partir do dia em que o último chegar, a implantação começa a valer.  O que é responsabilidade da clínica: 1. Acesso ao Instagram, com a conta convertida em profissional, Empresa ou Criador 2. Página do Facebook existindo e ligada ao Instagram 3. Portfólio de negócios criado, com a Página dentro 4. Conta de anúncios criada dentro do portfólio 5. Revon adicionada como parceira, com permissão de criar e editar anúncio 6. O número de WhatsApp que vai atender pela Revon, dizendo se ele já está conectado a outro aplicativo, provedor ou plataforma de atendimento 7. A política de preço da avaliação 8. Horário disponível na agenda para avaliação  O que é responsabilidade da Revon: 9. Combinar quem aperta impulsionar nestes 90 dias, o que fazemos já nesta mensagem: enquanto a gente está testando o que funciona no seu perfil, quem impulsiona é a Revon, para a leitura ficar limpa. Duas pessoas impulsionando ao mesmo tempo tornam impossível saber o que deu certo. O botão é seu e você pode apertar; o que a gente quer é que, ao fim disso, você saiba exatamente o que valeria a pena apertar.  Pode mandar cada item assim que estiver pronto, não precisa esperar ter todos.</p></blockquote>
+<hr>
+<h2 id="5-texto-de-abertura-do-portao-1-com-a-data">5 · Texto de abertura do Portão 1, com a data</h2>
+<p><strong>Passo:</strong> 1.11. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> assim que a última linha do Portão 1 chegar e for testada.</p>
+<blockquote><p>[Nome da doutora], todos os nove itens chegaram e testamos cada um. A partir de hoje, [data], a implantação está oficialmente em andamento.  <strong>O Copiloto entra no ar em [data, sete dias corridos a partir de hoje].</strong> É a partir desse dia que a triagem por IA passa a atender o WhatsApp da clínica.  Essa não é a data da campanha de anúncios. O impulsionamento depende de outra etapa, que tem caminho próprio e não tem data fixa porque depende da gravação da [nome da doutora]. Vamos explicar isso com calma na sessão diagnóstica.  Amanhã, [data], às [horário], começamos com a sessão diagnóstica.</p></blockquote>
+<hr>
+<h2 id="6-resumo-escrito-pos-diagnostica">6 · Resumo escrito pós-diagnóstica</h2>
+<p><strong>Passo:</strong> 1.9. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> dia 1, no mesmo dia, depois da sessão.</p>
+<blockquote><p>[Nome da doutora], resumo do que ficou pendente na sessão de hoje. Cada item com quem responde, até quando, e o que ele atrasa se passar da data.  1. [Dado que falta] · responsável: [nome] · até: [data] · atrasa: [Copiloto no ar / Portão 2] 2. [repetir para cada pendência]  A data do Copiloto no ar continua [data], sem mudança. Nada do que foi levantado hoje reabre o Portão 1.  O impulsionamento continua sem data fixa, porque depende do Portão 2, que depende da gravação. Vamos falar sobre isso na apresentação do planejamento, dia 3.  E anotei o que você me disse no fim: [o primeiro valor, nas palavras dela]. É contra isso que a gente vai olhar toda semana, junto com os números.</p></blockquote>
+<hr>
+<h2 id="7-comunicacao-de-ciencia-formal-a-equipe">7 · Comunicação de ciência formal à equipe</h2>
+<p><strong>Passo:</strong> 4.4. <strong>Quem entrega:</strong> Revon, como modelo obrigatório. <strong>Quem envia à equipe:</strong> a clínica, cláusula 6.3 do contrato.</p>
+<p>Texto para a clínica repassar aos próprios profissionais e prepostos. <strong>Este texto não substitui revisão jurídica antes do primeiro uso.</strong></p>
+<blockquote><p>Aviso interno · REVON HOF  A partir de hoje, [data], as conversas mantidas pelo número de WhatsApp [número] da clínica são registradas e analisadas pela plataforma Copiloto, ferramenta usada pela Revon para operar o atendimento comercial da clínica.  Isso vale para toda mensagem trocada por esse número, sem exceção.  Ciência de: [nome, cargo, assinatura ou confirmação por escrito de cada pessoa da equipe].</p></blockquote>
+<blockquote><p><strong>Instrução à clínica, fora do texto acima:</strong> guarde a evidência de que cada pessoa recebeu e confirmou este aviso. Sem isso, o Copiloto não pode ser declarado no ar.</p></blockquote>
+<hr>
+<h2 id="8-comunicacao-de-pendencia-com-marco-e-dono">8 · Comunicação de pendência, com marco e dono</h2>
+<p><strong>Passo:</strong> 7.2. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> no mesmo dia em que a linha vira não.</p>
+<p><strong>Versão A, atrasa o Copiloto no ar:</strong></p>
+<blockquote><p>[Nome da doutora], uma linha do Portão 1 (ou do checklist do 7.1) ficou pendente: [qual é a situação]. Responsável: [nome]. Por causa disso, a data do Copiloto no ar muda de [data antiga] para [data nova].</p></blockquote>
+<p><strong>Versão B, atrasa o Portão 2:</strong></p>
+<blockquote><p>[Nome da doutora], uma linha do Portão 2 ficou pendente: [qual é a situação]. Responsável: [nome], até [data]. A data do Copiloto no ar não muda, ele continua previsto para [data]. O que fica parado enquanto isso não resolve é o impulsionamento.</p></blockquote>
+<hr>
+<h2 id="9-comunicacao-do-copiloto-no-ar">9 · Comunicação do Copiloto no ar</h2>
+<p><strong>Passo:</strong> 7.4. <strong>Quem manda:</strong> coordenação. <strong>Quando:</strong> dia 7, fim do dia.</p>
+<blockquote><p>[Nome da doutora], o Copiloto está no ar. A partir de agora, toda paciente que escrever para o WhatsApp da clínica entra no sistema, é triada e cai na fila da secretária. Quem escreveu antes de hoje o Copiloto não conhece, por isso ele sobe primeiro que tudo o resto.  O que ainda não subiu: o impulsionamento. Ele depende da primeira leva gravada e da base de anúncios fechada, e ainda falta: [linha por linha, com nome de quem falta]. Assim que essas linhas fecharem, e a peça já tiver resposta orgânica, o anúncio entra no ar. Não tem data fixa porque depende da sua gravação.  Da semana que vem em diante, a Revon liga todo dia com a secretária e toda semana com você, e a conferência de 7 dias sai nesta data: [data].</p></blockquote>
+<hr>
+<h2 id="10-comunicacao-de-subida-do-impulsionamento">10 · Comunicação de subida do impulsionamento</h2>
+<p><strong>Passo:</strong> P.2. <strong>Quem manda:</strong> Revon. <strong>Quando:</strong> assim que as duas condições fecharem.</p>
+<blockquote><p>[Nome da doutora], o impulsionamento entrou no ar hoje, [data]. A peça escolhida foi [descrição da peça], porque [motivo, resposta orgânica ou encaixe no posicionamento]. O investimento é de R$ 1.500 este mês, e quem opera o botão é sempre a Revon, pela conta de anúncios da clínica.</p></blockquote>
+</main>
+</body>
+</html>

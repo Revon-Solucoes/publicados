@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Briefing para escrever o processo dos 90 dias</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>Briefing para escrever o processo dos 90 dias</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins | 2026-08-16</p>
+<p>Contexto que ainda não está em nenhum documento do repositório e que precisa ser lido antes de escrever o playbook da implantação.</p>
+<p>O documento <a href="../produto/definicao-produto-assessoria.html"><code>produto/definicao-produto-assessoria.md</code></a>, de 11/08, está desatualizado nos pontos marcados abaixo. Onde houver conflito, este briefing manda.</p>
+<hr>
+<h2 id="1-a-oferta-mudou">1 · A oferta mudou</h2>
+<p>Não se faz mais tráfego convencional. Não existe gestão de campanha no Gerenciador de Anúncios. O que existe é impulsionamento de peça já publicada.</p>
+<p><strong>O que sai é a gestão de campanha, não o acesso.</strong> O acesso ao Gerenciador do cliente continua sendo necessário. <strong>Se os dados do impulsionamento feito pelo app aparecem lá com gasto, impressões e cliques dia a dia ainda não foi confirmado em fonte oficial</strong>, e está marcado como pendência em <a href="base-meta-instagram.html"><code>operacao/base-meta-instagram.md</code></a>.</p>
+<p>A Revon atua em <strong>três frentes conectadas</strong>, e a conexão entre elas é uma cadeia causal, não uma lista:</p>
+<p><strong>Posicionamento gera lead → o Copiloto tria e agenda → gente treinada converte.</strong></p>
+<p>As seis frentes do documento de 11/08 viram subpartes destas três:</p>
+<table><thead><tr><th>Frente</th><th>O que absorve das seis</th></tr></thead><tbody><tr><td>1 · Posicionamento do especialista</td><td>Autoridade e conteúdo, Impulsionamento local, Social selling</td></tr><tr><td>2 · Copiloto</td><td>Triagem por IA, Agenda Confirmada</td></tr><tr><td>3 · Treinamento</td><td>Consulta de Protocolos, e a formação da secretária</td></tr></tbody></table>
+<p>Cada frente tem um ritmo diferente, e isso importa para o cronograma:</p>
+<ul><li><strong>Posicionamento é cíclico.</strong> Todo mês tem pauta, roteiro, gravação, edição, publicação, impulsionamento. Nunca termina.</li><li><strong>Copiloto é configuração seguida de calibração.</strong> Instala uma vez, depois ajusta com dado real.</li><li><strong>Treinamento é evento seguido de reforço.</strong> Dois encontros, e depois a manutenção do comportamento novo.</li></ul>
+<hr>
+<h2 id="2-frente-1-posicionamento-do-especialista">2 · Frente 1 · Posicionamento do especialista</h2>
+<p>O produto entregue ao cliente é <strong>o posicionamento dele</strong>. Isso é core para a Revon, não acessório.</p>
+<p>A Revon assessora o especialista dono da clínica a se posicionar, e por consequência posiciona a clínica.</p>
+<p><strong>A tese que a Revon leva ao cliente:</strong> ele não deve ser escravo do tráfego. Mesmo fazendo tráfego, sem o posicionamento correto e sem gerar conteúdo, ele não cresce.</p>
+<p>E a Revon diz isso com todas as letras: ele mesmo poderia apertar o botão impulsionar. O valor não está em apertar o botão, está em decidir o que se impulsiona e por quê.</p>
+<p><strong>A mesma lógica vale para o comercial, e é a outra metade da tese.</strong> A Revon não coloca uma vendedora própria no WhatsApp da clínica: ela transforma quem já está lá em quem sabe conduzir a conversa até a cadeira. <strong>A Revon instala capacidade dentro da clínica; ela não aluga dependência.</strong></p>
+<p><strong>Isso não é a Revon se tornar dispensável.</strong> A clínica passa a poder fazer sozinha, e a aposta é que a experiência e o resultado sejam bons a ponto de ela não querer. <strong>A independência é do cliente, e não da Revon.</strong></p>
+<p>O contrário é reter por dependência, que é o modelo de quem aluga a vendedora: a clínica fica porque perderia a operação se saísse. Quem retém assim não precisa ser bom, precisa ser insubstituível.</p>
+<p><strong>Isto atravessa como cada entrega é apresentada.</strong> O treinamento não é &quot;treinar a secretária&quot;: é o que entrega autonomia comercial à clínica. E a orientação sobre o botão de impulsionar é combinado de quem aperta enquanto o teste roda, e nunca proibição, porque proibir é o que a agência que ela quer largar já fazia.</p>
+<p><strong>Volume mensal:</strong></p>
+<table><thead><tr><th>Peça</th><th>Quantidade</th><th>Quem grava</th><th>Quem edita</th><th>Impulsiona</th></tr></thead><tbody><tr><td>Reels</td><td>12 por mês</td><td>O especialista</td><td>A Revon</td><td>Cerca de metade</td></tr><tr><td>Stories</td><td>30 por mês</td><td>O especialista</td><td>Ninguém</td><td>Não</td></tr></tbody></table>
+<p><strong>Cadência de entrega:</strong> semanal, com pelo menos uma semana de antecedência da data de postagem.</p>
+<p>A Revon entrega os roteiros. O especialista grava. A gravação não está inclusa no escopo e é a dependência crítica número um: sem matéria-prima o motor de autoridade para.</p>
+<p>Os leads vêm daí, mais o social selling.</p>
+<hr>
+<h2 id="3-frente-2-copiloto">3 · Frente 2 · Copiloto</h2>
+<p>Sistema próprio da Revon.</p>
+<p><strong>Triagem:</strong> a IA conversa pelo WhatsApp sem que o lead perceba que fala com IA. Ele pensa que já está falando com a secretária humana.</p>
+<p><strong>Passagem:</strong> lead qualificado vai para a mão da secretária humana.</p>
+<p><strong>Assistência:</strong> a partir daí o Copiloto assessora a secretária, mandando lembretes do que ela precisa fazer, através de réguas, conforme o momento do lead no funil.</p>
+<p><strong>Objetivo:</strong> o agendamento da avaliação com a especialista, para protocolo de HOF full face.</p>
+<hr>
+<h2 id="4-frente-3-treinamento">4 · Frente 3 · Treinamento</h2>
+<p><strong>A secretária</strong> deixa de ser atendente e vira uma máquina de agendar avaliação e de fazer o lead comparecer.</p>
+<p><strong>A especialista</strong> vira uma máquina de venda de protocolo.</p>
+<p><strong>A tese comercial central:</strong> a clínica precisa parar de vender procedimento e passar a vender protocolo. Dois motivos, e o segundo importa mais que o primeiro:</p>
+<ol><li>O ticket médio é bem maior.</li><li>É só assim que a paciente fica realmente satisfeita. Aplicação isolada de algo não produz harmonização facial.</li></ol>
+<hr>
+<h2 id="5-relacionamento">5 · Relacionamento</h2>
+<p>Os primeiros 90 dias são uma construção, e é imprescindível construir junto um ótimo relacionamento. A forma como a CS se veste e se expressa é relevante.</p>
+<p><strong>Princípio com a secretária:</strong> ela precisa ver a Revon como alguém que quer ajudá-la a atingir a missão dela, que é marcar e fazer o lead comparecer.</p>
+<p><strong>Princípio com a doutora:</strong> a Revon passa relatório, mas nunca em tom de estar falando mal da secretária. Não se pode transformar a secretária em detratora.</p>
+<p><strong>Consequência prática:</strong> o que a Revon fala com a secretária e o que fala com a doutora são conversas separadas, com conteúdos diferentes. Com a secretária é ajuda e treino. Com a doutora é resultado do funil, nunca desempenho da pessoa.</p>
+<p><strong>Ritmo de contato com o cliente:</strong></p>
+<p>O ritmo tem três colunas, e a terceira é a que faz a separação acima valer na prática. Contato com as duas é sempre <strong>individual</strong>, nunca em conversa conjunta, senão a conversa de resultado e a conversa de treino se misturam na frente das duas.</p>
+<table><thead><tr><th>Frequência</th><th>Canal</th><th>Com quem</th></tr></thead><tbody><tr><td>Diário</td><td>WhatsApp</td><td>Doutora e secretária, em conversas separadas</td></tr><tr><td>Semanal</td><td>Telefonema</td><td>Secretária, em ligação própria</td></tr><tr><td>Semanal</td><td>Telefonema</td><td>Doutora, em ligação própria</td></tr><tr><td>Mensal</td><td>Reunião</td><td>Só a doutora</td></tr></tbody></table>
+<p>O telefonema semanal são <strong>duas ligações, não uma</strong>, com pautas diferentes. Com a secretária é ajuda e treino, e sai da auditoria da semana. Com a doutora é resultado do funil, e o número nunca vai sozinho.</p>
+<p>A reunião mensal é só com a doutora porque é onde se olha resultado, e resultado na frente de quem executa vira avaliação de desempenho, que é exatamente o que transforma a secretária em detratora.</p>
+<hr>
+<h2 id="6-criterio-de-qualificacao">6 · Critério de qualificação</h2>
+<p>O cliente precisa faturar no mínimo <strong>30 mil por mês</strong>.</p>
+<p>A Revon não vende para clínica partindo do zero.</p>
+<hr>
+<h2 id="7-o-marco-do-dia-7">7 · O marco do dia 7</h2>
+<p>&quot;Primeira campanha no ar&quot; sai da oferta, porque campanha no sentido tradicional não existe mais.</p>
+<p>Proposta: o marco passa a ser <strong>operação no ar</strong>, com três coisas:</p>
+<ol><li>O Copiloto triando no WhatsApp da clínica.</li><li>A secretária treinada e usando a fila do dia.</li><li>A primeira publicação no perfil do especialista.</li></ol>
+<p>Impulsionamento não entra no marco: por definição ele exige peça publicada com resposta orgânica antes.</p>
+<p>Isso precisa mudar junto no contrato e no discurso de vendas. O contrato é da Ellen e não é fonte deste trabalho.</p>
+<hr>
+<h2 id="8-formato-do-documento">8 · Formato do documento</h2>
+<p><strong>Cronológico</strong>, não temático. É o processo mesmo: playbook com POPs.</p>
+<p><strong>Unidade:</strong> dia a dia do dia 0 ao dia 7. Semana a semana da semana 2 à semana 13.</p>
+<p><strong>Rotina</strong> entra no ponto cronológico onde nasce, escrita por extenso uma vez, e depois só referenciada.</p>
+<p><strong>Cada passo tem seis campos:</strong></p>
+<ul><li>Quando</li><li>Quem faz</li><li>O que precisa estar pronto antes</li><li>O que fazer, passo a passo</li><li>O que produz, e onde fica registrado</li><li>O que trava se não acontecer</li></ul>
+<p>O quinto campo é o que mais falta nos documentos atuais. Passo que não diz onde a coisa fica registrada é passo que some na execução.</p>
+<hr>
+<h2 id="9-como-escrever-o-pop">9 · Como escrever o POP</h2>
+<p>Regras vindas do Falconi, em <em>Gerenciamento da Rotina do Trabalho do Dia a Dia</em>:</p>
+<ul><li>Padroniza-se apenas o necessário para garantir o resultado desejado.</li><li>O POP lista as <strong>atividades críticas</strong> na sequência certa. Atividade crítica é a que precisa ser feita para a tarefa dar certo. O resto o operador faz do jeito dele.</li><li>Escrever o mínimo. Forma resumida.</li><li>Usar recurso visual e foto sempre que possível.</li><li>A essência da padronização é o treinamento. O POP sozinho é papel.</li><li>O trabalho só está padronizado quando todos executam da mesma maneira.</li></ul>
+<p><strong>Detalhado significa completo, não longo.</strong> Nenhuma atividade crítica fica de fora, a sequência é inequívoca, e quem executa não precisa perguntar. Não significa descrever cada gesto.</p>
+<p><strong>Teste para decidir se entra:</strong> se fazer diferente muda o resultado, entra. Se não muda, fica de fora.</p>
+<hr>
+<h2 id="10-anomalia">10 · Anomalia</h2>
+<p>Anomalia é qualquer desvio do normal, e exige ação corretiva. O operador relata, o supervisor trata.</p>
+<p><strong>No Revon HOF, o Copiloto é o supervisor</strong>, no sentido que o Falconi dá: quem verifica o cumprimento do padrão, lembra e conduz. Ele supervisiona sem chefiar e sem constranger, o que é o que permite a secretária ver a Revon como aliada.</p>
+<p>Quem trata é o papel que a natureza da anomalia aponta, e sobe para a coordenação quando exige decisão ou toca o risco da garantia. Decidido, e está na seção T.3 do playbook.</p>
+<hr>
+<h2 id="11-o-pulmao-de-conteudo">11 · O pulmão de conteúdo</h2>
+<p>A restrição da operação é a gravação do especialista. Tudo depende dela e é a única coisa que a Revon não faz no lugar dele.</p>
+<p>Por isso o bloco 1 não deve trabalhar com entrega semanal apertada: deve acumular estoque de material gravado, para que a semana em que ele viaja, opera ou adoece não pare a máquina.</p>
+<p>Duas semanas, seis peças em estoque contra um consumo de três por semana. Decidido, e o passo A.7 do playbook opera assim.</p>
+<hr>
+<h2 id="12-fontes-metodologicas-e-o-que-cada-uma-governa">12 · Fontes metodológicas, e o que cada uma governa</h2>
+<p>Esta tabela diz o que <strong>se pretendeu</strong> usar e o que o playbook <strong>de fato</strong> usa. A coluna da direita foi apurada em 19/08/2026, lendo cada livro contra o playbook, e o detalhe está em <a href="auditoria-playbook.html"><code>operacao/auditoria-playbook.md</code></a>.</p>
+<table><thead><tr><th>Parte do documento</th><th>Fonte</th><th>Sustenta?</th></tr></thead><tbody><tr><td>Onde olhar quando algo não vai bem, e o pulmão</td><td>Eliyahu Goldratt</td><td><strong>sim</strong>, com a definição de restrição, a hora perdida no gargalo e a lógica do pulmão na seção T.4</td></tr><tr><td>A entrega de posicionamento ao cliente</td><td>Al Ries e Jack Trout</td><td><strong>sim</strong>, quatro dos seis blocos de extração, mais a grade de atributos e a autoridade externa</td></tr><tr><td>Formato do POP</td><td>Vicente Falconi</td><td><strong>sim</strong></td></tr><tr><td>Itens de controle e verificação</td><td>Vicente Falconi</td><td><strong>sim</strong>, na seção T.7, com o mapa de causa e efeito e o item prioritário eleito nos gates</td></tr><tr><td>Anomalia</td><td>Vicente Falconi</td><td><strong>sim</strong>, na seção T.3, nos dois níveis: o desvio do dia e a crônica que escala</td></tr><tr><td>A rotina de contato e como a CS se apresenta</td><td>Dale Carnegie</td><td><strong>sim</strong>, na seção T.5, com os quatro princípios e a página de cada um</td></tr><tr><td>Curva de supervisão ao longo dos 90 dias, e o 1:1</td><td>Andrew Grove</td><td><strong>sim</strong>, na seção T.8, com o estilo por bloco e a queda de maturidade na semana 3</td></tr><tr><td>O arco cronológico e as etapas do onboarding</td><td>Donna Weber, <em>Onboarding Orquestrado</em></td><td><strong>sim</strong>, com o plano de sucesso no passo V.1, o primeiro valor no 1.12 e a passagem de bastão separada do kickoff</td></tr></tbody></table>
+<p>As seis etapas do Onboarding Orquestrado, que dão a espinha dos marcos: embarque, passagem de bastão, kickoff, adoção, revisão, expansão.</p>
+<p>O playbook lê os 90 dias nessas etapas, com uma sétima, a consolidação, entre a revisão e a expansão. O plano de sucesso costura as seis, o primeiro valor é fixado com a cliente na diagnóstica, e a passagem de bastão do dia 0 é reunião própria, separada do kickoff do dia 1.</p>
+<hr>
+<h2 id="13-o-que-ainda-nao-esta-decidido">13 · O que ainda não está decidido</h2>
+<ul><li>O marco do dia 7 (seção 7)</li><li>Quem trata anomalia do lado do cliente (seção 10)</li><li>O tamanho do pulmão de conteúdo (seção 11)</li><li>Quem executa a edição dos 12 reels por mês</li><li>Quantos clientes em implantação simultânea</li><li>O que acontece no dia 91</li><li>O piso de verba de impulsionamento, que nunca foi definido</li><li>Se o CS interno também precisa de definição de posicionamento própria dentro deste documento</li></ul>
+<p>Onde faltar decisão durante a escrita, marcar <code>[DECIDIR: pergunta]</code> e seguir. Não inventar e não parar.</p>
+</main>
+</body>
+</html>

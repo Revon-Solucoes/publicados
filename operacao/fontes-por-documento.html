@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O que sustenta cada documento da implantação</title>
+
+<!-- Tipografia da marca, nos arquivos oficiais. O caminho ../marca/kit e
+     resolvido por config/md2revon.py contra a pasta de saida. -->
+<style>
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-700.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'TT Norms Pro';src:url('../marca/kit/tipografia/tt-norms-pro-900.woff2') format('woff2');font-weight:900;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-500.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Awesome Serif';src:url('../marca/kit/tipografia/awesome-serif-700.woff2') format('woff2');font-weight:700;font-display:swap}
+</style>
+
+<style>
+/* ============================================================
+   IDENTIDADE REVON, aplicacao clara sobre marfim.
+
+   As cores vem de marca/kit/tokens.css, extraido da MIV em
+   19/08/2026, e a tipografia de marca/kit/tipografia/. Nao editar
+   valor de cor aqui: a fonte e a MIV, e o kit e regenerado dela.
+
+   Composicao escolhida pela Ellen: fundo claro, 60% marfim, 30%
+   escuro, 10% azul. O azul ativa e assina, e nunca vira campo de
+   fundo. Corpo de texto sobre marfim, como o MIV manda.
+
+   A REGUA DE USO DO AZUL, da MIV pagina 26, e vale para toda rampa:
+     50 a 500    letra sobre fundo ESCURO. E onde mora o azul da marca.
+     600         terra de ninguem, nao carrega letra. So bloco.
+     700 a 950   letra sobre MARFIM e BRANCO. E o azul-texto.
+
+   ATENCAO, ESTE ESTILO VIVE SO NESTE ARQUIVO. O template
+   empresa/template-documento-revon.html e o anterior, ainda no
+   sistema escuro, e nao foi adequado ao MIV.
+
+   Uma ausencia proposital: a assinatura. Os vetores estao em
+   marca/kit/logo/, e o documento de texto nao os usa.
+
+   Fora, porque o MIV proibe: dourado em qualquer tom, gradiente,
+   sombra, brilho, canto arredondado, e as cores funcionais de
+   produto, que nao valem em documento.
+   ============================================================ */
+:root{
+  --sans:'TT Norms Pro',system-ui,-apple-system,sans-serif;
+  --serif:'Awesome Serif','Iowan Old Style',Georgia,serif;
+
+  /* Azul Atlantico, a rampa oficial inteira. */
+  --azul-50:#E2EDFF;   /* Gelo */
+  --azul-100:#C8DAFF;
+  --azul-200:#AAC8FF;  /* Horizonte */
+  --azul-300:#8AB4FF;
+  --azul-400:#6A9FFF;
+  --azul-500:#4787FF;  /* marca */
+  --azul-600:#2F6DE6;
+  --azul-700:#1F57CC;  /* Azul-texto */
+  --azul-800:#1642A6;
+  --azul-900:#0E2F7A;
+  --azul-950:#071F52;
+
+  /* Cacau, base escura da identidade. Noz e o degrau 700. */
+  --cacau-50:#F4ECE7;
+  --cacau-100:#E5D7CF;
+  --cacau-200:#D3C0B4;
+  --cacau-300:#BEA797;
+  --cacau-400:#A98E7C;
+  --cacau-500:#947662;
+  --cacau-600:#7F5F48;
+  --cacau-700:#6B4A32;  /* Noz */
+  --cacau-800:#5A3F2D;
+  --cacau-900:#4A3428;  /* marca */
+  --cacau-950:#352116;
+
+  /* Marfim, papel editorial, familia quente. */
+  --marfim-50:#F3F0E9;  /* marca */
+  --marfim-100:#DCD9D4;
+  --marfim-200:#CBC7BE;
+  --marfim-300:#B9B4A7;
+  --marfim-400:#A7A091;
+  --marfim-500:#958D79;
+  --marfim-600:#7D7562;
+  --marfim-700:#69614F;
+  --marfim-800:#524C3C;
+  --marfim-900:#3B362B;
+  --marfim-950:#27231B;
+
+  /* Nomes proprios, do :root da propria MIV. */
+  --azul:#4787FF;
+  --azul-texto:#1F57CC;
+  --cacau:#4A3428;      /* o escuro da marca */
+  --noz:#6B4A32;
+  --grafite:#222222;    /* SECUNDARIA: tinta sobre o azul, e escuro neutro */
+  --marfim:#F3F0E9;
+  --branco:#FFFFFF;
+  --gelo:#E2EDFF;
+  --horizonte:#AAC8FF;
+  --ink:#2B2B2B;
+  --ink-2:rgba(43,43,43,.80);   /* 6,82:1 no marfim */
+  --ink-3:rgba(43,43,43,.67);   /* 4,61:1 no marfim */
+  --rule:rgba(43,43,43,.26);
+
+  /* Papeis */
+  --papel:var(--marfim);
+  --tinta:var(--ink);
+  --tinta-2:var(--ink-2);
+  --tinta-3:var(--ink-3);
+  --fio:var(--rule);
+  --fio-forte:var(--cacau-200);
+  --grafite-200:var(--cacau-200);
+  --grafite-600:var(--ink-3);
+  --grafite-700:var(--ink-2);
+
+  /* Escala. Os valores do MIV sao de peca e de slide, e chegam a
+     114px. Aqui eles vem para escala de leitura, mantendo peso,
+     proporcao e letter-spacing, em clamp com vmin, como a decisao de
+     2026-08-08 registrou. O corpo fica ancorado no 15,5px do MIV, o
+     rotulo no 10,5px e o subtitulo no 30px. */
+  --t-display:clamp(38px,6vmin,58px);
+  --t-h1:clamp(28px,4.2vmin,40px);
+  --t-h2:clamp(23px,3vmin,30px);
+  --t-h3:clamp(18px,2.1vmin,21px);
+  --t-apoio:clamp(19px,2.4vmin,24px);
+  --t-corpo:clamp(15.5px,1.85vmin,17px);
+  --t-peq:clamp(14px,1.7vmin,15px);
+  --t-rotulo:clamp(10.5px,1.3vmin,11.5px);
+
+  --col:68ch;            /* MIV: corpo entre 60 e 75 caracteres */
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--papel);-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--sans);
+  font-size:var(--t-corpo);
+  font-weight:400;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ---------- estrutura ----------
+   Coluna alinhada a esquerda e nao centralizada: o respiro fica todo
+   de um lado, que e a assimetria que o MIV pede. */
+.pagina{
+  max-width:min(1000px,100%);
+  margin:0 auto 0 clamp(20px,6vw,112px);
+  padding:clamp(36px,8vmin,96px) clamp(20px,4vw,56px) 16vmin 0;
+}
+
+/* A coluna de leitura e o texto corrido, nao a pagina. Tabela e fio
+   usam a largura cheia, que e o que impede a tabela de rolar dentro de
+   uma coluna estreita. MIV: corpo entre 60 e 75 caracteres. */
+p,ul,ol,blockquote{max-width:var(--col)}
+
+/* ---------- capa ---------- */
+.capa{margin:0 0 .6em;padding:0}
+.capa h1{
+  font-size:var(--t-display);
+  font-weight:900;
+  letter-spacing:-.025em;
+  line-height:1.02;
+  max-width:19ch;
+  margin:0;
+}
+
+/* Linha de status e autoria que o conversor emite logo depois da capa.
+   Rotulo curto em caixa alta com tracking aberto, que e o unico uso de
+   caixa alta autorizado. */
+.capa + p{
+  font-family:var(--sans);
+  font-size:var(--t-rotulo);
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  line-height:1.5;
+  color:var(--tinta-3);
+  max-width:none;
+  margin:0 0 clamp(28px,4.5vmin,44px);
+  padding:0 0 clamp(20px,3.4vmin,32px);
+  /* O unico Azul Revon 500 do documento. Nao carrega letra, que sobre
+     marfim ele nao pode, e nao e moldura: e o fio que assina a
+     abertura. Todo o resto do azul e o azul-texto, degrau 700. */
+  border-bottom:2px solid var(--azul);
+}
+
+/* ---------- titulos ----------
+   Sem serif automatica por hierarquia: o MIV diz que a escolha da
+   serif e semantica, nao hierarquica. Todos os titulos sao sans, e o
+   contraste vem do peso, de 400 a 900. */
+h1{
+  font-size:var(--t-h1);
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.08;
+  max-width:24ch;
+  margin:clamp(56px,9vmin,104px) 0 .5em;
+}
+.capa + p + h1{margin-top:0}
+
+h2{
+  font-size:var(--t-h2);
+  font-weight:800;
+  letter-spacing:-.015em;
+  line-height:1.18;
+  max-width:28ch;
+  margin:clamp(40px,6vmin,72px) 0 .55em;
+  padding-top:clamp(16px,2.4vmin,26px);
+  border-top:1px solid var(--fio);
+}
+
+h3{
+  font-size:var(--t-h3);
+  font-weight:700;
+  letter-spacing:-.005em;
+  line-height:1.3;
+  max-width:34ch;
+  margin:clamp(26px,4vmin,40px) 0 .4em;
+}
+
+/* Marcador dentro de titulo, do tipo [POP: nome] e [ROTINA: nome], e
+   metadado e nao titulo: entra menor e mais leve, para nao competir com
+   o nome do passo. Vale linkado ou nao. */
+h1 code,h2 code,h3 code{
+  font-size:.66em;
+  font-weight:500;
+  letter-spacing:.02em;
+  vertical-align:.08em;
+  display:inline-block;
+}
+
+/* ---------- corpo ---------- */
+p{margin:0 0 1.15em}
+
+/* A tese de abertura do documento, o primeiro paragrafo depois da linha
+   de status, e o unico em serif fora da citacao. E escolha semantica,
+   declarada: esta linha existe para fazer pensar, nao para fazer agir. */
+.capa + p + p{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.38;
+  letter-spacing:0;
+  color:var(--tinta-2);
+  max-width:34ch;
+  margin:0 0 1.5em;
+}
+
+strong{font-weight:700;color:var(--tinta)}
+em{font-style:italic}
+
+ul,ol{margin:0 0 1.2em;padding-left:1.5em}
+li{margin:0 0 .35em}
+li::marker{color:var(--azul-700);font-weight:700}
+
+a{
+  color:var(--azul-700);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-decoration-color:var(--azul-200);
+  text-underline-offset:.18em;
+}
+a:hover{text-decoration-color:var(--azul-700)}
+
+/* Caminho de arquivo que virou link nao acumula as duas marcacoes: a
+   caixa do codigo sai e fica so a letra sublinhada, que ja diz que
+   clica. Com a caixa, o box parte no meio quando a linha quebra. */
+a code{
+  background:none;
+  border:0;
+  padding:0;
+  color:inherit;
+  overflow-wrap:anywhere;
+}
+
+/* Nao ha monoespacada no MIV, entao o codigo fica na propria sans, em
+   peso 600, marcado por cor e fio de 1px em vez de caixa arredondada.
+   O fundo e marfim e nao azul: o documento usa <code> tambem para
+   anotacoes longas, de paragrafo inteiro, e fundo azul ali faria o
+   azul virar campo, que e o que o MIV proibe. O realce vem da letra. */
+code{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:.94em;
+  letter-spacing:.01em;
+  color:var(--azul-700);
+  background:var(--marfim-100);
+  border:1px solid var(--marfim-200);
+  border-radius:0;
+  padding:.06em .36em;
+  overflow-wrap:break-word;
+}
+
+/* ---------- tabela ----------
+   Fio de 1px no lugar de moldura, sem zebra e sem preenchimento de
+   cor. Rola no eixo x quando nao couber. */
+table{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  overflow-x:auto;
+  border-collapse:collapse;
+  font-size:var(--t-peq);
+  font-variant-numeric:tabular-nums;
+  margin:0 0 1.7em;
+}
+thead th{
+  font-size:var(--t-rotulo);
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--tinta-3);
+  text-align:left;
+  white-space:nowrap;
+  padding:0 1.6em .7em 0;
+  border-bottom:1px solid var(--grafite-200);
+}
+tbody td{
+  vertical-align:top;
+  padding:.75em 1.6em .75em 0;
+  border-bottom:1px solid var(--fio);
+}
+tbody tr:last-child td{border-bottom:1px solid var(--grafite-200)}
+th:last-child,td:last-child{padding-right:0}
+
+/* ---------- citacao ----------
+   O momento editorial da serif. Sem moldura e sem barra lateral: a
+   tipografia e que marca. */
+blockquote{
+  font-family:var(--serif);
+  font-size:var(--t-apoio);
+  font-weight:400;
+  line-height:1.36;
+  color:var(--tinta);
+  max-width:32ch;
+  margin:clamp(32px,5vmin,56px) 0;
+  padding:0;
+  border:0;
+}
+blockquote p{margin:0 0 .4em}
+blockquote p:last-child{margin-bottom:0}
+
+/* Fio curto e assimetrico no lugar da regua de ponta a ponta. */
+hr{
+  border:0;
+  border-top:1px solid var(--fio-forte);
+  width:6em;
+  margin:clamp(48px,7vmin,80px) 0;
+}
+
+::selection{background:var(--azul-50);color:var(--grafite)}
+:focus-visible{outline:2px solid var(--azul-700);outline-offset:3px}
+
+@media print{
+  html,body{background:var(--branco)}
+  .pagina{max-width:none;padding:0}
+  a{color:var(--tinta);text-decoration:none}
+  code{background:transparent;border:1px solid var(--grafite-200)}
+  h1,h2,h3{break-after:avoid}
+  table,blockquote,li{break-inside:avoid}
+}
+</style>
+</head>
+
+<body>
+<main class="pagina">
+<header class="capa"><h1>O que sustenta cada documento da implantação</h1></header>
+<p>STATUS: VIGENTE Autor: Ellen Martins e Claude Code | 2026-08-19</p>
+<p>Para responder, sem procurar, à pergunta &quot;com base em quê?&quot;. Uma linha por documento, dizendo qual fonte o sustenta e onde a citação com página mora.</p>
+<h2 id="a-regra-que-organiza-a-tabela">A regra que organiza a tabela</h2>
+<p><strong>Documento interno cita a fonte com a página, dentro dele.</strong> É lido por quem executa, e quem executa precisa poder conferir.</p>
+<p><strong>Material entregue ao cliente não cita autor nem página.</strong> A ciência está aplicada no conteúdo, e a citação mora no passo do playbook que manda entregar aquele material. Citar &quot;Falconi, página 49&quot; num deck de secretária não ajuda a secretária, e enche de ruído o que precisa ser curto.</p>
+<p><strong>Documento técnico não tem fonte de gestão, e isso não é lacuna.</strong> Especificação de integração de WhatsApp se sustenta na documentação da plataforma, não em livro de rotina.</p>
+<p><strong>Onde não há fonte, está escrito que não há.</strong> É o caso das oito mensagens de social selling e da estrutura dos sete movimentos da consulta: são construção da Revon, e quem valida é a auditoria semanal com conversa real.</p>
+<h2 id="os-documentos-internos-da-implantacao">Os documentos internos da implantação</h2>
+<table><thead><tr><th>Documento</th><th>O que o sustenta</th><th>Onde está a citação</th></tr></thead><tbody><tr><td><code>1-implantacao-90-dias.md</code></td><td>Falconi, Grove, Carnegie, Goldratt, Weber, Ries e Trout</td><td>seções T.3 a T.8, e no passo onde cada regra nasce</td></tr><tr><td><code>briefing-90-dias.md</code></td><td>os seis livros, com veredito por livro</td><td>seção 12</td></tr><tr><td><code>metodo-posicionamento-resumo.md</code></td><td>o próprio <code>metodo-posicionamento.md</code>, resumido; nenhuma fonte externa de primeira mão</td><td>é a versão de uma página, e não acrescenta fonte</td></tr><tr><td><code>metodo-posicionamento.md</code></td><td>Ries e Trout, lido inteiro</td><td>é o método em si, sete passos com critério de aceite, e a seção do que do livro não se usa</td></tr><tr><td><code>10-roteiro-posicionamento.md</code></td><td>Ries e Trout, capítulos 4, 19, 20, 21 e 24</td><td>seção do método na abertura, com a tabela de qual capítulo sustenta cada bloco, os dois acréscimos da Revon declarados, e o que do livro não se transfere</td></tr><tr><td><code>13-modelos-rotinas.md</code></td><td>Falconi, Carnegie, Weber</td><td>item 1 e item 3</td></tr><tr><td><code>14-balancos-garantia-comunicacoes.md</code></td><td>Falconi, Goldratt, Weber</td><td>item 1 e item 2</td></tr><tr><td><code>15-roteiros-encontros-2-3.md</code></td><td>Grove, Carnegie</td><td>abertura do documento</td></tr><tr><td><code>7-modelos-internos.md</code></td><td>Weber, capítulo 4</td><td>item 5, o plano de sucesso</td></tr><tr><td><code>8-perfil-e-social-selling.md</code></td><td>Ries e Trout, capítulos 4 e 21</td><td>bloco de abertura, com o que <strong>não</strong> tem fonte</td></tr><tr><td><code>3-roteiro-sessao-diagnostica-dia-1.md</code></td><td>Weber, o primeiro valor</td><td>Bloco 7, via passo 1.12</td></tr><tr><td><code>11-documento-interno.md</code></td><td>Falconi e Weber</td><td>seções 1 e 6, via seções T.7 e passo 1.12</td></tr><tr><td><code>2-dados-do-cliente.md</code></td><td>Weber, os recursos e o primeiro valor</td><td>&quot;Antes de perguntar&quot; e seção 0</td></tr><tr><td><code>12-roteiro-apresentacao.md</code></td><td>Ries e Trout, capítulo 24, e postura da T.5</td><td>bloco de abertura</td></tr><tr><td><code>9-conteudo-e-edicao.md</code></td><td>corpus de 340 Reels e as pesquisas do nicho</td><td>seção 4, com a ressalva de uso</td></tr><tr><td><code>estrategia-campanhas-hof.md</code></td><td>decisões registradas e o playbook</td><td>seção 2, com o que é <code>[DECIDIR]</code></td></tr><tr><td><code>grove-carnegie-90-dias.md</code></td><td>Grove e Carnegie, por extenso</td><td>é o documento-ponte, todo ele</td></tr></tbody></table>
+<h2 id="o-que-e-entregue-ao-cliente">O que é entregue ao cliente</h2>
+<p>A ciência está aplicada, e a citação mora no passo indicado.</p>
+<table><thead><tr><th>Documento</th><th>O que o sustenta</th><th>Onde está a citação</th></tr></thead><tbody><tr><td><code>treinamento-secretaria-clinica-hof.md</code></td><td>Grove, estilo estruturado; Carnegie, a missão dela; Falconi, o relato de anomalia; corpus do nicho, preço contra desconto</td><td>passo 4.5 do playbook, e seções T.5 e T.8</td></tr><tr><td><code>treinamento-doutora-clinica-hof-resumido.md</code></td><td>Ries e Trout, sacrifício e autoridade; postura em tensão</td><td>bloco de abertura do próprio documento</td></tr><tr><td><code>treinamento-doutora-clinica-hof.md</code></td><td>idem, versão longa</td><td>idem</td></tr><tr><td><code>orientacao-de-gravacao-do-especialista.md</code></td><td>Goldratt, a restrição e o pulmão; Hewlett, capítulos 6 e 7</td><td>seção 6, origem e escopo</td></tr><tr><td><code>6-mensagens-implantacao.md</code></td><td>Weber, a passagem de bastão</td><td>item 1, via passos 0.5 e 1.12</td></tr><tr><td><code>camada-posicionamento-do-cliente.md</code></td><td>Hewlett e Ries e Trout</td><td>seção 5</td></tr><tr><td><code>referencia-conteudo-e-leads.md</code></td><td>dois transcritos de podcast, em <code>operacao/fontes/</code>, com nome da convidada e timestamp</td><td>marcas <code>[FONTE]</code> ao longo do documento, e a seção &quot;Onde discordam&quot;</td></tr></tbody></table>
+<h2 id="o-que-nao-tem-fonte-de-gestao-e-nao-deveria-ter">O que não tem fonte de gestão, e não deveria ter</h2>
+<p><code>base-meta-instagram.md</code>, <code>whatsapp-revon-arquitetura-completa.md</code>, <code>revon-os-migracao-providers-spec.md</code>, <code>revon-os-onboarding-embedded-signup.md</code>, <code>revon-capacidades-conexao-whatsapp.md</code> e <code>aditivo-01-coexistence-numeros-proprios-sem-ticket.md</code> são documentação técnica de plataforma e de integração. A fonte deles é a documentação da Meta e a arquitetura do próprio sistema, e está citada dentro de cada um.</p>
+<h2 id="o-que-esta-declarado-como-sem-fonte-externa">O que está declarado como sem fonte externa</h2>
+<table><thead><tr><th>O quê</th><th>Onde está declarado</th></tr></thead><tbody><tr><td>O texto das oito mensagens de social selling</td><td><code>8-perfil-e-social-selling.md</code>, bloco de abertura</td></tr><tr><td>Os sete movimentos da consulta, a matriz de objeções e o caso da Cláudia</td><td><code>treinamento-doutora-clinica-hof-resumido.md</code>, bloco de abertura</td></tr><tr><td>O conteúdo técnico de gravação, seção 2</td><td><code>orientacao-de-gravacao-do-especialista.md</code>, seção 6</td></tr><tr><td>O teste dos territórios e a conta da cidade, blocos E4 e E6</td><td><code>10-roteiro-posicionamento.md</code>, e em <code>auditoria-playbook.md</code></td></tr><tr><td>O ritmo de edição em segundos por plano</td><td><code>9-conteudo-e-edicao.md</code>, marcado como não encontrado</td></tr><tr><td>O texto de mensagem dirigida à paciente</td><td><code>8-perfil-e-social-selling.md</code>: o corpus prescreve sobre a operação, e não fala com paciente</td></tr></tbody></table>
+<p><strong>Em todos esses, quem valida é a operação real.</strong> A auditoria semanal do passo A.4 lê conversa de clínica de verdade, e é ela que vai dizer o que muda na v2.</p>
+<h2 id="documentos-anteriores-a-mudanca-de-produto-de-11-08">Documentos anteriores à mudança de produto de 11/08</h2>
+<p><code>5-roteiro-apresentacao-planejamento.md</code> é de 08/08 e tem aviso de vigência no topo apontando o documento que o substituiu. Continua existindo porque guarda conteúdo sem casa em outro lugar: os tempos por bloco e a condução de objeção.</p>
+<p><code>4-modelo-documento-interno.md</code> foi superado em 19/08 e está em <code>operacao/fontes/superado/</code>. O que ele guardava de único virou o item 6 de <code>7-modelos-internos.md</code>, a ficha de configuração.</p>
+<p><code>metodo-FACE-revon-hof.md</code> tem nota dizendo que a sigla deixou de organizar o produto, e que o conteúdo dele segue valendo.</p>
+<h2 id="como-manter-isto-verdadeiro">Como manter isto verdadeiro</h2>
+<p>Documento novo entra nesta tabela no mesmo commit em que nasce. Fonte que passa a sustentar um documento entra aqui junto com a citação. <strong>A linha vazia é informação:</strong> documento sem fonte declarada é documento que ninguém conferiu, e é assim que ele aparece.</p>
+</main>
+</body>
+</html>
